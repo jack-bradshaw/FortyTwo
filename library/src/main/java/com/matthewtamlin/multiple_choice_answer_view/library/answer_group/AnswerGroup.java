@@ -18,6 +18,10 @@ public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
 
 	public boolean selectionChangesAreAllowedWhenMarked();
 
+	public void markAll();
+
+	public void unmarkAll();
+
 	public interface SelectionListener {
 		public void onAnswerSelected();
 
