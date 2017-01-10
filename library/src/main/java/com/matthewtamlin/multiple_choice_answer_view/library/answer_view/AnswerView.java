@@ -31,13 +31,33 @@ public interface AnswerView {
 	 * Sets the status of the answer view. The UI is updated to reflect the status.
 	 *
 	 * @param marked
-	 * 		true if the answer is marked, false otherwise
+	 * 		true to mark the answer, false to unmark it
 	 * @param selected
-	 * 		true if the user has selected this answer as correct, false otherwise
+	 * 		true to select the answer, false to deselect it
 	 * @param animate
 	 * 		true to animate any UI changes, false to perform them instantaneously
 	 */
 	public void setStatus(boolean marked, boolean selected, boolean animate);
+
+	/**
+	 * Sets the marked status of the answer view without changing the selected status.
+	 *
+	 * @param marked
+	 * 		true to mark the answer, false to unmark it
+	 * @param animate
+	 * 		true to animate any UI changes, false to perform them instantaneously
+	 */
+	public void setMarkedStatus(boolean marked, boolean animate);
+
+	/**
+	 * Sets the selected status of the answer view without changing the marked status.
+	 *
+	 * @param selected
+	 * 		true to select the answer, false to deselect it
+	 * @param animate
+	 * 		true to animate any UI changes, false to perform them instantaneously
+	 */
+	public void setSelectedStatus(boolean selected, boolean animate);
 
 	/**
 	 * @return true if the view is currently displaying as marked, false otherwise
