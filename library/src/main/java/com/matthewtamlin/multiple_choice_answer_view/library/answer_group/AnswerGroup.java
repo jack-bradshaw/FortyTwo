@@ -10,13 +10,13 @@ public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
 
 	public List<AnswerView> getContent();
 
+	public void addAnswer(AnswerView answer);
+
+	public void removeAnswer(AnswerView answer);
+
 	public void allowSelectionChangesWhenMarked(boolean allow);
 
 	public boolean selectionChangesAreAllowedWhenMarked();
-
-	public void markAll(boolean animate);
-
-	public void unmarkAll(boolean animate);
 
 	public void declareExternalViewSelectionChanges();
 
