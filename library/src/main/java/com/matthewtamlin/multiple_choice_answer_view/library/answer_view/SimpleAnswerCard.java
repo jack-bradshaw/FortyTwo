@@ -215,6 +215,16 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	@Override
+	public void setMarkedStatus(final boolean marked, final boolean animate) {
+		setStatus(marked, isSelected(), animate);
+	}
+
+	@Override
+	public void setSelectedStatus(final boolean selected, final boolean animate) {
+		setStatus(isMarked(), selected, animate);
+	}
+
+	@Override
 	public boolean isMarked() {
 		return marked;
 	}
