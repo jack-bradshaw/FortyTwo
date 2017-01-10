@@ -134,6 +134,16 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	@Override
+	public void setMarkedStatus(final boolean marked, final boolean animate) {
+		setStatus(marked, isSelected(), animate);
+	}
+
+	@Override
+	public void setSelectedStatus(final boolean selected, final boolean animate) {
+		setStatus(isMarked(), selected, animate);
+	}
+
+	@Override
 	public void setAnswer(final Answer answer, final boolean animate) {
 		super.setAnswer(answer, animate);
 
