@@ -10,7 +10,7 @@ public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
 
 	public List<AnswerView> getContent();
 
-	public void setMultipleSelectionLimit(int limit);
+	public void setMultipleSelectionLimit(int limit, boolean animate);
 
 	public int getMultipleSelectionLimit();
 
@@ -18,13 +18,15 @@ public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
 
 	public boolean selectionChangesAreAllowedWhenMarked();
 
-	public void markAll();
+	public void markAll(boolean animate);
 
-	public void unmarkAll();
+	public void unmarkAll(boolean animate);
+
+	public void declareExternalViewSelectionChanges();
 
 	public interface SelectionListener {
-		public void onAnswerSelected();
+		public void onAnswerSelected(final AnswerView selectedView);
 
-		public void onAnswerDeselected();
+		public void onAnswerDeselected(final AnswerView deselectedView);
 	}
 }
