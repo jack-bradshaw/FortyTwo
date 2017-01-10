@@ -1,8 +1,5 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.answer_group;
 
-import android.util.Pair;
-
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 import com.matthewtamlin.multiple_choice_answer_view.library.util.Listenable;
 
@@ -17,9 +14,9 @@ public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
 
 	public int getMultipleSelectionLimit();
 
-	public void allowMarkedViewsToBeSelected(boolean allow);
+	public void allowSelectionChangesWhenMarked(boolean allow);
 
-	public boolean markedViewsAreAllowedToBeSelected();
+	public boolean selectionChangesAreAllowedWhenMarked();
 
 	public interface SelectionListener {
 		public void onAnswerSelected();
