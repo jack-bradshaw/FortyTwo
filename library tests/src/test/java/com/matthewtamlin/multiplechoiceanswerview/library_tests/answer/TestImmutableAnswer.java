@@ -1,4 +1,4 @@
-package com.matthewtamlin.multiplechoiceanswerview.library_tests.answer.answer;
+package com.matthewtamlin.multiplechoiceanswerview.library_tests.answer.answer.answer;
 
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.ImmutableAnswer;
 
