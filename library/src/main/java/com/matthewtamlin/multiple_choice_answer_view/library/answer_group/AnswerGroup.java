@@ -6,7 +6,7 @@ import com.matthewtamlin.multiple_choice_answer_view.library.util.Listenable;
 import java.util.List;
 
 public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
-	public void addAnswers(List<AnswerView> content);
+	public void addAnswers(List<AnswerView> answers);
 
 	public void addAnswer(AnswerView answer);
 
