@@ -11,8 +11,6 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.Decorat
 
 import java.util.Random;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-
 public class MultipleChoiceAnswerGroupTestHarness extends
 		AnswerGroupTestHarness<DecoratedAnswerCard> {
 	/**
@@ -52,6 +50,10 @@ public class MultipleChoiceAnswerGroupTestHarness extends
 		}
 	});
 
+	/**
+	 * The view being tested. The view should be initialised before use so that {@link
+	 * #getTestView()} never returns null.
+	 */
 	private MultipleChoiceAnswerGroup testView;
 
 	@Override
