@@ -11,8 +11,10 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.Decorat
 
 import java.util.Random;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 public class MultipleChoiceAnswerGroupTestHarness extends
-		AnswerGroupTestHarness<MultipleChoiceAnswerGroup<DecoratedAnswerCard>> {
+		AnswerGroupTestHarness<DecoratedAnswerCard> {
 	/**
 	 * Decorates the test view by changing the background and text colors.
 	 */
@@ -53,7 +55,16 @@ public class MultipleChoiceAnswerGroupTestHarness extends
 	private MultipleChoiceAnswerGroup testView;
 
 	@Override
-	public MultipleChoiceAnswerGroup<DecoratedAnswerCard> getAnswerView() {
+	public AnswerGroup getTestView() {
+		if (testView == null) {
+			testView = new MultipleChoiceAnswerGroup(this);
+		}
+
+		return testView;
+	}
+
+	@Override
+	public DecoratedAnswerCard getAnswerView() {
 		final DecoratedAnswerCard answerCard = new DecoratedAnswerCard(this);
 
 		answerCard.addDecorator(colorFadeDecorator, false);
@@ -68,14 +79,5 @@ public class MultipleChoiceAnswerGroupTestHarness extends
 		answerCard.setStatus(false, false, false);
 
 		return answerCard;
-	}
-
-	@Override
-	public AnswerGroup getTestView() {
-		if (testView == null) {
-			testView = new MultipleChoiceAnswerGroup(this);
-		}
-
-		return testView;
 	}
 }
