@@ -22,8 +22,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsBelowViewTestHarness;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.SimpleAnswerCard;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.SimpleAnswer;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.SimpleAnswerCard;
 
 /**
  * A test harness for the {@link SimpleAnswerCard} class. This class is abstract because the test
