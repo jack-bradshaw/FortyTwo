@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 
 import java.util.ArrayList;
@@ -50,12 +51,29 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 		init();
 	}
 
+	public void setMultipleSelectionLimit(final int limit, final boolean animate) {
+		multipleSelectionLimit = limit;
+
+		if (limit < selectedViews.size()) {
+			for (final AnswerView view : allViews) {
+				view.setStatus(false, false, animate);
+			}
+		}
+	}
+
+	public int getMultipleSelectionLimit() {
+		return multipleSelectionLimit;
+	}
+
 	@Override
 	public void setContent(final List<AnswerView> content) {
 		this.allViews.clear();
-		this.allViews.addAll(content);
-
 		removeAllViews();
+
+		if (content != null) {
+			this.allViews.addAll(content);
+		}
+
 
 		for (final AnswerView answerView : content) {
 			final View asView = (View) answerView;
@@ -67,6 +85,10 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 					handleClick(answerView);
 				}
 			});
+
+			if (answerView.isSelected()) {
+				selectedViews.add(answerView);
+			}
 		}
 	}
 
@@ -76,19 +98,31 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	}
 
 	@Override
-	public void setMultipleSelectionLimit(final int limit, final boolean animate) {
-		multipleSelectionLimit = limit;
+	public void addAnswer(final AnswerView answer) {
+		if (answer != null) {
+			allViews.add(answer);
 
-		if (limit < selectedViews.size()) {
-			for (final AnswerView view : allViews) {
-				view.setStatus(false, false, animate);
+			final View asView = (View) answer;
+			addView(asView);
+			asView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(final View v) {
+					handleClick(answer);
+				}
+			});
+
+			if (answer.isSelected()) {
+				selectedViews.add(answer);
 			}
 		}
 	}
 
 	@Override
-	public int getMultipleSelectionLimit() {
-		return multipleSelectionLimit;
+	public void removeAnswer(final AnswerView answer) {
+		removeView((View) answer);
+		allViews.remove(answer);
+		selectedViews.remove(answer);
+		((View) answer).setOnClickListener(null);
 	}
 
 	@Override
@@ -99,20 +133,6 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	@Override
 	public boolean selectionChangesAreAllowedWhenMarked() {
 		return allowSelectionChangesWhenMarked;
-	}
-
-	@Override
-	public void markAll(final boolean animate) {
-		for (final AnswerView view : allViews) {
-			view.setMarkedStatus(true, animate);
-		}
-	}
-
-	@Override
-	public void unmarkAll(final boolean animate) {
-		for (final AnswerView view : allViews) {
-			view.setMarkedStatus(false, animate);
-		}
 	}
 
 	@Override
