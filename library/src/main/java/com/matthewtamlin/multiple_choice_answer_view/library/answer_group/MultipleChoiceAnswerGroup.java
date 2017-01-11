@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 
 import java.util.ArrayList;
@@ -15,12 +16,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGroup {
-	private final Set<Listener> listeners = new HashSet<>();
+public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayout implements
+		AnswerGroup<V> {
+	private final Set<AnswerGroup.Listener<V>> listeners = new HashSet<>();
 
-	private final List<AnswerView> allViews = new ArrayList<>();
+	private final List<V> allAnswers = new ArrayList<>();
 
-	private Set<AnswerView> selectedViews = new HashSet<>();
+	private Set<V> selectedViews = new HashSet<>();
 
 	private int multipleSelectionLimit = 1;
 
@@ -54,8 +56,8 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 		multipleSelectionLimit = limit;
 
 		if (limit < selectedViews.size()) {
-			for (final AnswerView view : allViews) {
-				view.setStatus(false, false, animate);
+			for (final V view : allAnswers) {
+				deselectView(view);
 			}
 		}
 	}
@@ -65,38 +67,15 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	}
 
 	@Override
-	public void addAnswers(final List<AnswerView> answers) {
-		if (answers != null) {
-			this.allViews.addAll(answers);
+	public void addAnswers(final List<V> answers) {
+		NullChecker.checkEachElementIsNotNull(answers, "answers cannot be null or contain null.");
 
-			for (final AnswerView answer : answers) {
-				if (answer != null) {
+		allAnswers.addAll(answers);
 
-					addView((View) answer);
-					((View) answer).setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(final View v) {
-							handleClick(answer);
-						}
-					});
+		for (final V answer : answers) {
+			addView((View) answer);
 
-					if (answer.isSelected()) {
-						selectedViews.add(answer);
-					}
-				}
-			}
-		}
-	}
-
-
-	@Override
-	public void addAnswer(final AnswerView answer) {
-		if (answer != null) {
-			allViews.add(answer);
-
-			final View asView = (View) answer;
-			addView(asView);
-			asView.setOnClickListener(new OnClickListener() {
+			((View) answer).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(final View v) {
 					handleClick(answer);
@@ -110,28 +89,35 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	}
 
 	@Override
-	public void removeAnswer(final AnswerView answer) {
-		if (answer != null) {
-			removeView((View) answer);
-			allViews.remove(answer);
-			selectedViews.remove(answer);
-			((View) answer).setOnClickListener(null);
-		}
+	public void addAnswer(final V answer) {
+		NullChecker.checkNotNull(answer, "answer cannot be null.");
+
+		final List<V> answers = new ArrayList<>();
+		answers.add(answer);
+
+		addAnswers(answers);
+	}
+
+	@Override
+	public void removeAnswer(final V answer) {
+		NullChecker.checkNotNull(answer, "answer cannot be null.");
+
+		allAnswers.remove(answer);
+		selectedViews.remove(answer);
+
+		((View) answer).setOnClickListener(null);
 	}
 
 	@Override
 	public void clearAnswers() {
-		for (final AnswerView view : allViews) {
-			((View) view).setOnClickListener(null);
+		for (final V answer : allAnswers) {
+			removeAnswer(answer);
 		}
-
-		allViews.clear();
-		selectedViews.clear();
 	}
 
 	@Override
-	public List<AnswerView> getAnswers() {
-		return Collections.unmodifiableList(allViews);
+	public List<V> getAnswers() {
+		return Collections.unmodifiableList(allAnswers);
 	}
 
 	@Override
@@ -148,27 +134,51 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	public void declareExternalViewSelectionChanges() {
 		selectedViews.clear();
 
-		for (final AnswerView view : allViews) {
-			if (view.isSelected()) {
-				selectedViews.add(view);
+		for (final V answer : allAnswers) {
+			if (answer.isSelected()) {
+				selectedViews.add(answer);
 			}
 		}
 	}
 
 	@Override
-	public void registerListener(final Listener listener) {
+	public void registerListener(final Listener<V> listener) {
 		if (listener != null) {
 			listeners.add(listener);
 		}
 	}
 
 	@Override
-	public void unregisterListener(final Listener listener) {
+	public void unregisterListener(final Listener<V> listener) {
 		listeners.remove(listener);
 	}
 
 	private void init() {
 		setOrientation(VERTICAL);
+	}
+
+	private void deselectView(final V answerView) {
+		if (answerView.isSelected()) {
+			answerView.setSelectedStatus(false, true);
+
+			selectedViews.remove(answerView);
+
+			for (final AnswerGroup.Listener<V> listener : listeners) {
+				listener.onAnswerDeselected(answerView);
+			}
+		}
+	}
+
+	private void selectView(final V answerView) {
+		if (!answerView.isSelected()) {
+			answerView.setSelectedStatus(true, true);
+
+			selectedViews.add(answerView);
+
+			for (final AnswerGroup.Listener<V> listener : listeners) {
+				listener.onAnswerSelected(answerView);
+			}
+		}
 	}
 
 	private void handleClick(final AnswerView clickedView) {
@@ -184,23 +194,5 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 		}
 	}
 
-	private void deselectView(final AnswerView answerView) {
-		answerView.setSelectedStatus(false, true);
 
-		selectedViews.remove(answerView);
-
-		for (final Listener listener : listeners) {
-			listener.onAnswerDeselected(answerView);
-		}
-	}
-
-	private void selectView(final AnswerView answerView) {
-		answerView.setSelectedStatus(true, true);
-
-		selectedViews.add(answerView);
-
-		for (final Listener listener : listeners) {
-			listener.onAnswerSelected(answerView);
-		}
-	}
 }
