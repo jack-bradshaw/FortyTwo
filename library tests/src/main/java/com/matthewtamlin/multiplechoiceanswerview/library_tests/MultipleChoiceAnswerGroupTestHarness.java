@@ -1,14 +1,55 @@
 package com.matthewtamlin.multiplechoiceanswerview.library_tests;
 
+import android.graphics.Color;
+
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.ImmutableAnswer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AlphaDecorator;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFadeDecorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard;
 
 import java.util.Random;
 
 public class MultipleChoiceAnswerGroupTestHarness extends
 		AnswerGroupTestHarness<MultipleChoiceAnswerGroup<DecoratedAnswerCard>> {
+	/**
+	 * Decorates the test view by changing the background and text colors.
+	 */
+	private final ColorFadeDecorator colorFadeDecorator =
+			new ColorFadeDecorator(new ColorFadeDecorator.ColorSupplier
+					() {
+				@Override
+				public int getColor(final boolean marked, final boolean selected,
+						final boolean answerIsCorrect) {
+					if (marked) {
+						if (selected) {
+							return answerIsCorrect ? Color.GREEN : Color.RED;
+						} else {
+							return answerIsCorrect ? Color.RED : Color.GREEN;
+						}
+					} else {
+						return selected ? Color.BLUE : Color.WHITE;
+					}
+				}
+			});
+
+	/**
+	 * Decorates the test view by changing the transparency.
+	 */
+	private final AlphaDecorator
+			alphaDecorator = new AlphaDecorator(new AlphaDecorator.AlphaSupplier() {
+		@Override
+		public float getAlpha(final boolean marked, final boolean selected,
+				final boolean answerIsCorrect) {
+			if (marked && !selected && !answerIsCorrect) {
+				return 0.5f;
+			} else {
+				return 1f;
+			}
+		}
+	});
+
 	private MultipleChoiceAnswerGroup testView;
 
 	@Override
