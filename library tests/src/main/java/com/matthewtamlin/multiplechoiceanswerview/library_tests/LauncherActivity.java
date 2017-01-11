@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
+
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
@@ -40,6 +42,7 @@ public class LauncherActivity extends AppCompatActivity {
 		setContentView(rootView, new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
 
 		rootView.addView(createLaunchTestSimpleAnswerCard());
+		rootView.addView(createLaunchMultipleChoiceAnswerGroupTestHarnessButton());
 	}
 
 	/**
@@ -58,6 +61,28 @@ public class LauncherActivity extends AppCompatActivity {
 			public void onClick(final View v) {
 				startActivity(
 						new Intent(LauncherActivity.this, DecoratedAnswerCardTestHarness.class));
+			}
+		});
+
+		return b;
+	}
+
+	/**
+	 * Creates a button which launches the {@link MultipleChoiceAnswerGroupTestHarness} activity
+	 * when pressed.
+	 *
+	 * @return the button, not null
+	 */
+	private Button createLaunchMultipleChoiceAnswerGroupTestHarnessButton() {
+		final Button b = new Button(this);
+		b.setText("Launch MultipleChoiceAnswerGroup test harness");
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				startActivity(
+						new Intent(LauncherActivity.this, MultipleChoiceAnswerGroup.class));
 			}
 		});
 
