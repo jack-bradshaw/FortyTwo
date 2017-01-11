@@ -90,11 +90,6 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 
 
 	@Override
-	public List<AnswerView> getAnswers() {
-		return Collections.unmodifiableList(allViews);
-	}
-
-	@Override
 	public void addAnswer(final AnswerView answer) {
 		if (answer != null) {
 			allViews.add(answer);
@@ -120,6 +115,11 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 		allViews.remove(answer);
 		selectedViews.remove(answer);
 		((View) answer).setOnClickListener(null);
+	}
+
+	@Override
+	public List<AnswerView> getAnswers() {
+		return Collections.unmodifiableList(allViews);
 	}
 
 	@Override
