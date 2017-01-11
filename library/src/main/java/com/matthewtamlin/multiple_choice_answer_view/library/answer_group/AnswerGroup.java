@@ -1,12 +1,12 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.answer_group;
 
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.SelectionListener;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.Listener;
 import com.matthewtamlin.multiple_choice_answer_view.library.util.Listenable;
 
 import java.util.List;
 
-public interface AnswerGroup<V extends AnswerView> extends Listenable<SelectionListener<V>> {
+public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V>> {
 	public void addAnswers(List<V> answers);
 
 	public void addAnswer(V answer);
@@ -23,7 +23,7 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<SelectionL
 
 	public void declareExternalViewSelectionChanges();
 
-	public interface SelectionListener<V extends AnswerView> {
+	public interface Listener<V extends AnswerView> {
 		public void onAnswerSelected(final V selectedView);
 
 		public void onAnswerDeselected(final V deselectedView);
