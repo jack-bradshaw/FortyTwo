@@ -193,6 +193,4 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 			}
 		}
 	}
-
-
 }
