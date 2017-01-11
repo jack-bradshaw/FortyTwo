@@ -120,6 +120,16 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	}
 
 	@Override
+	public void clearAnswers() {
+		for (final AnswerView view : allViews) {
+			((View) view).setOnClickListener(null);
+		}
+
+		allViews.clear();
+		selectedViews.clear();
+	}
+
+	@Override
 	public List<AnswerView> getAnswers() {
 		return Collections.unmodifiableList(allViews);
 	}
