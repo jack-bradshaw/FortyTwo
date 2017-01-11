@@ -93,7 +93,7 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	}
 
 	@Override
-	public List<AnswerView> getContent() {
+	public List<AnswerView> getAnswers() {
 		return Collections.unmodifiableList(allViews);
 	}
 
