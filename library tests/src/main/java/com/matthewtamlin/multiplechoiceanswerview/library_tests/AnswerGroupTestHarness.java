@@ -19,43 +19,6 @@ import java.util.List;
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
 		ControlsBelowViewTestHarness<AnswerGroup<V>> {
-	/**
-	 * Decorates the test view by changing the background and text colors.
-	 */
-	private final ColorFadeDecorator colorFadeDecorator =
-			new ColorFadeDecorator(new ColorFadeDecorator.ColorSupplier
-					() {
-				@Override
-				public int getColor(final boolean marked, final boolean selected,
-						final boolean answerIsCorrect) {
-					if (marked) {
-						if (selected) {
-							return answerIsCorrect ? Color.GREEN : Color.RED;
-						} else {
-							return answerIsCorrect ? Color.RED : Color.GREEN;
-						}
-					} else {
-						return selected ? Color.BLUE : Color.WHITE;
-					}
-				}
-			});
-
-	/**
-	 * Decorates the test view by changing the transparency.
-	 */
-	private final AlphaDecorator
-			alphaDecorator = new AlphaDecorator(new AlphaDecorator.AlphaSupplier() {
-		@Override
-		public float getAlpha(final boolean marked, final boolean selected,
-				final boolean answerIsCorrect) {
-			if (marked && !selected && !answerIsCorrect) {
-				return 0.5f;
-			} else {
-				return 1f;
-			}
-		}
-	});
-
 	public abstract V getAnswerView();
 
 	@Override
