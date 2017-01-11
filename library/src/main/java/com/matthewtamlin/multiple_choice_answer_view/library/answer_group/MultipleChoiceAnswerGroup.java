@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGroup {
-	private final Set<SelectionListener> listeners = new HashSet<>();
+	private final Set<Listener> listeners = new HashSet<>();
 
 	private final List<AnswerView> allViews = new ArrayList<>();
 
@@ -156,14 +156,14 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	}
 
 	@Override
-	public void registerListener(final SelectionListener listener) {
+	public void registerListener(final Listener listener) {
 		if (listener != null) {
 			listeners.add(listener);
 		}
 	}
 
 	@Override
-	public void unregisterListener(final SelectionListener listener) {
+	public void unregisterListener(final Listener listener) {
 		listeners.remove(listener);
 	}
 
@@ -189,7 +189,7 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 
 		selectedViews.remove(answerView);
 
-		for (final SelectionListener listener : listeners) {
+		for (final Listener listener : listeners) {
 			listener.onAnswerDeselected(answerView);
 		}
 	}
@@ -199,7 +199,7 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 
 		selectedViews.add(answerView);
 
-		for (final SelectionListener listener : listeners) {
+		for (final Listener listener : listeners) {
 			listener.onAnswerSelected(answerView);
 		}
 	}
