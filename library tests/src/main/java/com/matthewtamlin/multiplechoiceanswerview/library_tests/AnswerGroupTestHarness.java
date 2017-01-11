@@ -8,19 +8,17 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsBelowViewTestHarness;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.ImmutableAnswer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFadeDecorator;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class AnswerGroupTestHarness extends ControlsBelowViewTestHarness<AnswerGroup> {
+public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
+		ControlsBelowViewTestHarness<AnswerGroup<V>> {
 	/**
 	 * Decorates the test view by changing the background and text colors.
 	 */
@@ -57,6 +55,8 @@ public abstract class AnswerGroupTestHarness extends ControlsBelowViewTestHarnes
 			}
 		}
 	});
+
+	public abstract V getAnswerView();
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState, final PersistableBundle persistentState) {
@@ -202,22 +202,5 @@ public abstract class AnswerGroupTestHarness extends ControlsBelowViewTestHarnes
 		});
 
 		return b;
-	}
-
-	private AnswerView createNewAnswerView() {
-		final DecoratedAnswerCard answerCard = new DecoratedAnswerCard(this);
-
-		answerCard.addDecorator(colorFadeDecorator, false);
-		answerCard.addDecorator(alphaDecorator, false);
-
-		if ((new Random()).nextBoolean()) {
-			answerCard.setAnswer(new ImmutableAnswer("Correct", true), false);
-		} else {
-			answerCard.setAnswer(new ImmutableAnswer("Incorrect", false), false);
-		}
-
-		answerCard.setStatus(false, false, false);
-
-		return answerCard;
 	}
 }
