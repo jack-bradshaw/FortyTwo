@@ -8,11 +8,13 @@ import java.util.List;
 public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
 	public void addAnswers(List<AnswerView> content);
 
-	public List<AnswerView> getContent();
-
 	public void addAnswer(AnswerView answer);
 
 	public void removeAnswer(AnswerView answer);
+
+	public void clearAnswers();
+
+	public List<AnswerView> getContent();
 
 	public void allowSelectionChangesWhenMarked(boolean allow);
 
