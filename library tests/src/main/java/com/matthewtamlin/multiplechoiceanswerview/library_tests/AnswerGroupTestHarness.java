@@ -43,10 +43,10 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				final List<AnswerView> answers = new ArrayList<>();
-				answers.add(createNewAnswerView());
-				answers.add(createNewAnswerView());
-				answers.add(createNewAnswerView());
+				final List<V> answers = new ArrayList<>();
+				answers.add(getAnswerView());
+				answers.add(getAnswerView());
+				answers.add(getAnswerView());
 
 				getTestView().addAnswers(answers);
 			}
@@ -63,7 +63,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().addAnswer(createNewAnswerView());
+				getTestView().addAnswer(getAnswerView());
 			}
 		});
 
@@ -79,7 +79,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
 			@Override
 			public void onClick(final View v) {
 				if (!getTestView().getAnswers().isEmpty()) {
-					final AnswerView firstAnswer = getTestView().getAnswers().get(0);
+					final V firstAnswer = getTestView().getAnswers().get(0);
 					getTestView().removeAnswer(firstAnswer);
 				}
 			}
@@ -141,7 +141,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				for (final AnswerView answerView : getTestView().getAnswers()) {
+				for (final V answerView : getTestView().getAnswers()) {
 					answerView.setMarkedStatus(true, true);
 				}
 			}
@@ -158,7 +158,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				for (final AnswerView answerView : getTestView().getAnswers()) {
+				for (final V answerView : getTestView().getAnswers()) {
 					answerView.setMarkedStatus(false, true);
 				}
 			}
