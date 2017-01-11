@@ -181,7 +181,7 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 		}
 	}
 
-	private void handleClick(final AnswerView clickedView) {
+	private void handleClick(final V clickedView) {
 		boolean allowSelectionChange = !(clickedView.isMarked()
 				&& !allowSelectionChangesWhenMarked);
 
