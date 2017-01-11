@@ -14,7 +14,7 @@ public interface AnswerGroup extends Listenable<AnswerGroup.SelectionListener> {
 
 	public void clearAnswers();
 
-	public List<AnswerView> getContent();
+	public List<AnswerView> getAnswers();
 
 	public void allowSelectionChangesWhenMarked(boolean allow);
 
