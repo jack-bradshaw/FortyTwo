@@ -67,19 +67,14 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 
 	@Override
 	public void addAnswers(final List<AnswerView> content) {
-		this.allViews.clear();
-		removeAllViews();
-
 		if (content != null) {
 			this.allViews.addAll(content);
 		}
 
 
 		for (final AnswerView answerView : content) {
-			final View asView = (View) answerView;
-
-			addView(asView);
-			asView.setOnClickListener(new OnClickListener() {
+			addView((View) answerView);
+			((View) answerView).setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(final View v) {
 					handleClick(answerView);
@@ -91,6 +86,8 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 			}
 		}
 	}
+
+
 
 	@Override
 	public List<AnswerView> getAnswers() {
