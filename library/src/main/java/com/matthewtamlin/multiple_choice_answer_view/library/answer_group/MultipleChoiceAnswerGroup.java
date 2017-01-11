@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 
 import java.util.ArrayList;
@@ -66,27 +65,28 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 	}
 
 	@Override
-	public void addAnswers(final List<AnswerView> content) {
-		if (content != null) {
-			this.allViews.addAll(content);
-		}
+	public void addAnswers(final List<AnswerView> answers) {
+		if (answers != null) {
+			this.allViews.addAll(answers);
 
+			for (final AnswerView answer : answers) {
+				if (answer != null) {
 
-		for (final AnswerView answerView : content) {
-			addView((View) answerView);
-			((View) answerView).setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(final View v) {
-					handleClick(answerView);
+					addView((View) answer);
+					((View) answer).setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(final View v) {
+							handleClick(answer);
+						}
+					});
+
+					if (answer.isSelected()) {
+						selectedViews.add(answer);
+					}
 				}
-			});
-
-			if (answerView.isSelected()) {
-				selectedViews.add(answerView);
 			}
 		}
 	}
-
 
 
 	@Override
@@ -111,10 +111,12 @@ public class MultipleChoiceAnswerGroup extends LinearLayout implements AnswerGro
 
 	@Override
 	public void removeAnswer(final AnswerView answer) {
-		removeView((View) answer);
-		allViews.remove(answer);
-		selectedViews.remove(answer);
-		((View) answer).setOnClickListener(null);
+		if (answer != null) {
+			removeView((View) answer);
+			allViews.remove(answer);
+			selectedViews.remove(answer);
+			((View) answer).setOnClickListener(null);
+		}
 	}
 
 	@Override
