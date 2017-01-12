@@ -11,7 +11,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class MultipleChoiceAnswerGroupViewAssertions {
-	public static ViewAssertion containsView(final AnswerView view) {
+	public static ViewAssertion containsView(final AnswerView answerView, final boolean
+			contained) {
 		return new ViewAssertion() {
 			@Override
 			public void check(final View view, final NoMatchingViewException noViewFoundException) {
@@ -24,12 +25,12 @@ public class MultipleChoiceAnswerGroupViewAssertions {
 					boolean contains = false;
 
 					for (int i = 0; i < group.getChildCount(); i++) {
-						if (group.getChildAt(i).equals(view)) {
+						if (group.getChildAt(i).equals(answerView)) {
 							contains = true;
 						}
 					}
 
-					assertThat("view was not contained in answer group.", contains, is(true));
+					assertThat("view was not contained in answer group.", contains, is(contained));
 				}
 			}
 		};
