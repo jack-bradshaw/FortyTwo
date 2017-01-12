@@ -105,6 +105,7 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 		allAnswers.remove(answer);
 		selectedViews.remove(answer);
 
+		removeView((View) answer);
 		((View) answer).setOnClickListener(null);
 	}
 
