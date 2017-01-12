@@ -1,7 +1,6 @@
 package com.matthewtamlin.multiplechoiceanswerview.library_tests;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -9,16 +8,14 @@ import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsBelowViewTestHarness;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFadeDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
-		ControlsBelowViewTestHarness<AnswerGroup<V>> {
+public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends AnswerGroup<V>> extends
+		ControlsBelowViewTestHarness<T> {
 	public abstract V getAnswerView();
 
 	@Override
@@ -44,6 +41,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView> extends
 			@Override
 			public void onClick(final View v) {
 				final List<V> answers = new ArrayList<>();
+
 				answers.add(getAnswerView());
 				answers.add(getAnswerView());
 				answers.add(getAnswerView());
