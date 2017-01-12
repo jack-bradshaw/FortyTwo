@@ -3,7 +3,6 @@ package com.matthewtamlin.multiplechoiceanswerview.library_tests;
 import android.graphics.Color;
 
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.ImmutableAnswer;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFadeDecorator;
@@ -12,7 +11,8 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.Decorat
 import java.util.Random;
 
 public class MultipleChoiceAnswerGroupTestHarness extends
-		AnswerGroupTestHarness<DecoratedAnswerCard> {
+		AnswerGroupTestHarness<DecoratedAnswerCard,
+				MultipleChoiceAnswerGroup<DecoratedAnswerCard>> {
 	/**
 	 * Decorates the test view by changing the background and text colors.
 	 */
@@ -54,12 +54,12 @@ public class MultipleChoiceAnswerGroupTestHarness extends
 	 * The view being tested. The view should be initialised before use so that {@link
 	 * #getTestView()} never returns null.
 	 */
-	private MultipleChoiceAnswerGroup testView;
+	private MultipleChoiceAnswerGroup<DecoratedAnswerCard> testView;
 
 	@Override
-	public AnswerGroup getTestView() {
+	public MultipleChoiceAnswerGroup<DecoratedAnswerCard> getTestView() {
 		if (testView == null) {
-			testView = new MultipleChoiceAnswerGroup(this);
+			testView = new MultipleChoiceAnswerGroup<>(this);
 		}
 
 		return testView;
