@@ -1,6 +1,8 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.util;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThan;
@@ -14,7 +16,10 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * @param <T>
  * 		the type of the elements contained in the stack
  */
-public class EvictingStackSet<T> extends Stack<T> {
+public class EvictingStackSet<T> extends Stack<T> implements Listenable<EvictingStackSet
+		.EvictionListener<T>> {
+	private final Set<EvictionListener<T>> listeners = new HashSet<>();
+
 	/**
 	 * When the size of the stack exceeds this value, the bottom element is evicted.
 	 */
@@ -40,7 +45,7 @@ public class EvictingStackSet<T> extends Stack<T> {
 	 * limit.
 	 *
 	 * @param maxSize
-	 * 		the size limit after which elements will be evicted, greater than or equal to zero
+	 * 		the size limit after which elements will be evicted, greater than zero
 	 * @param contents
 	 * 		the elements to add to the stack
 	 * @throws IllegalArgumentException
@@ -64,6 +69,26 @@ public class EvictingStackSet<T> extends Stack<T> {
 		return maxSize;
 	}
 
+	/**
+	 * Sets the size limit of the stack. If the stack contains more that this many elements,
+	 * elements will be evicted from the bottom until the stack reaches the new max size.
+	 *
+	 * @param maxSize the size limit to use, greater than zero
+	 */
+	public void setMaxSize(final int maxSize) {
+		this.maxSize = checkGreaterThan(maxSize, 0, "maxSize cannot be less than 1.");
+
+		// If the stack exceeds the new size limit, remove elements
+		while (this.size() > maxSize) {
+			final T bottomItem = get(0);
+			remove(bottomItem);
+
+			for (final EvictionListener<T> listener : listeners) {
+				listener.onEviction(this, bottomItem);
+			}
+		}
+	}
+
 	@Override
 	public T push(final T object) {
 		if (contains(object)) {
@@ -72,9 +97,30 @@ public class EvictingStackSet<T> extends Stack<T> {
 
 		// If the stack will become too big, remove elements until it's the right size
 		while (this.size() >= maxSize) {
-			this.remove(0);
+			final T bottomItem = get(0);
+			remove(bottomItem);
+
+			for (final EvictionListener<T> listener : listeners) {
+				listener.onEviction(this, bottomItem);
+			}
 		}
 
 		return super.push(object);
+	}
+
+	@Override
+	public void registerListener(final EvictionListener<T> listener) {
+		if (listener != null) {
+			listeners.add(listener);
+		}
+	}
+
+	@Override
+	public void unregisterListener(final EvictionListener<T> listener) {
+		listeners.remove(listener);
+	}
+
+	public interface EvictionListener<V> {
+		public void onEviction(EvictingStackSet<V> evictingStackSet, V evicted);
 	}
 }
