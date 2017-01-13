@@ -141,19 +141,31 @@ public class TestMultipleChoiceAnswerGroup {
 		}
 	}
 
-	public void testAnswerViewClickedBehaviour_selectionChangesAllowedAndMarked() {
+	public void testAnswerViewClickedBehaviour_selectionChangesAllowedViewIsMarked() {
 
 	}
 
-	public void testAnswerViewClickedBehaviour_selectionChangesAllowedAndNotUnmrked() {
+	public void testAnswerViewClickedBehaviour_selectionChangesAllowedViewIsNotUnmarked() {
 
 	}
 
-	public void testAnswerViewClickedBehaviour_selectionChangesDisallowedAndMarked() {
+	public void testAnswerViewClickedBehaviour_selectionChangesDisallowedViewIsMarked() {
 
 	}
 
-	public void testAnswerViewClickedBehaviour_selectionChangesDisallowedAndUnmarked() {
+	public void testAnswerViewClickedBehaviour_selectionChangesDisallowedViewIsUnmarked() {
+
+	}
+
+	public void testAnswerViewClickedBehaviour_selectionLimitNotReached() {
+
+	}
+
+	public void testAnswerViewClickedBehaviour_selectionLimitReached() {
+
+	}
+
+	public void testAnswerViewClickedBehaviour_selectionLimitReachedThenSelectedViewRemoved() {
 
 	}
 
