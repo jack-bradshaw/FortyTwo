@@ -73,7 +73,8 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 	 * Sets the size limit of the stack. If the stack contains more that this many elements,
 	 * elements will be evicted from the bottom until the stack reaches the new max size.
 	 *
-	 * @param maxSize the size limit to use, greater than zero
+	 * @param maxSize
+	 * 		the size limit to use, greater than zero
 	 */
 	public void setMaxSize(final int maxSize) {
 		this.maxSize = checkGreaterThan(maxSize, 0, "maxSize cannot be less than 1.");
