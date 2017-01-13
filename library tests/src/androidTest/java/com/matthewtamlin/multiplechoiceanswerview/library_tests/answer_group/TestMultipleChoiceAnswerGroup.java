@@ -95,7 +95,7 @@ public class TestMultipleChoiceAnswerGroup {
 		testViewEspresso.check(containsView(view, true));
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveAnswer_nullSupplied() {
 		testViewEspresso.perform(removeAnswer(null));
 	}
