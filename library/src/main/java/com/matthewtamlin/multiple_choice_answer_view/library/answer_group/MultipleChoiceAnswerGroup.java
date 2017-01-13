@@ -11,7 +11,6 @@ import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -111,14 +110,17 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 
 	@Override
 	public void clearAnswers() {
-		for (final V answer : allAnswers) {
+		// Use a copy to avoid concurrent modification exceptions when removeAnswer is called
+		final List<V> allAnswersCopy = new ArrayList<>(allAnswers);
+
+		for (final V answer : allAnswersCopy) {
 			removeAnswer(answer);
 		}
 	}
 
 	@Override
 	public List<V> getAnswers() {
-		return Collections.unmodifiableList(allAnswers);
+		return new ArrayList<>(allAnswers);
 	}
 
 	@Override
