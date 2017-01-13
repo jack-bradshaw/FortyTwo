@@ -24,8 +24,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
-
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
@@ -81,8 +79,8 @@ public class LauncherActivity extends AppCompatActivity {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				startActivity(
-						new Intent(LauncherActivity.this, MultipleChoiceAnswerGroup.class));
+				startActivity(new Intent(LauncherActivity.this,
+						MultipleChoiceAnswerGroupTestHarness.class));
 			}
 		});
 
