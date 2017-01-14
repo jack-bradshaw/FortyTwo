@@ -8,10 +8,10 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.matthewtamlin.android_testing_tools.library.EspressoHelper;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.Listener;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard;
-import com.matthewtamlin.multiplechoiceanswerview.library_tests.MultipleChoiceAnswerGroupTestHarness;
+import com.matthewtamlin.multiplechoiceanswerview.library_tests.SelectionLimitAnswerGroupTestHarness;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,16 +21,16 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.addAnswer;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.addAnswers;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.allowSelectionChangesWhenMarked;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.clearAnswers;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.clickViewAtIndex;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.registerListener;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.removeAnswer;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewActions.setMultipleSelectionLimit;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewAssertions.containsNoAnswers;
-import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.MultipleChoiceAnswerGroupViewAssertions.containsView;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.addAnswer;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.addAnswers;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.allowSelectionChangesWhenMarked;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.clearAnswers;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.clickViewAtIndex;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.registerListener;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.removeAnswer;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.setMultipleSelectionLimit;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewAssertions.containsNoAnswers;
+import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewAssertions.containsView;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
@@ -38,12 +38,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
-public class TestMultipleChoiceAnswerGroup {
+public class TestSelectionLimitAnswerGroup {
 	@Rule
-	public ActivityTestRule<MultipleChoiceAnswerGroupTestHarness> rule = new
-			ActivityTestRule<>(MultipleChoiceAnswerGroupTestHarness.class);
+	public ActivityTestRule<SelectionLimitAnswerGroupTestHarness> rule = new
+			ActivityTestRule<>(SelectionLimitAnswerGroupTestHarness.class);
 
-	private MultipleChoiceAnswerGroup<DecoratedAnswerCard> testViewDirect;
+	private SelectionLimitedAnswerGroup<DecoratedAnswerCard> testViewDirect;
 
 	public ViewInteraction testViewEspresso;
 

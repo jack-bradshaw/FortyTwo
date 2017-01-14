@@ -4,9 +4,8 @@ import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.view.View;
 
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.Listener;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 
 import org.hamcrest.Matcher;
@@ -16,12 +15,12 @@ import java.util.List;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 
 @SuppressWarnings("unchecked")
-public class MultipleChoiceAnswerGroupViewActions {
+public class SelectionLimitAnswerGroupViewActions {
 	public static ViewAction addAnswers(final List<? extends AnswerView> answers) {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -32,7 +31,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 			@Override
 			public void perform(final UiController uiController, final View view) {
 				// Might fail
-				((MultipleChoiceAnswerGroup) view).addAnswers(answers);
+				((SelectionLimitedAnswerGroup) view).addAnswers(answers);
 			}
 		};
 	}
@@ -41,7 +40,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -52,7 +51,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 			@Override
 			public void perform(final UiController uiController, final View view) {
 				// Might fail
-				((MultipleChoiceAnswerGroup) view).addAnswer(answer);
+				((SelectionLimitedAnswerGroup) view).addAnswer(answer);
 			}
 		};
 	}
@@ -61,7 +60,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -72,7 +71,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 			@Override
 			public void perform(final UiController uiController, final View view) {
 				// Might fail
-				((MultipleChoiceAnswerGroup) view).removeAnswer(answer);
+				((SelectionLimitedAnswerGroup) view).removeAnswer(answer);
 			}
 		};
 	}
@@ -81,7 +80,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -92,7 +91,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 			@Override
 			public void perform(final UiController uiController, final View view) {
 				// Might fail
-				((MultipleChoiceAnswerGroup) view).clearAnswers();
+				((SelectionLimitedAnswerGroup) view).clearAnswers();
 			}
 		};
 	}
@@ -101,7 +100,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -111,7 +110,8 @@ public class MultipleChoiceAnswerGroupViewActions {
 
 			@Override
 			public void perform(final UiController uiController, final View view) {
-				final MultipleChoiceAnswerGroup castView = (MultipleChoiceAnswerGroup) view;
+				final SelectionLimitedAnswerGroup
+						castView = (SelectionLimitedAnswerGroup) view;
 				castView.getChildAt(index).performClick();
 			}
 		};
@@ -121,7 +121,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -131,7 +131,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 
 			@Override
 			public void perform(final UiController uiController, final View view) {
-				((MultipleChoiceAnswerGroup) view).allowSelectionChangesWhenMarked(allow);
+				((SelectionLimitedAnswerGroup) view).allowSelectionChangesWhenMarked(allow);
 			}
 		};
 	}
@@ -140,7 +140,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -150,7 +150,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 
 			@Override
 			public void perform(final UiController uiController, final View view) {
-				((MultipleChoiceAnswerGroup) view).setMultipleSelectionLimit(limit);
+				((SelectionLimitedAnswerGroup) view).setMultipleSelectionLimit(limit);
 			}
 		};
 	}
@@ -159,7 +159,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
-				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+				return isAssignableFrom(SelectionLimitedAnswerGroup.class);
 			}
 
 			@Override
@@ -169,7 +169,7 @@ public class MultipleChoiceAnswerGroupViewActions {
 
 			@Override
 			public void perform(final UiController uiController, final View view) {
-				((MultipleChoiceAnswerGroup) view).registerListener(listener);
+				((SelectionLimitedAnswerGroup) view).registerListener(listener);
 			}
 		};
 	}

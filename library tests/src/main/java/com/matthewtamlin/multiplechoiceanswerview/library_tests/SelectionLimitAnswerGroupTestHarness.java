@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.ImmutableAnswer;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFadeDecorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFadeDecorator.ColorSupplier;
@@ -16,8 +16,8 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.Decorat
 import java.util.Random;
 
 @SuppressLint("SetTextI18n") // Not important during testing
-public class MultipleChoiceAnswerGroupTestHarness extends AnswerGroupTestHarness
-		<DecoratedAnswerCard, MultipleChoiceAnswerGroup<DecoratedAnswerCard>> {
+public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
+		<DecoratedAnswerCard, SelectionLimitedAnswerGroup<DecoratedAnswerCard>> {
 	/**
 	 * Decorates the test view by changing the background and text colors.
 	 */
@@ -57,7 +57,7 @@ public class MultipleChoiceAnswerGroupTestHarness extends AnswerGroupTestHarness
 	 * The view being tested. The view should be initialised before use so that {@link
 	 * #getTestView()} never returns null.
 	 */
-	private MultipleChoiceAnswerGroup<DecoratedAnswerCard> testView;
+	private SelectionLimitedAnswerGroup<DecoratedAnswerCard> testView;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -68,9 +68,9 @@ public class MultipleChoiceAnswerGroupTestHarness extends AnswerGroupTestHarness
 	}
 
 	@Override
-	public MultipleChoiceAnswerGroup<DecoratedAnswerCard> getTestView() {
+	public SelectionLimitedAnswerGroup<DecoratedAnswerCard> getTestView() {
 		if (testView == null) {
-			testView = new MultipleChoiceAnswerGroup<>(this);
+			testView = new SelectionLimitedAnswerGroup<>(this);
 		}
 
 		return testView;
