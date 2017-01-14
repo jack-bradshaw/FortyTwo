@@ -18,6 +18,9 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  */
 public class EvictingStackSet<T> extends Stack<T> implements Listenable<EvictingStackSet
 		.EvictionListener<T>> {
+	/**
+	 * The listeners to call when elements are evicted.
+	 */
 	private final Set<EvictionListener<T>> listeners = new HashSet<>();
 
 	/**
@@ -121,7 +124,21 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 		listeners.remove(listener);
 	}
 
+	/**
+	 * Callback listener to be invoked when elements are evicted from an EvictingStackSet.
+	 *
+	 * @param <V>
+	 * 		the type of elements being evicted
+	 */
 	public interface EvictionListener<V> {
+		/**
+		 * Invoked when an item is removed from an EvictingStackSet this listener is register to.
+		 *
+		 * @param evictingStackSet
+		 * 		the EvictingStackSet the element was evicted from, not null
+		 * @param evicted
+		 * 		the element which was evicted, may be null
+		 */
 		public void onEviction(EvictingStackSet<V> evictingStackSet, V evicted);
 	}
 }
