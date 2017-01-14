@@ -13,6 +13,7 @@ import com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackS
 import com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackSet.EvictionListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,7 +68,7 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 	}
 
 	@Override
-	public void addAnswers(final List<V> answers) {
+	public void addAnswers(final Collection<V> answers) {
 		NullChecker.checkEachElementIsNotNull(answers, "answers cannot be null or contain null.");
 
 		allAnswers.addAll(answers);
