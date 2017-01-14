@@ -35,4 +35,21 @@ public class MultipleChoiceAnswerGroupViewAssertions {
 			}
 		};
 	}
+
+	public static ViewAssertion containsNoAnswers() {
+		return new ViewAssertion() {
+			@Override
+			public void check(final View view, final NoMatchingViewException noViewFoundException) {
+				if (view == null || !(view instanceof MultipleChoiceAnswerGroup)) {
+					throw new AssertionError("view must be a non-null instance of " +
+							"MultipleChoiceAnswerGroup.");
+				} else {
+					final MultipleChoiceAnswerGroup group = (MultipleChoiceAnswerGroup) view;
+
+					assertThat("view was not contained in answer group.", group.getChildCount(),
+							is(0));
+				}
+			}
+		};
+	}
 }
