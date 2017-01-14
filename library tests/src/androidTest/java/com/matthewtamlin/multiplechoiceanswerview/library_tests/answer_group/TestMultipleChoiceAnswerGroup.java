@@ -51,6 +51,7 @@ public class TestMultipleChoiceAnswerGroup {
 
 	private Listener<DecoratedAnswerCard> listener2;
 
+	@SuppressWarnings("unchecked") // Not relevant to mocks
 	@Before
 	public void setup() {
 		testViewDirect = rule.getActivity().getTestView();
