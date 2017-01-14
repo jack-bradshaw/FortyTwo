@@ -1,7 +1,7 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.answer_group;
 
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.Listener;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 import com.matthewtamlin.multiple_choice_answer_view.library.util.Listenable;
 
 import java.util.List;
