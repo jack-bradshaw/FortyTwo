@@ -77,8 +77,6 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 	public void decorate(final DecoratedAnswerCard cardToDecorate, final boolean animate) {
 		checkNotNull(cardToDecorate, "cardToDecorate cannot be null.");
 
-		animateNextUpdate = animate;
-
 		updatePending = true;
 		animateNextUpdate = animate;
 
