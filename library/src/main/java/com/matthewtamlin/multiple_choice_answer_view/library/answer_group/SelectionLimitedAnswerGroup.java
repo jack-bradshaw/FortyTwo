@@ -51,7 +51,7 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	private boolean allowSelectionChangesWhenMarked = false;
 
 	/**
-	 * Listens to eviction callbacks from the {@code selectedViews} 
+	 * Listens to eviction callbacks from the {@code selectedViews} and selects the evicted view.
 	 */
 	private EvictionListener<V> evictionListener = new EvictionListener<V>() {
 		@Override
@@ -60,22 +60,58 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 		}
 	};
 
+	/**
+	 * Constructs a new SelectionLimitAnswerGroup. The selection limit is initially set to 1.
+	 *
+	 * @param context
+	 * 		the context the view is operating in, not null
+	 */
 	public SelectionLimitedAnswerGroup(final Context context) {
 		super(context);
 		init();
 	}
 
+	/**
+	 * Constructs a new SelectionLimitAnswerGroup. The selection limit is initially set to 1.
+	 *
+	 * @param context
+	 * 		the context this view is operating in, not null
+	 * @param attrs
+	 * 		configuration attributes, null allowed
+	 */
 	public SelectionLimitedAnswerGroup(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
 
+	/**
+	 * Constructs a new SelectionLimitAnswerGroup. The selection limit is initially set to 1.
+	 *
+	 * @param context
+	 * 		the context this view is operating in, not null
+	 * @param attrs
+	 * 		configuration attributes, null allowed
+	 * @param defStyleAttr
+	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
+	 */
 	public SelectionLimitedAnswerGroup(final Context context, final AttributeSet attrs,
 			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
 	}
 
+	/**
+	 * Constructs a new SelectionLimitAnswerGroup. The selection limit is initially set to 1.
+	 *
+	 * @param context
+	 * 		the context this view is operating in, not null
+	 * @param attrs
+	 * 		configuration attributes, null allowed
+	 * @param defStyleAttr
+	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
+	 * @param defStyleRes
+	 * 		a resource in the current theme which supplied default attributes, pass 0 to ignore
+	 */
 	@RequiresApi(21) // For caller
 	@TargetApi(21) // For lint
 	public SelectionLimitedAnswerGroup(final Context context, final AttributeSet attrs,
