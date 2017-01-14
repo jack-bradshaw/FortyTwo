@@ -4,6 +4,7 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.Answer
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 import com.matthewtamlin.multiple_choice_answer_view.library.util.Listenable;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 	 *
 	 * @param answers
 	 */
-	public void addAnswers(List<V> answers);
+	public void addAnswers(Collection<V> answers);
 
 	public void addAnswer(V answer);
 
