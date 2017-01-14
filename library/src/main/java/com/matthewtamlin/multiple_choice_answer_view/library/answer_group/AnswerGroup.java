@@ -24,8 +24,8 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 	public void declareExternalViewSelectionChanges();
 
 	public interface Listener<V extends AnswerView> {
-		public void onAnswerSelected(final V selectedView);
+		public void onAnswerSelected(final AnswerGroup<V> answerGroup, final V selectedView);
 
-		public void onAnswerDeselected(final V deselectedView);
+		public void onAnswerDeselected(final AnswerGroup<V> answerGroup, final V deselectedView);
 	}
 }
