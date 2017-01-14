@@ -183,7 +183,7 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 		 * Returns the duration currently used for any animations this decorator performs when
 		 * {@link #decorate(DecoratedAnswerCard, boolean)} is called.
 		 *
-		 * @return the current duration, measured in milliseconds
+		 * @return the current animation duration, measured in milliseconds
 		 */
 		public int getAnimationDurationMs();
 
