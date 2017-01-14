@@ -27,10 +27,10 @@ import static com.matthewtamlin.android_utilities.library.helpers.ColorHelper.ca
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A {@link Decorator} which changes the card background color, the answer text color, and the
- * indicator text color. The color of the background is defined by supplying a {@link ColorSupplier}
- * to the constructor, and the text colors are automatically chosen to maximise contrast with the
- * background. If animations are enabled, the colors are transitioned smoothly.
+ * A {@link Decorator} which changes the colors of the answer card, specifically the card background
+ * and the text colors. The card background colors are defined by supplying a {@link ColorSupplier}
+ * to the constructor, and the text colors are automatically chosen to maximise readability against
+ * the background. If animations are enabled, the colors are transitioned smoothly.
  */
 public class ColorFadeDecorator extends DecoratorAdapter {
 	/**
