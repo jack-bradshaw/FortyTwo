@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 import com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackSet;
@@ -22,7 +23,7 @@ import java.util.Set;
  * An AnswerGroup which limits the number of view which can be selected at any given time. The limit
  * can be set at any time, and is automatically enforced when views are clicked. If the limit has
  * been reached and a view is clicked, the view which was least recently selected will be deselected
- * to allow for the newly selected room.
+ * to allow for the newly selected view.
  *
  * @param <V>
  * 		the type of AnswerViews contained
@@ -120,10 +121,24 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 		init();
 	}
 
+	/**
+	 * Sets the number of answer views which can be selected at any time. If the new limit is less
+	 * than the current number of selected views, the least recently selected views are deselected
+	 * so that the number of selected views equals the limit.
+	 *
+	 * @param limit
+	 * 		the new limit, greater than zero
+	 * @throws IllegalArgumentException
+	 * 		if {@code limit} is less than 1
+	 */
 	public void setMultipleSelectionLimit(final int limit) {
+		IntChecker.checkGreaterThan(limit, 0, "limit cannot be less than 1.");
 		selectedViews.setMaxSize(limit);
 	}
 
+	/**
+	 * @return the current selection limit of this group
+	 */
 	public int getMultipleSelectionLimit() {
 		return selectedViews.getMaxSize();
 	}
@@ -219,12 +234,22 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 		listeners.remove(listener);
 	}
 
+	/**
+	 * Common initializer method for this view. This method should only be called from a
+	 * constructor.
+	 */
 	private void init() {
 		setOrientation(VERTICAL);
 
 		selectedViews.registerListener(evictionListener);
 	}
 
+	/**
+	 * Handles clicks on answer views contained within this group.
+	 *
+	 * @param clickedView
+	 * 		the answer view which was clicked, not null
+	 */
 	private void handleClick(final V clickedView) {
 		boolean allowSelectionChange = !(clickedView.isMarked()
 				&& !allowSelectionChangesWhenMarked);
@@ -238,6 +263,15 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 		}
 	}
 
+	/**
+	 * Deselects the supplied view and calls any registered listeners. Calling this method with a
+	 * view which is already deselected causes the method to exit immediately.
+	 *
+	 * @param answerView
+	 * 		the view to deselect, not null
+	 * @param animate
+	 * 		whether or not the change should be animated
+	 */
 	private void deselectView(final V answerView, final boolean animate) {
 		if (answerView.isSelected()) {
 			answerView.setSelectedStatus(false, animate);
@@ -250,6 +284,15 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 		}
 	}
 
+	/**
+	 * Selects the supplied view and calls any registered listeners. Calling this method with a
+	 * view which is already selected causes the method to exit immediately.
+	 *
+	 * @param answerView
+	 * 		the view to select, not null
+	 * @param animate
+	 * 		whether or not the change should be animated
+	 */
 	private void selectView(final V answerView, final boolean animate) {
 		if (!answerView.isSelected()) {
 			answerView.setSelectedStatus(true, animate);
