@@ -125,7 +125,7 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 	}
 
 	/**
-	 * Callback listener to be invoked when elements are evicted from an EvictingStackSet.
+	 * Callback listener to be called when elements are evicted from an EvictingStackSet.
 	 *
 	 * @param <V>
 	 * 		the type of elements being evicted
