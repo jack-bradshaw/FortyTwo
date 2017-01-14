@@ -18,7 +18,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayout implements
+/**
+ * An AnswerGroup which allows the
+ * @param <V>
+ */
+public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLayout implements
 		AnswerGroup<V> {
 	private final Set<AnswerGroup.Listener<V>> listeners = new HashSet<>();
 
@@ -35,17 +39,17 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 		}
 	};
 
-	public MultipleChoiceAnswerGroup(final Context context) {
+	public SelectionLimitedAnswerGroup(final Context context) {
 		super(context);
 		init();
 	}
 
-	public MultipleChoiceAnswerGroup(final Context context, final AttributeSet attrs) {
+	public SelectionLimitedAnswerGroup(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
 
-	public MultipleChoiceAnswerGroup(final Context context, final AttributeSet attrs,
+	public SelectionLimitedAnswerGroup(final Context context, final AttributeSet attrs,
 			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
@@ -53,7 +57,7 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 
 	@RequiresApi(21) // For caller
 	@TargetApi(21) // For lint
-	public MultipleChoiceAnswerGroup(final Context context, final AttributeSet attrs,
+	public SelectionLimitedAnswerGroup(final Context context, final AttributeSet attrs,
 			final int defStyleAttr, final int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		init();

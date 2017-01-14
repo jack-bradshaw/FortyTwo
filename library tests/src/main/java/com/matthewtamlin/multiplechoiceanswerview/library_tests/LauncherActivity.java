@@ -66,7 +66,7 @@ public class LauncherActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which launches the {@link MultipleChoiceAnswerGroupTestHarness} activity
+	 * Creates a button which launches the {@link SelectionLimitAnswerGroupTestHarness} activity
 	 * when pressed.
 	 *
 	 * @return the button, not null
@@ -80,7 +80,7 @@ public class LauncherActivity extends AppCompatActivity {
 			@Override
 			public void onClick(final View v) {
 				startActivity(new Intent(LauncherActivity.this,
-						MultipleChoiceAnswerGroupTestHarness.class));
+						SelectionLimitAnswerGroupTestHarness.class));
 			}
 		});
 
