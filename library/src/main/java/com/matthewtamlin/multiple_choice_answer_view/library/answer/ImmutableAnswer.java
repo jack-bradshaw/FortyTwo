@@ -3,8 +3,8 @@ package com.matthewtamlin.multiple_choice_answer_view.library.answer;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * An immutable implementation of the Answer interface. The text and correctness are set at
- * instantiation and cannot be modifier thereafter.
+ * An immutable implementation of the Answer interface. The values set at instantiation cannot be
+ * changes.
  */
 public final class ImmutableAnswer implements Answer {
 	/**
