@@ -1,6 +1,9 @@
 package com.matthewtamlin.multiplechoiceanswerview.library_tests;
 
 import android.graphics.Color;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.widget.Button;
 
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.ImmutableAnswer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
@@ -10,9 +13,8 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.Decorat
 
 import java.util.Random;
 
-public class MultipleChoiceAnswerGroupTestHarness extends
-		AnswerGroupTestHarness<DecoratedAnswerCard,
-				MultipleChoiceAnswerGroup<DecoratedAnswerCard>> {
+public class MultipleChoiceAnswerGroupTestHarness extends AnswerGroupTestHarness
+				<DecoratedAnswerCard, MultipleChoiceAnswerGroup<DecoratedAnswerCard>> {
 	/**
 	 * Decorates the test view by changing the background and text colors.
 	 */
