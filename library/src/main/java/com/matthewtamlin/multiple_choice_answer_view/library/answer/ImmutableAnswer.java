@@ -53,7 +53,7 @@ public final class ImmutableAnswer implements Answer {
 			return false;
 		} else if (obj == this) {
 			return true;
-		} else if (obj instanceof ImmutableAnswer) {
+		} else if (obj.getClass() == ImmutableAnswer.class) {
 			final ImmutableAnswer input = (ImmutableAnswer) obj;
 			return text.equals(input.text) && (correctness == input.correctness);
 		} else {
