@@ -20,11 +20,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard.Decorator;
+
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A {@link DecoratedAnswerCard.Decorator} which changes the transparency of the view. The alpha is
- * defined by supplying a {@link AlphaDecorator.AlphaSupplier} to the constructor . If animations
+ * A {@link Decorator} which changes the transparency of the answer card. The alpha values are
+ * defined by supplying an {@link AlphaDecorator.AlphaSupplier} to the constructor. If animations
  * are enabled, the alpha is transitioned smoothly.
  */
 public class AlphaDecorator extends DecoratorAdapter {
