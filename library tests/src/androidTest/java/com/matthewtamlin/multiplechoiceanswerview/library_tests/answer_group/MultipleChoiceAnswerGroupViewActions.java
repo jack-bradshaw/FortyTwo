@@ -4,6 +4,8 @@ import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.view.View;
 
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.Listener;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
 
@@ -130,6 +132,44 @@ public class MultipleChoiceAnswerGroupViewActions {
 			@Override
 			public void perform(final UiController uiController, final View view) {
 				((MultipleChoiceAnswerGroup) view).allowSelectionChangesWhenMarked(allow);
+			}
+		};
+	}
+
+	public static ViewAction setMultipleSelectionLimit(final int limit) {
+		return new ViewAction() {
+			@Override
+			public Matcher<View> getConstraints() {
+				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+			}
+
+			@Override
+			public String getDescription() {
+				return "set multiple selection limit to " + limit;
+			}
+
+			@Override
+			public void perform(final UiController uiController, final View view) {
+				((MultipleChoiceAnswerGroup) view).setMultipleSelectionLimit(limit);
+			}
+		};
+	}
+
+	public static ViewAction registerListener(final Listener listener) {
+		return new ViewAction() {
+			@Override
+			public Matcher<View> getConstraints() {
+				return isAssignableFrom(MultipleChoiceAnswerGroup.class);
+			}
+
+			@Override
+			public String getDescription() {
+				return "register listener";
+			}
+
+			@Override
+			public void perform(final UiController uiController, final View view) {
+				((MultipleChoiceAnswerGroup) view).registerListener(listener);
 			}
 		};
 	}
