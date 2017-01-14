@@ -183,7 +183,7 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 			selectedViews.remove(answerView);
 
 			for (final AnswerGroup.Listener<V> listener : listeners) {
-				listener.onAnswerDeselected(answerView);
+				listener.onAnswerDeselected(this, answerView);
 			}
 		}
 	}
@@ -195,7 +195,7 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 			selectedViews.push(answerView);
 
 			for (final AnswerGroup.Listener<V> listener : listeners) {
-				listener.onAnswerSelected(answerView);
+				listener.onAnswerSelected(this, answerView);
 			}
 		}
 	}
