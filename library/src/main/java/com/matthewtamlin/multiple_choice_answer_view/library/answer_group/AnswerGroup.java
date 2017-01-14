@@ -16,7 +16,7 @@ import java.util.List;
  * #allowSelectionChangesWhenMarked(boolean)} method must be called immediately after a contained
  * view is selected or deselected externally.</li> <li>The on click listeners of the contained views
  * must not be modified externally.</li>
- *
+ * <p>
  * Failure to satisfy both conditions at any time may result in malfunction.
  *
  * @param <V>
@@ -24,9 +24,11 @@ import java.util.List;
  */
 public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V>> {
 	/**
-	 * Adds all views in the supplied collection
+	 * Adds all views in the supplied collection. The order of the collection determines the order
+	 * in which the views are added.
 	 *
 	 * @param answers
+	 * 		the views to add
 	 */
 	public void addAnswers(Collection<V> answers);
 
