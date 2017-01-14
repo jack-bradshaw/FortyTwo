@@ -7,7 +7,6 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.matthewtamlin.android_testing_tools.library.EspressoHelper;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.Listener;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.MultipleChoiceAnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
@@ -35,6 +34,7 @@ import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_gr
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -48,9 +48,9 @@ public class TestMultipleChoiceAnswerGroup {
 
 	public ViewInteraction testViewEspresso;
 
-	private Listener listener1;
+	private Listener<DecoratedAnswerCard> listener1;
 
-	private Listener listener2;
+	private Listener<DecoratedAnswerCard> listener2;
 
 	@Before
 	public void setup() {
@@ -191,6 +191,11 @@ public class TestMultipleChoiceAnswerGroup {
 
 		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
 	@Test
@@ -208,6 +213,11 @@ public class TestMultipleChoiceAnswerGroup {
 
 		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
 	@Test
@@ -225,6 +235,11 @@ public class TestMultipleChoiceAnswerGroup {
 
 		assertThat("Answer 0 should not be selected.", answers.get(0).isSelected(), is(false));
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
+
+		verifySelectedCallbackInvocations(answers.get(0), 0);
+		verifySelectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
 	@Test
@@ -242,6 +257,11 @@ public class TestMultipleChoiceAnswerGroup {
 
 		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
 	@Test
@@ -261,17 +281,51 @@ public class TestMultipleChoiceAnswerGroup {
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
 		assertThat("Answer 2 should not be selected.", answers.get(2).isSelected(), is(false));
 
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 0);
+		verifySelectedCallbackInvocations(answers.get(2), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
+
 		testViewEspresso.perform(clickViewAtIndex(1));
 
 		assertThat("Answer 0 should not be selected.", answers.get(0).isSelected(), is(false));
 		assertThat("Answer 1 should be selected.", answers.get(1).isSelected(), is(true));
 		assertThat("Answer 2 should not be selected.", answers.get(2).isSelected(), is(false));
 
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 1);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
+
 		testViewEspresso.perform(clickViewAtIndex(2));
 
 		assertThat("Answer 0 should not be selected.", answers.get(0).isSelected(), is(false));
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
 		assertThat("Answer 2 should be selected.", answers.get(2).isSelected(), is(true));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 1);
+		verifyDeselectedCallbackInvocations(answers.get(0), 1);
+		verifyDeselectedCallbackInvocations(answers.get(1), 1);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
+
+		testViewEspresso.perform(clickViewAtIndex(0));
+
+		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
+		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
+		assertThat("Answer 2 should not be selected.", answers.get(2).isSelected(), is(false));
+
+		verifySelectedCallbackInvocations(answers.get(0), 2);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 1);
+		verifyDeselectedCallbackInvocations(answers.get(0), 1);
+		verifyDeselectedCallbackInvocations(answers.get(1), 1);
+		verifyDeselectedCallbackInvocations(answers.get(2), 1);
 	}
 
 	public void testSelectAnswer_selectionCapacityNotExceeded() {
@@ -290,17 +344,38 @@ public class TestMultipleChoiceAnswerGroup {
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
 		assertThat("Answer 2 should not be selected.", answers.get(2).isSelected(), is(false));
 
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 0);
+		verifySelectedCallbackInvocations(answers.get(2), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
+
 		testViewEspresso.perform(clickViewAtIndex(1));
 
 		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
 		assertThat("Answer 1 should be selected.", answers.get(1).isSelected(), is(true));
 		assertThat("Answer 2 should not be selected.", answers.get(2).isSelected(), is(false));
 
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 0);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
+
 		testViewEspresso.perform(clickViewAtIndex(2));
 
 		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
 		assertThat("Answer 1 should be selected.", answers.get(1).isSelected(), is(true));
 		assertThat("Answer 2 should be selected.", answers.get(2).isSelected(), is(true));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 1);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -313,6 +388,7 @@ public class TestMultipleChoiceAnswerGroup {
 		testViewEspresso.perform(setMultipleSelectionLimit(0));
 	}
 
+	@Test
 	public void testSetSelectionLimit_limitExceedsCurrentSelectionCount() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
 		answers.add(getNewAnswerCard());
@@ -332,10 +408,71 @@ public class TestMultipleChoiceAnswerGroup {
 		assertThat("Answer 0 should not be selected.", answers.get(0).isSelected(), is(false));
 		assertThat("Answer 1 should not be selected.", answers.get(1).isSelected(), is(false));
 		assertThat("Answer 2 should be selected.", answers.get(2).isSelected(), is(true));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 1);
+		verifyDeselectedCallbackInvocations(answers.get(0), 1);
+		verifyDeselectedCallbackInvocations(answers.get(1), 1);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
 	}
 
-	public void testSetSelectionLimit_limitDoesNotExceedCurrentSelectionCount() {
+	@Test
+	public void testSetSelectionLimit_limitEqualToCurrentSelectionCount() {
+		final List<DecoratedAnswerCard> answers = new ArrayList<>();
+		answers.add(getNewAnswerCard());
+		answers.add(getNewAnswerCard());
+		answers.add(getNewAnswerCard());
 
+		testViewEspresso.perform(addAnswers(answers));
+		testViewEspresso.perform(allowSelectionChangesWhenMarked(true));
+		testViewEspresso.perform(setMultipleSelectionLimit(3));
+
+		testViewEspresso.perform(clickViewAtIndex(0));
+		testViewEspresso.perform(clickViewAtIndex(1));
+		testViewEspresso.perform(clickViewAtIndex(2));
+
+		testViewEspresso.perform(setMultipleSelectionLimit(3));
+
+		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
+		assertThat("Answer 1 should be selected.", answers.get(1).isSelected(), is(true));
+		assertThat("Answer 2 should be selected.", answers.get(2).isSelected(), is(true));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 1);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
+	}
+
+	@Test
+	public void testSetSelectionLimit_limitDoesNotExceedCurrentSelectionCount() {
+		final List<DecoratedAnswerCard> answers = new ArrayList<>();
+		answers.add(getNewAnswerCard());
+		answers.add(getNewAnswerCard());
+		answers.add(getNewAnswerCard());
+
+		testViewEspresso.perform(addAnswers(answers));
+		testViewEspresso.perform(allowSelectionChangesWhenMarked(true));
+		testViewEspresso.perform(setMultipleSelectionLimit(3));
+
+		testViewEspresso.perform(clickViewAtIndex(0));
+		testViewEspresso.perform(clickViewAtIndex(1));
+		testViewEspresso.perform(clickViewAtIndex(2));
+
+		testViewEspresso.perform(setMultipleSelectionLimit(4));
+
+		assertThat("Answer 0 should be selected.", answers.get(0).isSelected(), is(true));
+		assertThat("Answer 1 should be selected.", answers.get(1).isSelected(), is(true));
+		assertThat("Answer 2 should be selected.", answers.get(2).isSelected(), is(true));
+
+		verifySelectedCallbackInvocations(answers.get(0), 1);
+		verifySelectedCallbackInvocations(answers.get(1), 1);
+		verifySelectedCallbackInvocations(answers.get(2), 1);
+		verifyDeselectedCallbackInvocations(answers.get(0), 0);
+		verifyDeselectedCallbackInvocations(answers.get(1), 0);
+		verifyDeselectedCallbackInvocations(answers.get(2), 0);
 	}
 
 	/**
@@ -344,5 +481,17 @@ public class TestMultipleChoiceAnswerGroup {
 	private DecoratedAnswerCard getNewAnswerCard() {
 		final Context context = InstrumentationRegistry.getTargetContext();
 		return new DecoratedAnswerCard(context);
+	}
+
+	private void verifySelectedCallbackInvocations(final DecoratedAnswerCard selectedView,
+			final int times) {
+		verify(listener1, times(times)).onAnswerSelected(testViewDirect, selectedView);
+		verify(listener2, times(times)).onAnswerSelected(testViewDirect, selectedView);
+	}
+
+	private void verifyDeselectedCallbackInvocations(final DecoratedAnswerCard deselectedView,
+			final int times) {
+		verify(listener1, times(times)).onAnswerDeselected(testViewDirect, deselectedView);
+		verify(listener2, times(times)).onAnswerDeselected(testViewDirect, deselectedView);
 	}
 }
