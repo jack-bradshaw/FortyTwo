@@ -100,7 +100,7 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 		}
 
 		// If the stack will become too big, remove elements until it's the right size
-		while (this.size() >= maxSize) {
+		while (size() >= maxSize) {
 			final T bottomItem = get(0);
 			remove(bottomItem);
 
