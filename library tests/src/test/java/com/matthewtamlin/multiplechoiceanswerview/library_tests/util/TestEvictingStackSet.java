@@ -6,12 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.mockito.Matchers;
 
 import java.util.ArrayList;
 
 import static com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackSet.EvictionListener;
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -186,6 +190,7 @@ public class TestEvictingStackSet {
 		final int inserted = 9;
 
 		final EvictingStackSet<Integer> evictingStackSet = new EvictingStackSet<>(limit);
+		registerListeners(evictingStackSet);
 
 		// Insert elements
 		for (int i = 0; i < inserted; i++) {
@@ -198,6 +203,9 @@ public class TestEvictingStackSet {
 
 			assertThat(message, evictingStackSet.contains(i), is(true));
 		}
+
+		verify(listener1, never()).onEviction(eq(evictingStackSet), anyInt());
+		verify(listener2, never()).onEviction(eq(evictingStackSet), anyInt());
 	}
 
 	@Test
@@ -206,6 +214,7 @@ public class TestEvictingStackSet {
 		final int inserted = 10;
 
 		final EvictingStackSet<Integer> evictingStackSet = new EvictingStackSet<>(limit);
+		registerListeners(evictingStackSet);
 
 		// Insert elements
 		for (int i = 0; i < inserted; i++) {
@@ -218,6 +227,9 @@ public class TestEvictingStackSet {
 
 			assertThat(message, evictingStackSet.contains(i), is(true));
 		}
+
+		verify(listener1, never()).onEviction(eq(evictingStackSet), anyInt());
+		verify(listener2, never()).onEviction(eq(evictingStackSet), anyInt());
 	}
 
 	@Test
@@ -226,6 +238,7 @@ public class TestEvictingStackSet {
 		final int inserted = 15;
 
 		final EvictingStackSet<Integer> evictingStackSet = new EvictingStackSet<>(limit);
+		registerListeners(evictingStackSet);
 
 		// Insert elements
 		for (int i = 0; i < inserted; i++) {
@@ -237,6 +250,9 @@ public class TestEvictingStackSet {
 			final String message = String.format("\"%1$s\" should have been evicted.", i);
 
 			assertThat(message, evictingStackSet.contains(i), is(false));
+
+			verify(listener1, times(1)).onEviction(evictingStackSet, i);
+			verify(listener2, times(1)).onEviction(evictingStackSet, i);
 		}
 
 		// Check that the correct elements were retained
@@ -244,6 +260,9 @@ public class TestEvictingStackSet {
 			final String message = String.format("\"%1$s\" should not have been evicted.", i);
 
 			assertThat(message, evictingStackSet.contains(i), is(true));
+
+			verify(listener1, never()).onEviction(evictingStackSet, i);
+			verify(listener2, never()).onEviction(evictingStackSet, i);
 		}
 	}
 
