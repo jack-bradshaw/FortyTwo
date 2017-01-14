@@ -25,13 +25,20 @@ import java.util.List;
 public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V>> {
 	/**
 	 * Adds all views in the supplied collection. The order of the collection determines the order
-	 * in which the views are added.
+	 * in which the views are added. The supplied collection must not be null and must not contain
+	 * null.
 	 *
 	 * @param answers
-	 * 		the views to add
+	 * 		the views to add, not null, not containing null
 	 */
 	public void addAnswers(Collection<V> answers);
 
+	/**
+	 * Adds a single answer to the view. The supplied answer must not be null
+	 *
+	 * @param answer
+	 * 		the answer to add, not null
+	 */
 	public void addAnswer(V answer);
 
 	public void removeAnswer(V answer);
