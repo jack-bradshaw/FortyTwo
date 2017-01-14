@@ -108,7 +108,7 @@ public abstract class SimpleAnswerCardTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setStatus(true, getTestView().isSelected(), true);
+				getTestView().setMarkedStatus(true, true);
 			}
 		});
 
@@ -128,7 +128,7 @@ public abstract class SimpleAnswerCardTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setStatus(false, getTestView().isSelected(), true);
+				getTestView().setMarkedStatus(false, true);
 			}
 		});
 
@@ -148,7 +148,7 @@ public abstract class SimpleAnswerCardTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setStatus(getTestView().isMarked(), true, true);
+				getTestView().setSelectedStatus(true, true);
 			}
 		});
 
@@ -168,7 +168,7 @@ public abstract class SimpleAnswerCardTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setStatus(getTestView().isMarked(), false, true);
+				getTestView().setSelectedStatus(false, true);
 			}
 		});
 
