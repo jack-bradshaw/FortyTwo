@@ -20,7 +20,7 @@ import java.util.List;
  * Failure to satisfy both conditions at any time may result in malfunction.
  *
  * @param <V>
- * 		the type of AnswerViews container
+ * 		the type of AnswerViews contained
  */
 public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V>> {
 	/**
