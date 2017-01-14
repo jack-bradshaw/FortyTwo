@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
+import com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackSet;
+import com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackSet.EvictionListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,11 +23,16 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 
 	private final List<V> allAnswers = new ArrayList<>();
 
-	private Set<V> selectedViews = new HashSet<>();
-
-	private int multipleSelectionLimit = 1;
+	private EvictingStackSet<V> selectedViews = new EvictingStackSet<>(1);
 
 	private boolean allowSelectionChangesWhenMarked = false;
+
+	private EvictionListener<V> evictionListener = new EvictionListener<V>() {
+		@Override
+		public void onEviction(final EvictingStackSet<V> evictingStackSet, final V evicted) {
+			deselectView(evicted, true);
+		}
+	};
 
 	public MultipleChoiceAnswerGroup(final Context context) {
 		super(context);
@@ -51,18 +58,12 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 		init();
 	}
 
-	public void setMultipleSelectionLimit(final int limit, final boolean animate) {
-		multipleSelectionLimit = limit;
-
-		if (limit < selectedViews.size()) {
-			for (final V view : allAnswers) {
-				deselectView(view);
-			}
-		}
+	public void setMultipleSelectionLimit(final int limit) {
+		selectedViews.setMaxSize(limit);
 	}
 
 	public int getMultipleSelectionLimit() {
-		return multipleSelectionLimit;
+		return selectedViews.getMaxSize();
 	}
 
 	@Override
@@ -158,11 +159,26 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 
 	private void init() {
 		setOrientation(VERTICAL);
+
+		selectedViews.registerListener(evictionListener);
 	}
 
-	private void deselectView(final V answerView) {
+	private void handleClick(final V clickedView) {
+		boolean allowSelectionChange = !(clickedView.isMarked()
+				&& !allowSelectionChangesWhenMarked);
+
+		if (allowSelectionChange) {
+			if (clickedView.isSelected()) {
+				deselectView(clickedView, true);
+			} else {
+				selectView(clickedView, true);
+			}
+		}
+	}
+
+	private void deselectView(final V answerView, final boolean animate) {
 		if (answerView.isSelected()) {
-			answerView.setSelectedStatus(false, true);
+			answerView.setSelectedStatus(false, animate);
 
 			selectedViews.remove(answerView);
 
@@ -172,27 +188,14 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 		}
 	}
 
-	private void selectView(final V answerView) {
+	private void selectView(final V answerView, final boolean animate) {
 		if (!answerView.isSelected()) {
-			answerView.setSelectedStatus(true, true);
+			answerView.setSelectedStatus(true, animate);
 
 			selectedViews.add(answerView);
 
 			for (final AnswerGroup.Listener<V> listener : listeners) {
 				listener.onAnswerSelected(answerView);
-			}
-		}
-	}
-
-	private void handleClick(final V clickedView) {
-		boolean allowSelectionChange = !(clickedView.isMarked()
-				&& !allowSelectionChangesWhenMarked);
-
-		if (allowSelectionChange) {
-			if (clickedView.isSelected()) {
-				deselectView(clickedView);
-			} else if (selectedViews.size() < multipleSelectionLimit) {
-				selectView(clickedView);
 			}
 		}
 	}

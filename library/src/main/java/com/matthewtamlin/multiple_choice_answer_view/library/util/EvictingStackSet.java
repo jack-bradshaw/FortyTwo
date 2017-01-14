@@ -104,7 +104,7 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 			for (final EvictionListener<T> listener : listeners) {
 				listener.onEviction(this, bottomItem);
 			}
-		}
+		}	
 
 		return super.push(object);
 	}
