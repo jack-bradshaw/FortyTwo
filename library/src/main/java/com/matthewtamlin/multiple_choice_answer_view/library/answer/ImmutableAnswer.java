@@ -63,6 +63,9 @@ public final class ImmutableAnswer implements Answer {
 
 	@Override
 	public String toString() {
-		return text.toString() + (correctness ? " (correct)" : " (incorrect)");
+		return "ImmutableAnswer {" +
+				"\n\ttext=" + text +
+				"\n\tcorrectness=" + correctness +
+				'}';
 	}
 }
