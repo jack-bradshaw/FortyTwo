@@ -3,9 +3,9 @@ package com.matthewtamlin.multiple_choice_answer_view.library.answer;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A simple POJO implementation of the Answer interface.
+ * A POJO implementation of the Answer interface.
  */
-public class SimpleAnswer implements Answer {
+public class PojoAnswer implements Answer {
 	/**
 	 * The actual text of the answer.
 	 */
@@ -17,7 +17,7 @@ public class SimpleAnswer implements Answer {
 	private boolean correctness;
 
 	/**
-	 * Constructs a new SimpleAnswer.
+	 * Constructs a new PojoAnswer.
 	 *
 	 * @param text
 	 * 		the actual text of the answer, not null
@@ -26,7 +26,7 @@ public class SimpleAnswer implements Answer {
 	 * @throws IllegalArgumentException
 	 * 		if {@code text} is null
 	 */
-	public SimpleAnswer(final CharSequence text, final boolean correctness) {
+	public PojoAnswer(final CharSequence text, final boolean correctness) {
 		this.text = checkNotNull(text, "text cannot be null.");
 		this.correctness = correctness;
 	}
@@ -75,7 +75,7 @@ public class SimpleAnswer implements Answer {
 		} else if (obj == this) {
 			return true;
 		} else if (obj instanceof Answer) {
-			final SimpleAnswer input = (SimpleAnswer) obj;
+			final PojoAnswer input = (PojoAnswer) obj;
 			return text.equals(input.text) && (correctness == input.correctness);
 		} else {
 			return false;

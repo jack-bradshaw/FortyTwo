@@ -21,7 +21,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.SimpleAnswerCard;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.SimpleAnswer;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer.PojoAnswer;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -248,13 +248,13 @@ public abstract class TestSimpleAnswerCard {
 		simpleAnswerCardEspresso.perform(setAnswer(null, true));
 		answerContainerEspresso.check(hasText(isEmptyOrNullString()));
 
-		simpleAnswerCardEspresso.perform(setAnswer(new SimpleAnswer( "test 1", false), true));
+		simpleAnswerCardEspresso.perform(setAnswer(new PojoAnswer( "test 1", false), true));
 		answerContainerEspresso.check(hasText(is("test 1")));
 
 		simpleAnswerCardEspresso.perform(setAnswer(null, true));
 		answerContainerEspresso.check(hasText(isEmptyOrNullString()));
 
-		simpleAnswerCardEspresso.perform(setAnswer(new SimpleAnswer("test 2", false), true));
+		simpleAnswerCardEspresso.perform(setAnswer(new PojoAnswer("test 2", false), true));
 		answerContainerEspresso.check(hasText(is("test 2")));
 	}
 
@@ -269,13 +269,13 @@ public abstract class TestSimpleAnswerCard {
 		simpleAnswerCardEspresso.perform(setAnswer(null, false));
 		answerContainerEspresso.check(hasText(isEmptyOrNullString()));
 
-		simpleAnswerCardEspresso.perform(setAnswer(new SimpleAnswer("test 1", false), false));
+		simpleAnswerCardEspresso.perform(setAnswer(new PojoAnswer("test 1", false), false));
 		answerContainerEspresso.check(hasText(is("test 1")));
 
 		simpleAnswerCardEspresso.perform(setAnswer(null, false));
 		answerContainerEspresso.check(hasText(isEmptyOrNullString()));
 
-		simpleAnswerCardEspresso.perform(setAnswer(new SimpleAnswer("test 2", false), false));
+		simpleAnswerCardEspresso.perform(setAnswer(new PojoAnswer("test 2", false), false));
 		answerContainerEspresso.check(hasText(is("test 2")));
 	}
 

@@ -1,6 +1,6 @@
 package com.matthewtamlin.multiplechoiceanswerview.library_tests.answer.answer.answer;
 
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.SimpleAnswer;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer.PojoAnswer;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,12 +13,12 @@ import static org.hamcrest.Matchers.is;
 public class TestSimpleAnswer {
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_nullText() {
-		new SimpleAnswer(null, true);
+		new PojoAnswer(null, true);
 	}
 
 	@Test
 	public void testConstructor_validArguments() {
-		final SimpleAnswer answer = new SimpleAnswer("test", true);
+		final PojoAnswer answer = new PojoAnswer("test", true);
 
 		assertThat("getter returned wrong text.", answer.getText(), is((CharSequence) "test"));
 		assertThat("getter returned wrong correctness", answer.isCorrect(), is(true));
@@ -26,14 +26,14 @@ public class TestSimpleAnswer {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetText_nullText() {
-		final SimpleAnswer answer = new SimpleAnswer("test", true);
+		final PojoAnswer answer = new PojoAnswer("test", true);
 
 		answer.setText(null);
 	}
 
 	@Test
 	public void testSetText_validArguments() {
-		final SimpleAnswer answer = new SimpleAnswer("test", true);
+		final PojoAnswer answer = new PojoAnswer("test", true);
 
 		answer.setText("42");
 
@@ -46,7 +46,7 @@ public class TestSimpleAnswer {
 
 	@Test
 	public void testSetCorrectness() {
-		final SimpleAnswer answer = new SimpleAnswer("test", true);
+		final PojoAnswer answer = new PojoAnswer("test", true);
 
 		answer.setCorrectness(false);
 
