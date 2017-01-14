@@ -34,7 +34,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  */
 public class ColorFadeDecorator extends DecoratorAdapter {
 	/**
-	 * Supplies the background color to use for a given set of properties.
+	 * Supplies the background colors to use.
 	 */
 	private final ColorSupplier colorSupplier;
 
