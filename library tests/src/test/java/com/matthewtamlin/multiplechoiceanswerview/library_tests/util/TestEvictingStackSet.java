@@ -6,12 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.Matchers;
 
 import java.util.ArrayList;
 
 import static com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackSet.EvictionListener;
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
