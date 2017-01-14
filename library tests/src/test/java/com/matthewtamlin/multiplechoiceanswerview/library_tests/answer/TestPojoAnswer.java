@@ -1,4 +1,4 @@
-package com.matthewtamlin.multiplechoiceanswerview.library_tests.answer.answer.answer;
+package com.matthewtamlin.multiplechoiceanswerview.library_tests.answer;
 
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.PojoAnswer;
 
@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(JUnit4.class)
-public class TestSimpleAnswer {
+public class TestPojoAnswer {
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_nullText() {
 		new PojoAnswer(null, true);
