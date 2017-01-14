@@ -7,17 +7,26 @@ import com.matthewtamlin.multiple_choice_answer_view.library.util.Listenable;
 import java.util.List;
 
 /**
- * Contains and coordinates a collection of AnswerViews. The group listens for clicks on the views
- * and responds by selecting and deselecting views as necessary. The group provides the option of
- * ignoring selection changes for views which are currently marked as selected.
+ * Contains and coordinates a collection of AnswerViews. The group listens for clicks on the
+ * contained views and responds by selecting and deselecting views as necessary. The group provides
+ * the option of ignoring selection changes for views which are currently marked as selected.
  * <p>
- * If a view contained in the group is selected or deselected externally, {@link
- * #allowSelectionChangesWhenMarked(boolean)} must be called to declare the change.
+ * When using this view, two conditions must be satisfied:<iul> <li>The {@link
+ * #allowSelectionChangesWhenMarked(boolean)} method must be called immediately after a contained
+ * view is selected or deselected externally.</li> <li>The on click listeners of the contained views
+ * must not be modified externally.</li>
+ *
+ * Failure to satisfy both conditions at any time may result in malfunction.
  *
  * @param <V>
  * 		the type of AnswerViews container
  */
 public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V>> {
+	/**
+	 * Adds all views in the supplied collection
+	 *
+	 * @param answers
+	 */
 	public void addAnswers(List<V> answers);
 
 	public void addAnswer(V answer);
