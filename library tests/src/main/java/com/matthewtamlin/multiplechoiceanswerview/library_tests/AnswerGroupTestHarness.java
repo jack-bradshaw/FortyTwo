@@ -104,7 +104,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 
 	private Button createAllowSelectionChangesWhenMarkedButton() {
 		final Button b = new Button(this);
-		b.setText("Lock when marked");
+		b.setText("Unlock when marked");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +119,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 
 	private Button createDisallowSelectionChangesWhenMarkedButton() {
 		final Button b = new Button(this);
-		b.setText("Unlock when marked");
+		b.setText("Lock when marked");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
