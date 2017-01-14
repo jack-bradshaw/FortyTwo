@@ -31,7 +31,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  */
 public class AlphaDecorator extends DecoratorAdapter {
 	/**
-	 * Supplies the alpha to use for a given set of properties.
+	 * Supplies the alpha values.
 	 */
 	private final AlphaSupplier alphaSupplier;
 
