@@ -165,8 +165,9 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Applies decoration to a {@link DecoratedAnswerCard}. Decorators can be applied to a view by
-	 * calling {@link DecoratedAnswerCard#addDecorator(Decorator, boolean)}.
+	 * Applies decoration to a single {@link DecoratedAnswerCard} via the {@link
+	 * DecoratedAnswerCard#addDecorator(Decorator, boolean)} method. In general, it is not safe to
+	 * apply the same decorator to multiple views simultaneously.
 	 */
 	public interface Decorator {
 		/**
