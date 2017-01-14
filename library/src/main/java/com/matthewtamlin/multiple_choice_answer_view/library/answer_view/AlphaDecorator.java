@@ -27,7 +27,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
 /**
  * A {@link Decorator} which changes the transparency of the answer card. The alpha values are
  * defined by supplying an {@link AlphaDecorator.AlphaSupplier} to the constructor. If animations
- * are enabled, the alpha is transitioned smoothly.
+ * are enabled, the alpha of the card is transitioned smoothly.
  */
 public class AlphaDecorator extends DecoratorAdapter {
 	/**
