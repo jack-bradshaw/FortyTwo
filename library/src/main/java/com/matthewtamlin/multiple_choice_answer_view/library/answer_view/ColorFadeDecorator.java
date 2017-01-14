@@ -27,10 +27,11 @@ import static com.matthewtamlin.android_utilities.library.helpers.ColorHelper.ca
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A {@link Decorator} which changes the colors of the answer card, specifically the card background
- * and the text colors. The card background colors are defined by supplying a {@link ColorSupplier}
- * to the constructor, and the text colors are automatically chosen to maximise readability against
- * the background. If animations are enabled, the colors are transitioned smoothly.
+ * A {@link Decorator} which changes the colors of an answer card, specifically the card background
+ * color and the text colors. The card background colors are defined by supplying a {@link
+ * ColorSupplier} to the constructor, and the text colors are automatically chosen to maximise
+ * readability against the background. If animations are enabled, the colors are transitioned
+ * smoothly.
  */
 public class ColorFadeDecorator extends DecoratorAdapter {
 	/**
@@ -39,7 +40,7 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 	private final ColorSupplier colorSupplier;
 
 	/**
-	 * Indicates whether or not a decoration is currently being applied. This could be an
+	 * Indicates whether or not a decoration is currently being applied to a view. This could be an
 	 * instantaneous update on the UI thread, or an asynchronous update using animators.
 	 */
 	private boolean updateInProgress = false;
@@ -58,7 +59,7 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 	 * Constructs a new ColorFadeDecorator.
 	 *
 	 * @param colorSupplier
-	 * 		defines the background colors to use when decorating, not null
+	 * 		defines the card background colors, not null
 	 * @throws IllegalArgumentException
 	 * 		if {@code colorSupplier} is null
 	 */
@@ -86,9 +87,9 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 	}
 
 	/**
-	 * Performs the decoration, using animations if necessary. If this method is called again while
-	 * animations from a previous invocation are still running, the current animations will complete
-	 * before new ones are started.
+	 * Applies the decoration to the supplied card. If this method is called again while animations
+	 * from a previous invocation are still running, the current animations will complete before new
+	 * ones are started.
 	 *
 	 * @param cardToDecorate
 	 * 		the card to apply the decoration to, not null
