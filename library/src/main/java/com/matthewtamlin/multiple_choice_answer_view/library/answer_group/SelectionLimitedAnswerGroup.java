@@ -52,12 +52,17 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	private boolean allowSelectionChangesWhenMarked = false;
 
 	/**
+	 * Whether or not animations should be shown when selecting and deselecting views.
+	 */
+	private boolean selectionAnimationsEnabled = true;
+
+	/**
 	 * Listens to eviction callbacks from the {@code selectedViews} and selects the evicted view.
 	 */
 	private EvictionListener<V> evictionListener = new EvictionListener<V>() {
 		@Override
 		public void onEviction(final EvictingStackSet<V> evictingStackSet, final V evicted) {
-			deselectView(evicted, true);
+			deselectView(evicted);
 		}
 	};
 
@@ -134,6 +139,25 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	public void setMultipleSelectionLimit(final int limit) {
 		IntChecker.checkGreaterThan(limit, 0, "limit cannot be less than 1.");
 		selectedViews.setMaxSize(limit);
+	}
+
+	/**
+	 * Enables/disables animations when answer views are selected/deselected.
+	 *
+	 * @param enable
+	 * 		true to enable animations, false to disable them
+	 */
+	public void enableSelectionAnimations(final boolean enable) {
+		selectionAnimationsEnabled = enable;
+	}
+
+	/**
+	 * Whether or not animations are enabled when views are selected/deselected
+	 *
+	 * @return true if animations are enabled, false otherwise
+	 */
+	public boolean selectionAnimationsAreEnabled() {
+		return selectionAnimationsEnabled;
 	}
 
 	/**
@@ -256,9 +280,9 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 
 		if (allowSelectionChange) {
 			if (clickedView.isSelected()) {
-				deselectView(clickedView, true);
+				deselectView(clickedView);
 			} else {
-				selectView(clickedView, true);
+				selectView(clickedView);
 			}
 		}
 	}
@@ -269,12 +293,10 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	 *
 	 * @param answerView
 	 * 		the view to deselect, not null
-	 * @param animate
-	 * 		whether or not the change should be animated
 	 */
-	private void deselectView(final V answerView, final boolean animate) {
+	private void deselectView(final V answerView) {
 		if (answerView.isSelected()) {
-			answerView.setSelectedStatus(false, animate);
+			answerView.setSelectedStatus(false, selectionAnimationsEnabled);
 
 			selectedViews.remove(answerView);
 
@@ -285,17 +307,15 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	}
 
 	/**
-	 * Selects the supplied view and calls any registered listeners. Calling this method with a
-	 * view which is already selected causes the method to exit immediately.
+	 * Selects the supplied view and calls any registered listeners. Calling this method with a view
+	 * which is already selected causes the method to exit immediately.
 	 *
 	 * @param answerView
 	 * 		the view to select, not null
-	 * @param animate
-	 * 		whether or not the change should be animated
 	 */
-	private void selectView(final V answerView, final boolean animate) {
+	private void selectView(final V answerView) {
 		if (!answerView.isSelected()) {
-			answerView.setSelectedStatus(true, animate);
+			answerView.setSelectedStatus(true, selectionAnimationsEnabled);
 
 			selectedViews.push(answerView);
 
