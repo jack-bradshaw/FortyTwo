@@ -192,7 +192,7 @@ public class MultipleChoiceAnswerGroup<V extends AnswerView> extends LinearLayou
 		if (!answerView.isSelected()) {
 			answerView.setSelectedStatus(true, animate);
 
-			selectedViews.add(answerView);
+			selectedViews.push(answerView);
 
 			for (final AnswerGroup.Listener<V> listener : listeners) {
 				listener.onAnswerSelected(answerView);
