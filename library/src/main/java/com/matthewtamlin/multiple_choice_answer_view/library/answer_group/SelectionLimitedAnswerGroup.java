@@ -19,19 +19,40 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * An AnswerGroup which allows the
+ * An AnswerGroup which limits the number of view which can be selected at any given time. The limit
+ * can be set at any time, and is automatically enforced when views are clicked. If the limit has
+ * been reached and a view is clicked, the view which was least recently selected will be deselected
+ * to allow for the newly selected room.
+ *
  * @param <V>
+ * 		the type of AnswerViews contained
  */
 public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLayout implements
 		AnswerGroup<V> {
+	/**
+	 * The listeners which have registered for callbacks.
+	 */
 	private final Set<AnswerGroup.Listener<V>> listeners = new HashSet<>();
 
+	/**
+	 * All answers which are currently displayed in this group.
+	 */
 	private final List<V> allAnswers = new ArrayList<>();
 
+	/**
+	 * All answers which are currently displayed and selected. The size of the stack enforces the
+	 * selection limit.
+	 */
 	private EvictingStackSet<V> selectedViews = new EvictingStackSet<>(1);
 
+	/**
+	 * Whether or not the selection status of marked views can be changed.
+	 */
 	private boolean allowSelectionChangesWhenMarked = false;
 
+	/**
+	 * Listens to eviction callbacks from the {@code selectedViews} 
+	 */
 	private EvictionListener<V> evictionListener = new EvictionListener<V>() {
 		@Override
 		public void onEviction(final EvictingStackSet<V> evictingStackSet, final V evicted) {
