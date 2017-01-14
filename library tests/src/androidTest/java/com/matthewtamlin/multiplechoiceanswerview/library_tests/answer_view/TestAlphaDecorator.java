@@ -19,10 +19,10 @@ package com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_view;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 
+import com.matthewtamlin.multiple_choice_answer_view.library.answer.PojoAnswer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AlphaDecorator.AlphaSupplier;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.SimpleAnswer;
 import com.matthewtamlin.multiplechoiceanswerview.library_tests.DecoratedAnswerCardTestHarness;
 
 import org.junit.Before;
@@ -108,7 +108,7 @@ public class TestAlphaDecorator {
 	 */
 	@Test
 	public void testUnmarkedDeselectedAndIncorrect_usingAnimation() {
-		decoratedAnswerCardEspresso.perform(setAnswer(new SimpleAnswer("test", false), true));
+		decoratedAnswerCardEspresso.perform(setAnswer(new PojoAnswer("test", false), true));
 		decoratedAnswerCardEspresso.perform(setStatus(false, false, true));
 
 		decoratedAnswerCardEspresso.perform(addDecorator(alphaDecorator, true));
@@ -128,7 +128,7 @@ public class TestAlphaDecorator {
 	 */
 	@Test
 	public void testUnmarkedDeselectedAndIncorrect_noAnimation() {
-		decoratedAnswerCardEspresso.perform(setAnswer(new SimpleAnswer("test", false), false));
+		decoratedAnswerCardEspresso.perform(setAnswer(new PojoAnswer("test", false), false));
 		decoratedAnswerCardEspresso.perform(setStatus(false, false, false));
 
 		decoratedAnswerCardEspresso.perform(addDecorator(alphaDecorator, false));
@@ -148,7 +148,7 @@ public class TestAlphaDecorator {
 	 */
 	@Test
 	public void testMarkedSelectedAndCorrect_usingAnimation() {
-		decoratedAnswerCardEspresso.perform(setAnswer(new SimpleAnswer("test", true), true));
+		decoratedAnswerCardEspresso.perform(setAnswer(new PojoAnswer("test", true), true));
 		decoratedAnswerCardEspresso.perform(setStatus(true, true, true));
 
 		decoratedAnswerCardEspresso.perform(addDecorator(alphaDecorator, true));
@@ -168,7 +168,7 @@ public class TestAlphaDecorator {
 	 */
 	@Test
 	public void testMarkedSelectedAndCorrect_noAnimation() {
-		decoratedAnswerCardEspresso.perform(setAnswer(new SimpleAnswer("test", true), false));
+		decoratedAnswerCardEspresso.perform(setAnswer(new PojoAnswer("test", true), false));
 		decoratedAnswerCardEspresso.perform(setStatus(true, true, false));
 
 		decoratedAnswerCardEspresso.perform(addDecorator(alphaDecorator, false));

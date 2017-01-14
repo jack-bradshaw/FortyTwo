@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsBelowViewTestHarness;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.SimpleAnswer;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer.PojoAnswer;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.SimpleAnswerCard;
 
 /**
@@ -228,7 +228,7 @@ public abstract class SimpleAnswerCardTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setAnswer(new SimpleAnswer("answer (correct)", true), true);
+				getTestView().setAnswer(new PojoAnswer("answer (correct)", true), true);
 			}
 		});
 
@@ -248,7 +248,7 @@ public abstract class SimpleAnswerCardTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setAnswer(new SimpleAnswer("answer (incorrect)", false), true);
+				getTestView().setAnswer(new PojoAnswer("answer (incorrect)", false), true);
 			}
 		});
 
