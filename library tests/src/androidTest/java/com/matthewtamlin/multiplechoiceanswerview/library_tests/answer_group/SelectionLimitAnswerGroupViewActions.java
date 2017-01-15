@@ -30,8 +30,19 @@ import java.util.List;
 
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 
+/**
+ * Custom ViewActions for use with SelectionLimitAnswerGroups.
+ */
 @SuppressWarnings("unchecked")
 public class SelectionLimitAnswerGroupViewActions {
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to add multiple
+	 * answer view to the group.
+	 *
+	 * @param answers
+	 * 		the answers to add
+	 * @return the view action
+	 */
 	public static ViewAction addAnswers(final List<? extends AnswerView> answers) {
 		return new ViewAction() {
 			@Override
@@ -52,6 +63,14 @@ public class SelectionLimitAnswerGroupViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to add a single
+	 * answer view to the group.
+	 *
+	 * @param answer
+	 * 		the answer to add
+	 * @return the view action
+	 */
 	public static ViewAction addAnswer(final AnswerView answer) {
 		return new ViewAction() {
 			@Override
@@ -72,6 +91,14 @@ public class SelectionLimitAnswerGroupViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to remove an answer
+	 * from the group.
+	 *
+	 * @param answer
+	 * 		the answer to remove
+	 * @return the view action
+	 */
 	public static ViewAction removeAnswer(final AnswerView answer) {
 		return new ViewAction() {
 			@Override
@@ -92,6 +119,12 @@ public class SelectionLimitAnswerGroupViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to clear all answers
+	 * in the group.
+	 *
+	 * @return the view action
+	 */
 	public static ViewAction clearAnswers() {
 		return new ViewAction() {
 			@Override
@@ -112,6 +145,14 @@ public class SelectionLimitAnswerGroupViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to click an answer
+	 * view in the group.
+	 *
+	 * @param index
+	 * 		the index of the answer view to click
+	 * @return the view action
+	 */
 	public static ViewAction clickViewAtIndex(final int index) {
 		return new ViewAction() {
 			@Override
@@ -133,6 +174,14 @@ public class SelectionLimitAnswerGroupViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to allow or disallow
+	 * selection changes on marked views.
+	 *
+	 * @param allow
+	 * 		true to allow selection changes on marked views, false to disallow them
+	 * @return the view action
+	 */
 	public static ViewAction allowSelectionChangesWhenMarked(final boolean allow) {
 		return new ViewAction() {
 			@Override
@@ -152,6 +201,14 @@ public class SelectionLimitAnswerGroupViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to set its multiple
+	 * selection limit.
+	 *
+	 * @param limit
+	 * 		the limit to set
+	 * @return the view action
+	 */
 	public static ViewAction setMultipleSelectionLimit(final int limit) {
 		return new ViewAction() {
 			@Override
@@ -171,6 +228,14 @@ public class SelectionLimitAnswerGroupViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which can be applied to a SelectionLimitAnswerGroup to register a
+	 * listener to the group for callbacks.
+	 *
+	 * @param listener
+	 * 		the listener to register
+	 * @return the view action
+	 */
 	public static ViewAction registerListener(final Listener listener) {
 		return new ViewAction() {
 			@Override
