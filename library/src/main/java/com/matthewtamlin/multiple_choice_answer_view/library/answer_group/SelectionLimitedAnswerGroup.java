@@ -62,7 +62,17 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	 * All answers which are currently displayed and selected. The size of the stack enforces the
 	 * selection limit.
 	 */
-	private EvictingStackSet<V> selectedViews = new EvictingStackSet<>(1);
+	private final EvictingStackSet<V> selectedViews = new EvictingStackSet<>(1);
+
+	/**
+	 * Listens to eviction callbacks from the {@code selectedViews} and selects the evicted view.
+	 */
+	private final EvictionListener<V> evictionListener = new EvictionListener<V>() {
+		@Override
+		public void onEviction(final EvictingStackSet<V> evictingStackSet, final V evicted) {
+			deselectView(evicted);
+		}
+	};
 
 	/**
 	 * Whether or not the selection status of marked views can be changed.
@@ -73,16 +83,6 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	 * Whether or not animations should be shown when selecting and deselecting views.
 	 */
 	private boolean selectionAnimationsEnabled = true;
-
-	/**
-	 * Listens to eviction callbacks from the {@code selectedViews} and selects the evicted view.
-	 */
-	private EvictionListener<V> evictionListener = new EvictionListener<V>() {
-		@Override
-		public void onEviction(final EvictingStackSet<V> evictingStackSet, final V evicted) {
-			deselectView(evicted);
-		}
-	};
 
 	/**
 	 * Constructs a new SelectionLimitAnswerGroup. The selection limit is initially set to 1.
