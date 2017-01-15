@@ -25,13 +25,26 @@ import org.junit.runners.JUnit4;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Unit tests for the {@link PojoAnswer} class.
+ */
 @RunWith(JUnit4.class)
 public class TestPojoAnswer {
+	/**
+	 * Test to ensure the {@link PojoAnswer#PojoAnswer(CharSequence, boolean)} construction
+	 * functions correctly when provided with null text. The test will only pass if the correct
+	 * exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_nullText() {
 		new PojoAnswer(null, true);
 	}
 
+	/**
+	 * Test to ensure the {@link PojoAnswer#PojoAnswer(CharSequence, boolean)} constructor functions
+	 * correctly when provided with non-null text. The test will only pass if the getters return the
+	 * values passed the constructor.
+	 */
 	@Test
 	public void testConstructor_validArguments() {
 		final PojoAnswer answer = new PojoAnswer("test", true);
@@ -40,6 +53,10 @@ public class TestPojoAnswer {
 		assertThat("getter returned wrong correctness", answer.isCorrect(), is(true));
 	}
 
+	/**
+	 * Test to ensure the {@link PojoAnswer#setText(CharSequence)} method functions correctly when
+	 * provided with null text. The test will only pass if the correct exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetText_nullText() {
 		final PojoAnswer answer = new PojoAnswer("test", true);
@@ -47,6 +64,10 @@ public class TestPojoAnswer {
 		answer.setText(null);
 	}
 
+	/**
+	 * Test to ensure the {@link PojoAnswer#setText(CharSequence)} method functions correctly when
+	 * provided with non-null text. The test will only pass if the getter returns the new value.
+	 */
 	@Test
 	public void testSetText_validArguments() {
 		final PojoAnswer answer = new PojoAnswer("test", true);
@@ -60,6 +81,10 @@ public class TestPojoAnswer {
 		assertThat("getter returned wrong text.", answer.getText(), is((CharSequence) "test"));
 	}
 
+	/**
+	 * Test to ensure the {@link PojoAnswer#setCorrectness(boolean)} (CharSequence)} method
+	 * functions correctly. The test will only pass if the getter returns the new value.
+	 */
 	@Test
 	public void testSetCorrectness() {
 		final PojoAnswer answer = new PojoAnswer("test", true);
