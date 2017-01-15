@@ -20,16 +20,20 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard.Decorator;
+
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A {@link DecoratedAnswerCard.Decorator} which changes the transparency of the view. The alpha is
- * defined by supplying a {@link AlphaDecorator.AlphaSupplier} to the constructor . If animations
- * are enabled, the alpha is transitioned smoothly.
+ * A {@link Decorator} which changes the transparency of the target answer card. The alpha values
+ * are defined by supplying an {@link AlphaDecorator.AlphaSupplier} to the constructor. If
+ * animations are enabled, the transparency is transitioned smoothly.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true)
 public class AlphaDecorator extends DecoratorAdapter {
 	/**
-	 * Supplies the alpha to use for a given set of properties.
+	 * Supplies the alpha values.
 	 */
 	private final AlphaSupplier alphaSupplier;
 
@@ -40,7 +44,7 @@ public class AlphaDecorator extends DecoratorAdapter {
 	private boolean updateInProgress = false;
 
 	/**
-	 * Indicates whether or not an update needs to be performed.
+	 * Indicates whether or not an update needs to be performed when possible.
 	 */
 	private boolean updatePending = false;
 
@@ -53,7 +57,7 @@ public class AlphaDecorator extends DecoratorAdapter {
 	 * Constructs a new AlphaDecorator.
 	 *
 	 * @param alphaSupplier
-	 * 		defines the alpha values to use when decorating, not null
+	 * 		supplies the alpha values to use when decorating, not null
 	 * @throws IllegalArgumentException
 	 * 		if {@code alphaSupplier} is null
 	 */
@@ -74,9 +78,9 @@ public class AlphaDecorator extends DecoratorAdapter {
 	}
 
 	/**
-	 * Performs the decoration, using animations if necessary. If this method is called again while
-	 * animations from a previous invocation are still running, the current animations will complete
-	 * before new ones are started.
+	 * Applies the decoration to the supplied card, using animations if necessary. If this method is
+	 * called again while animations from a previous invocation are still running, the current
+	 * animations will complete before new ones are started.
 	 *
 	 * @param cardToDecorate
 	 * 		the card to apply the decoration to, not null

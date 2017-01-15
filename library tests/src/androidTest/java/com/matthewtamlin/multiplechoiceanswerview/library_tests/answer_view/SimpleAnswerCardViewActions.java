@@ -20,8 +20,8 @@ import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.view.View;
 
-import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.SimpleAnswerCard;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.SimpleAnswerCard;
 
 import org.hamcrest.Matcher;
 
@@ -41,7 +41,7 @@ public class SimpleAnswerCardViewActions {
 	 * duration.
 	 *
 	 * @param animationDurationMs
-	 * 		the animation duration to set, measured in milliseconds, at least zero
+	 * 		the animation duration to set
 	 * @return the view action
 	 */
 	public static ViewAction setAnimationDurationMs(final int animationDurationMs) {
@@ -67,9 +67,9 @@ public class SimpleAnswerCardViewActions {
 	 * Creates a ViewAction which can be applied to a SimpleAnswerCard to set the status.
 	 *
 	 * @param marked
-	 * 		whether or not the view should be marked
+	 * 		true to mark the view, false to unmark it
 	 * @param selected
-	 * 		whether or not the view should be selected
+	 * 		true to select the view, false to unmark it
 	 * @param animate
 	 * 		whether or not any resulting UI changes should be animated
 	 * @return the view action
@@ -100,10 +100,74 @@ public class SimpleAnswerCardViewActions {
 	}
 
 	/**
+	 * Creates a ViewAction which can be applied to a SimpleAnswerCard to set the marked status.
+	 *
+	 * @param marked
+	 * 		true to mark the view, false to unmark it
+	 * @param animate
+	 * 		whether or not any resulting UI changes should be animated
+	 */
+	public static ViewAction setMarkedStatus(final boolean marked, final boolean animate) {
+		return new ViewAction() {
+			@Override
+			public Matcher<View> getConstraints() {
+				return isAssignableFrom(SimpleAnswerCard.class);
+			}
+
+			@Override
+			public String getDescription() {
+				return "set marked to " + marked + (animate ? " using animation" : " without " +
+						"animation");
+			}
+
+			@Override
+			public void perform(final UiController uiController, final View view) {
+				((SimpleAnswerCard) view).setMarkedStatus(marked, animate);
+
+				if (animate) {
+					uiController.loopMainThreadForAtLeast(WAIT_FOR_ASYNC_EVENTS_TO_FINISH_MS);
+				}
+			}
+		};
+	}
+
+	/**
+	 * Creates a ViewAction which can be applied to a SimpleAnswerCard to set the selected status.
+	 *
+	 * @param selected
+	 * 		true to select the view, false to unmark it
+	 * @param animate
+	 * 		whether or not any resulting UI changes should be animated
+	 */
+	public static ViewAction setSelectedStatus(final boolean selected, final boolean animate) {
+		return new ViewAction() {
+			@Override
+			public Matcher<View> getConstraints() {
+				return isAssignableFrom(SimpleAnswerCard.class);
+			}
+
+			@Override
+			public String getDescription() {
+				return "set selected to " + selected + (animate ? " using animation" : " without " +
+						"animation");
+			}
+
+			@Override
+			public void perform(final UiController uiController, final View view) {
+				((SimpleAnswerCard) view).setSelectedStatus(selected, animate);
+
+				if (animate) {
+					uiController.loopMainThreadForAtLeast(WAIT_FOR_ASYNC_EVENTS_TO_FINISH_MS);
+				}
+			}
+		};
+	}
+
+	/**
 	 * Creates a ViewAction which can be applied to a SimpleAnswerCard to set the answer.
 	 *
 	 * @param answer
-	 * 		the answer to set, may be null
+	 * 		the answer to set
 	 * @param animate
 	 * 		whether or not any resulting UI changes should be animated
 	 * @return the view action
@@ -135,7 +199,7 @@ public class SimpleAnswerCardViewActions {
 	 * Creates a ViewAction which can be applied to a SimpleAnswerCard to set the identifier.
 	 *
 	 * @param identifier
-	 * 		the identifier to set, may be null
+	 * 		the identifier to set
 	 * @param animate
 	 * 		whether or not any resulting UI changes should be animated
 	 * @return the view action

@@ -40,6 +40,7 @@ public class LauncherActivity extends AppCompatActivity {
 		setContentView(rootView, new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
 
 		rootView.addView(createLaunchTestSimpleAnswerCard());
+		rootView.addView(createLaunchMultipleChoiceAnswerGroupTestHarnessButton());
 	}
 
 	/**
@@ -56,8 +57,30 @@ public class LauncherActivity extends AppCompatActivity {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				startActivity(
-						new Intent(LauncherActivity.this, DecoratedAnswerCardTestHarness.class));
+				startActivity(new Intent(LauncherActivity.this,
+						DecoratedAnswerCardTestHarness.class));
+			}
+		});
+
+		return b;
+	}
+
+	/**
+	 * Creates a button which launches the {@link SelectionLimitAnswerGroupTestHarness} activity
+	 * when pressed.
+	 *
+	 * @return the button, not null
+	 */
+	private Button createLaunchMultipleChoiceAnswerGroupTestHarnessButton() {
+		final Button b = new Button(this);
+		b.setText("Launch MultipleChoiceAnswerGroup test harness");
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				startActivity(new Intent(LauncherActivity.this,
+						SelectionLimitAnswerGroupTestHarness.class));
 			}
 		});
 

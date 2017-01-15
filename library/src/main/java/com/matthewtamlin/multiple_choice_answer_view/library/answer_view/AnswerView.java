@@ -19,25 +19,46 @@ package com.matthewtamlin.multiple_choice_answer_view.library.answer_view;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
 
 /**
- * Displays an answer and an identifier to the user. An identifier is a CharSequence which
- * differentiates the answer amongst a series of others (e.g. "A", "B", "C", "1", "2", "3" etc.).
- * <p>
- * Each answer view has two main properties: selected and marked. Selected simply means the user has
- * selected this view. Marked means that the view is displaying whether or not the user's selection
- * is correct.
+ * Displays an answer to the user, along with an identifier which differentiates the answer card
+ * from others. Examples of identifiers are "A", "B", "C", "1", "2", "3" etc. Each card has two main
+ * properties which influence how it is displayed: selected and marked. Selected is self
+ * explanatory, and marked simply means that the card should display an indication of whether or not
+ * the answer is correct.
  */
 public interface AnswerView {
 	/**
-	 * Sets the status of the answer view. The UI is updated to reflect the status.
+	 * Sets the of the answer view and updates the UI to match the change.
 	 *
 	 * @param marked
-	 * 		true if the answer is marked, false otherwise
+	 * 		true to mark the answer, false to unmark it
 	 * @param selected
-	 * 		true if the user has selected this answer as correct, false otherwise
+	 * 		true to select the answer, false to deselect it
 	 * @param animate
 	 * 		true to animate any UI changes, false to perform them instantaneously
 	 */
 	public void setStatus(boolean marked, boolean selected, boolean animate);
+
+	/**
+	 * Sets the marked status of the answer view without changing the selected status. The UI is
+	 * updated to match the change.
+	 *
+	 * @param marked
+	 * 		true to mark the answer, false to unmark it
+	 * @param animate
+	 * 		true to animate any UI changes, false to perform them instantaneously
+	 */
+	public void setMarkedStatus(boolean marked, boolean animate);
+
+	/**
+	 * Sets the selected status of the answer view without changing the marked status. The UI is
+	 * updated to match the change.
+	 *
+	 * @param selected
+	 * 		true to select the answer, false to deselect it
+	 * @param animate
+	 * 		true to animate any UI changes, false to perform them instantaneously
+	 */
+	public void setSelectedStatus(boolean selected, boolean animate);
 
 	/**
 	 * @return true if the view is currently displaying as marked, false otherwise
@@ -50,7 +71,7 @@ public interface AnswerView {
 	public boolean isSelected();
 
 	/**
-	 * Sets the answer to display in the view.
+	 * Sets the answer to display in the view. If null is supplied, then no answer is displayed.
 	 *
 	 * @param answer
 	 * 		the answer to display, may be null
@@ -65,7 +86,8 @@ public interface AnswerView {
 	public Answer getAnswer();
 
 	/**
-	 * Sets the identifier to display in the view.
+	 * Sets the identifier to display in the view. If null is supplied, then no identifier is
+	 * displayed.
 	 *
 	 * @param identifier
 	 * 		the identifier to display, may be null
