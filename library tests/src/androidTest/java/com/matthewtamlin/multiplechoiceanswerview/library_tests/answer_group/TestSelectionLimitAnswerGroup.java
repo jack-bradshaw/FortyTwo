@@ -379,7 +379,7 @@ public class TestSelectionLimitAnswerGroup {
 	 * to maintain the limit.
 	 */
 	@Test
-	public void testSelectAnswer_selectionCapacityReached() {
+	public void testSelectAnswer_selectionCapacityExceeded() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
 		answers.add(getNewAnswerCard());
 		answers.add(getNewAnswerCard());
@@ -448,7 +448,7 @@ public class TestSelectionLimitAnswerGroup {
 	 * selected and none are deselected.
 	 */
 	@Test
-	public void testSelectAnswer_selectionCapacityNotExceeded() {
+	public void testSelectAnswer_selectionLimitReachedButNotExceeded() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
 		answers.add(getNewAnswerCard());
 		answers.add(getNewAnswerCard());
