@@ -31,7 +31,7 @@ import static org.hamcrest.Matchers.is;
  */
 public class TextViewViewAssertions {
 	/**
-	 * Creates a ViewAssertion which checks that the test in a TextView matches some condition
+	 * Creates a ViewAssertion which checks that the test in a TextView matches some condition.
 	 *
 	 * @param text
 	 * 		the condition to match, not null
