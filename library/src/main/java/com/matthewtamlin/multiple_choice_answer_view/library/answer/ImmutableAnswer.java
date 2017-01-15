@@ -1,11 +1,14 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.answer;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
+
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
  * An immutable implementation of the Answer interface. The values set at instantiation cannot be
  * changes.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = false)
 public final class ImmutableAnswer implements Answer {
 	/**
 	 * The actual text of the answer.

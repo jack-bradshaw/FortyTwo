@@ -27,6 +27,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.matthewtamlin.android_utilities.library.helpers.ColorHelper;
+import com.matthewtamlin.android_utilities.library.testing.Tested;
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.R;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
@@ -39,6 +40,7 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
  * status and answer, however custom content descriptions can be set by passing false to {@link
  * #enableAutomaticContentDescriptions(boolean)} and setting the content description as usual.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true) // via subclasses
 public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView {
 	/**
 	 * The main UI component, containing the answer container and identifier container.

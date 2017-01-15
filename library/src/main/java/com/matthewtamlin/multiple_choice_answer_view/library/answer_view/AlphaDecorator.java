@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard.Decorator;
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
@@ -29,6 +30,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * defined by supplying an {@link AlphaDecorator.AlphaSupplier} to the constructor. If animations
  * are enabled, the transparency is transitioned smoothly.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true)
 public class AlphaDecorator extends DecoratorAdapter {
 	/**
 	 * Supplies the alpha values.

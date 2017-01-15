@@ -1,10 +1,13 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.answer;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
+
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
  * A POJO implementation of the Answer interface.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = false)
 public class PojoAnswer implements Answer {
 	/**
 	 * The actual text of the answer.

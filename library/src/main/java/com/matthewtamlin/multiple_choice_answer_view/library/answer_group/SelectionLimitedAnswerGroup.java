@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
@@ -28,6 +29,7 @@ import java.util.Set;
  * @param <V>
  * 		the type of AnswerViews contained
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true)
 public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLayout implements
 		AnswerGroup<V> {
 	/**
