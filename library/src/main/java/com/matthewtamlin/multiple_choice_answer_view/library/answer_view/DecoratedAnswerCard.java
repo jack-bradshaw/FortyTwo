@@ -27,18 +27,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * An implementation of the AnswerCard interface which can be customised using decorators. Multiple
- * decorators can be supplied to achieve a mix of multiple effects.
+ * An implementation of the AnswerCard interface which can be customised by supplying one or more
+ * decorators. Any decorator supplied to {@link #addDecorator(Decorator, boolean)} will be called
+ * upon whenever the status, answer or identifier changes.
  */
 public class DecoratedAnswerCard extends SimpleAnswerCard {
 	/**
-	 * The decorators which are currently applied to the card.
+	 * All decorators currently registered with the card.
 	 */
 	private final Set<Decorator> decorators = new HashSet<>();
 
 	/**
-	 * Constructs a new DecoratedAnswerCard. The marked and selected parameters are both set to
-	 * false by default.
+	 * Constructs a new DecoratedAnswerCard. The marked and selected statuses are both set to false
+	 * by default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -48,8 +49,8 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Constructs a new DecoratedAnswerCard. The marked and selected parameters are both set to
-	 * false by default.
+	 * Constructs a new DecoratedAnswerCard. The marked and selected statuses are both set to false
+	 * by default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -61,8 +62,8 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Constructs a new DecoratedAnswerCard. The marked and selected parameters are both set to
-	 * false by default.
+	 * Constructs a new DecoratedAnswerCard. The marked and selected statuses are both set to false
+	 * by default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -77,9 +78,9 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Adds a decorator to this view if not already added. When the decorator is added, the {@link
-	 * Decorator#decorate (DecoratedAnswerCard, boolean)} method is called. If the decorator is null
-	 * or has already been added, there is no effect and the method returns normally.
+	 * Registers a decorator with this view and calls its {@link Decorator#decorate
+	 * (DecoratedAnswerCard, boolean)} method immediately. If the decorator is null or has already
+	 * been added, then there is no effect and the method returns immediately.
 	 *
 	 * @param decorator
 	 * 		the decorator to add
@@ -89,16 +90,15 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	public void addDecorator(final Decorator decorator, boolean animate) {
 		if (decorator != null) {
 			decorators.add(decorator);
-
 			decorator.setAnimationDurationMs(getAnimationDurationMs());
 			decorator.decorate(this, animate);
 		}
 	}
 
 	/**
-	 * Removes a decorator from this view. If the decorator has modified the view in some way, those
-	 * modifications will not be reversed. If the decorator is null or was never added to the view,
-	 * there is no effect and the method returns normally.
+	 * Removes a decorator from this view. If the decorator is null or has not been added, then
+	 * there is no effect and the method returns immediately. If the decorator has modified the view
+	 * in some way, those modifications are not reversed.
 	 *
 	 * @param decorator
 	 * 		the decorator to remove
@@ -108,7 +108,8 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Removes all decorators from the view.
+	 * Removes all decorators from the view. If the decorators have modified the view in some way,
+	 * those modifications are not reversed.
 	 */
 	public void clearDecorators() {
 		decorators.clear();
