@@ -20,7 +20,8 @@ import com.matthewtamlin.java_utilities.checkers.IntChecker;
 
 /**
  * A partial implementation of the Decorator interface which handles getting and setting the
- * animation duration. The default duration is 300 milliseconds.
+ * animation duration. The default duration is 300 milliseconds. The implementation of the {@link
+ * #decorate(DecoratedAnswerCard, boolean)} method is deferred to subclasses.
  */
 public abstract class DecoratorAdapter implements DecoratedAnswerCard.Decorator {
 	/**
