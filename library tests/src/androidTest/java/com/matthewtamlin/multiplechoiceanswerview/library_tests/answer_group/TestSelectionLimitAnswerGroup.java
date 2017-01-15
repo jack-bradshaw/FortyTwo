@@ -35,6 +35,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.matthewtamlin.multiplechoiceanswerview.library_tests.answer_group.SelectionLimitAnswerGroupViewActions.addAnswer;
@@ -53,20 +54,43 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+/**
+ * Unit tests for the {@link SelectionLimitedAnswerGroup} class.
+ */
 @RunWith(AndroidJUnit4.class)
 public class TestSelectionLimitAnswerGroup {
+	/**
+	 * Rule to always launch the SelectionLimitAnswerGroupTestHarness before running the tests. This
+	 * rule allows an actual instance of the view to be tested.
+	 */
 	@Rule
 	public ActivityTestRule<SelectionLimitAnswerGroupTestHarness> rule = new
 			ActivityTestRule<>(SelectionLimitAnswerGroupTestHarness.class);
 
+	/**
+	 * A direct reference to the view under test.
+	 */
 	private SelectionLimitedAnswerGroup<DecoratedAnswerCard> testViewDirect;
 
+	/**
+	 * The view under test, as an Espresso ViewInteraction.
+	 */
 	public ViewInteraction testViewEspresso;
 
+	/**
+	 * A mock listener.
+	 */
 	private Listener<DecoratedAnswerCard> listener1;
 
+	/**
+	 * Another mock listener.
+	 */
 	private Listener<DecoratedAnswerCard> listener2;
 
+	/**
+	 * Performs initialisation before the tests run. The direct and espresso view references are
+	 * obtained, and the listeners are registered for callbacks.
+	 */
 	@SuppressWarnings("unchecked") // Not relevant to mocks
 	@Before
 	public void setup() {
@@ -81,11 +105,21 @@ public class TestSelectionLimitAnswerGroup {
 		testViewEspresso.perform(registerListener(null)); // Check null safety
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#addAnswers(Collection)} method
+	 * functions correctly when provided with a null collection. The test will only pass if the
+	 * expected exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddAnswers_nullSupplied() {
 		testViewEspresso.perform(addAnswers(null));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#addAnswers(Collection)} method
+	 * functions correctly when provided with a collection containing null. The test will only pass
+	 * if the expected exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddAnswers_collectionContainsNull() {
 		final List<AnswerView> answers = new ArrayList<>();
@@ -95,6 +129,11 @@ public class TestSelectionLimitAnswerGroup {
 		testViewEspresso.perform(addAnswers(answers));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#addAnswers(Collection)} method
+	 * functions correctly when provided with an empty collection. The test will only pass if the
+	 * group contains no answers.
+	 */
 	@Test
 	public void testAddAnswers_emptyCollection() {
 		final List<AnswerView> answers = new ArrayList<>();
@@ -107,6 +146,11 @@ public class TestSelectionLimitAnswerGroup {
 				testViewDirect.getAnswers().isEmpty(), is(true));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#addAnswers(Collection)} method
+	 * functions correctly when provided with a non-empty collection which contains no null
+	 * elements. The test will only pass if the group contains all expected answers.
+	 */
 	@Test
 	public void testAddAnswers_validArgument() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -123,11 +167,21 @@ public class TestSelectionLimitAnswerGroup {
 				testViewDirect.getAnswers(), is(answers));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#addAnswer(AnswerView)} method functions
+	 * correctly when provided with a null answer view. The test will only pass if the expected
+	 * exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddAnswer_nullSupplied() {
 		testViewEspresso.perform(addAnswer(null));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#addAnswer(AnswerView)} method functions
+	 * correctly when provided with a non-null answer view. The test will only pass if the answer is
+	 * added to the group.
+	 */
 	@Test
 	public void testAddAnswer_validArgument() {
 		final DecoratedAnswerCard view = getNewAnswerCard();
@@ -142,11 +196,21 @@ public class TestSelectionLimitAnswerGroup {
 				testViewDirect.getAnswers().get(0), is(view));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#removeAnswer(AnswerView)} method
+	 * functions correctly when provided with a null answer view. The test will only pass if the
+	 * expected exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveAnswer_nullSupplied() {
 		testViewEspresso.perform(removeAnswer(null));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#removeAnswer(AnswerView)} method
+	 * functions correctly when provided with a non-null answer view which is not contained in the
+	 * group. The test wil only pass if an exception is not thrown.
+	 */
 	@Test
 	public void testRemoveAnswer_viewNotInGroup() {
 		final AnswerView view = getNewAnswerCard();
@@ -154,6 +218,11 @@ public class TestSelectionLimitAnswerGroup {
 		testViewEspresso.perform(removeAnswer(view));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#removeAnswer(AnswerView)} method
+	 * functions correctly when provided with a non-null answer view which is contained in the
+	 * group. The test will only pass if the answer is removed from the group.
+	 */
 	@Test
 	public void testRemoveAnswer_viewContainedInGroup() {
 		final AnswerView view = getNewAnswerCard();
@@ -170,6 +239,10 @@ public class TestSelectionLimitAnswerGroup {
 				is(true));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#clearAnswers()} method functions
+	 * correctly. The test will only pass if all answers rae removed from the group.
+	 */
 	@Test
 	public void testClearAnswers() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -192,6 +265,11 @@ public class TestSelectionLimitAnswerGroup {
 				is(true));
 	}
 
+	/**
+	 * Test to ensure the group functions correctly when an answer is clicked while selection
+	 * changes are allowed and the clicked view is marked. The test will only pass if the selection
+	 * status of the clicked view changes.
+	 */
 	@Test
 	public void testClickAnswer_selectionChangesAllowedAndMarked() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -214,6 +292,11 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
+	/**
+	 * Test to ensure the group functions correctly when an answer is clicked while selection
+	 * changes are allowed and the clicked view is unmarked. The test will only pass if the
+	 * selection status of the clicked view changes.
+	 */
 	@Test
 	public void testClickAnswer_selectionChangesAllowedAndUnmarked() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -236,6 +319,11 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
+	/**
+	 * Test to ensure the group functions correctly when an answer is clicked while selection
+	 * changes are disallowed and the view is marked. The test will only pass if the selection
+	 * status of the clicked view does not change.
+	 */
 	@Test
 	public void testClickAnswer_selectionChangesDisallowedAndMarked() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -258,6 +346,11 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
+	/**
+	 * Test to ensure the group functions correctly when an answer is clicked while selection
+	 * changes are disallowed and the view is unmarked. The test will only pass if the selection
+	 * status of the clicked view changes.
+	 */
 	@Test
 	public void testClickAnswer_selectionChangesDisallowedAnUnmarked() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -280,6 +373,11 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(1), 0);
 	}
 
+	/**
+	 * Test to ensure the group functions correctly when an answer is clicked and the selection
+	 * capacity has been exceeded. The test will only pass if the views are selected and deselected
+	 * to maintain the limit.
+	 */
 	@Test
 	public void testSelectAnswer_selectionCapacityReached() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -344,6 +442,12 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(2), 1);
 	}
 
+	/**
+	 * Test to ensure the group functions correctly when an answer is clicked and the selection
+	 * capacity has not been reached but not exceeded. The test will only pass if all views are
+	 * selected and none are deselected.
+	 */
+	@Test
 	public void testSelectAnswer_selectionCapacityNotExceeded() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
 		answers.add(getNewAnswerCard());
