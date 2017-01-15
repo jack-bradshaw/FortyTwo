@@ -29,9 +29,21 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerV
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An abstract test harness for displaying and interacting with implementations of the {@link
+ * AnswerGroup} interface.
+ *
+ * @param <V>
+ * 		the type of AnswerViews displayed in the AnswerGroup
+ * @param <T>
+ * 		the type of AnswerGroup under test
+ */
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends AnswerGroup<V>> extends
 		ControlsOverViewTestHarness<T> {
+	/**
+	 * @return a new AnswerView which can be displayed in the test answer group, not null
+	 */
 	public abstract V getAnswerView();
 
 	@Override
@@ -49,6 +61,11 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		getControlsContainer().addView(createUnmarkAllButton());
 	}
 
+	/**
+	 * Creates a button which adds multiple answer views to the test view when clicked.
+	 *
+	 * @return the button
+	 */
 	private Button createAddAnswersButton() {
 		final Button b = new Button(this);
 		b.setText("Add multiple answers");
@@ -70,6 +87,11 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		return b;
 	}
 
+	/**
+	 * Creates a button which adds a single answer view to the test view when clicked.
+	 *
+	 * @return the button
+	 */
 	private Button createAddAnswerButton() {
 		final Button b = new Button(this);
 		b.setText("Add one answer");
@@ -85,6 +107,11 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		return b;
 	}
 
+	/**
+	 * Creates a button which removes the first answer view from the test view when clicked.
+	 *
+	 * @return the button
+	 */
 	private Button createRemoveAnswerButton() {
 		final Button b = new Button(this);
 		b.setText("Remove first answer");
@@ -103,6 +130,11 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		return b;
 	}
 
+	/**
+	 * Creates a button which clears all answer views from the test view when clicked.
+	 *
+	 * @return the button
+	 */
 	private Button createClearAnswersButton() {
 		final Button b = new Button(this);
 		b.setText("Clear answers");
@@ -118,6 +150,11 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		return b;
 	}
 
+	/**
+	 * Creates a button which when clicked, allows marked views to be selected and unselected.
+	 *
+	 * @return the button
+	 */
 	private Button createAllowSelectionChangesWhenMarkedButton() {
 		final Button b = new Button(this);
 		b.setText("Unlock when marked");
@@ -133,6 +170,12 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		return b;
 	}
 
+	/**
+	 * Creates a button which when clicked, prevents marked views from being selected and
+	 * unselected.
+	 *
+	 * @return the button
+	 */
 	private Button createDisallowSelectionChangesWhenMarkedButton() {
 		final Button b = new Button(this);
 		b.setText("Lock when marked");
@@ -148,6 +191,11 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		return b;
 	}
 
+	/**
+	 * Creates a button which when clicked, marks all answer views in the test view.
+	 *
+	 * @return the button
+	 */
 	private Button createMarkAllButton() {
 		final Button b = new Button(this);
 		b.setText("Mark all");
@@ -165,6 +213,11 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		return b;
 	}
 
+	/**
+	 * Creates a button which when clicked, unmarks all answer views in the test view.
+	 *
+	 * @return the button
+	 */
 	private Button createUnmarkAllButton() {
 		final Button b = new Button(this);
 		b.setText("Unmark all");
