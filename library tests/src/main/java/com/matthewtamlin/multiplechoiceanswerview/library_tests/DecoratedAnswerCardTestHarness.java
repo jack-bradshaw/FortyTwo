@@ -29,7 +29,7 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFa
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard;
 
 /**
- * A test harness for displaying and interacting with the {@link DecoratedAnswerCard} class.
+ * A test harness for displaying and interacting with a {@link DecoratedAnswerCard}.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class DecoratedAnswerCardTestHarness extends SimpleAnswerCardTestHarness {
