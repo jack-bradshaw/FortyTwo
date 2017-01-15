@@ -17,8 +17,8 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.util;
 
 /**
- * Something which allows listeners to subscribe for callbacks. This interface does not define
- * the conditions which result in callbacks being delivered.
+ * An object which allows listeners to subscribe for callbacks. This interface does not define the
+ * conditions which result in callbacks being delivered.
  *
  * @param <L>
  * 		the type of listener which can register for callbacks
@@ -26,7 +26,7 @@ package com.matthewtamlin.multiple_choice_answer_view.library.util;
 public interface Listenable<L> {
 	/**
 	 * Registers the supplied listener for future callbacks. If the supplied listener is null or is
-	 * already registered, the method returns normally.
+	 * already registered, then the method returns normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -35,7 +35,7 @@ public interface Listenable<L> {
 
 	/**
 	 * Unregisters the supplied listener from receiving future callbacks. If the supplied listener
-	 * is null or is not registered, the method returns normally.
+	 * is null or is not registered, then the method returns normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
