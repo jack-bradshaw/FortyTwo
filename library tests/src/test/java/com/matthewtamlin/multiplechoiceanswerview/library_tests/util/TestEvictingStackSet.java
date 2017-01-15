@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import static com.matthewtamlin.multiple_choice_answer_view.library.util.EvictingStackSet.EvictionListener;
 import static org.hamcrest.Matchers.is;
@@ -35,13 +36,25 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+/**
+ * Unit test for the {@link EvictingStackSet} class.
+ */
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 @RunWith(JUnit4.class)
 public class TestEvictingStackSet {
+	/**
+	 * A mock listener.
+	 */
 	private EvictingStackSet.EvictionListener<Integer> listener1;
 
+	/**
+	 * Another mock listener.
+	 */
 	private EvictingStackSet.EvictionListener<Integer> listener2;
 
+	/**
+	 * Performs initialisation before the test run by creating the mock listeners.
+	 */
 	@SuppressWarnings("unchecked") // Not relevant for mocks
 	@Before
 	public void setup() {
@@ -49,16 +62,32 @@ public class TestEvictingStackSet {
 		listener2 = mock(EvictionListener.class);
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#EvictingStackSet(int)} constructor functions
+	 * correctly when provided with a negative max size. The test will only pass if the correct
+	 * exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor1_negativeSizeLimit() {
 		new EvictingStackSet(-1);
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#EvictingStackSet(int)} constructor functions
+	 * correctly when provided with a max size if zero. The test will only pass if the correct
+	 * exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor1_zeroSizeLimit() {
 		new EvictingStackSet(0);
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#EvictingStackSet(int)} constructor functions
+	 * correctly when provided with a positive max size. The test will only pass if the getter
+	 * returns the correct max size value. Furthermore, the stack set must be empty after
+	 * construction.
+	 */
 	@Test
 	public void testConstructor1_positiveSizeLimit() {
 		final EvictingStackSet evictingStackSet = new EvictingStackSet(10);
@@ -68,16 +97,32 @@ public class TestEvictingStackSet {
 		assertThat("Should be empty when initialised.", evictingStackSet.isEmpty(), is(true));
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#EvictingStackSet(int, Collection)}
+	 * constructor functions correctly when provided with a negative max size. The test will only
+	 * pass if the correct exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor2_negativeSizeLimit() {
 		new EvictingStackSet<>(-1, new ArrayList<>());
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#EvictingStackSet(int, Collection)}
+	 * constructor functions correctly when provided with a max size if zero. The test will only
+	 * pass if the correct exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor2_zeroSizeLimit() {
 		new EvictingStackSet<>(0, new ArrayList<>());
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#EvictingStackSet(int, Collection)}
+	 * constructor functions correctly when provided with a positive max size. The test will only
+	 * pass if the getter returns the correct max size value. Furthermore, the stack set must be
+	 * empty after construction.
+	 */
 	@Test
 	public void testConstructor2_positiveSizeLimit() {
 		final ArrayList<String> contents = new ArrayList<>();
@@ -97,11 +142,21 @@ public class TestEvictingStackSet {
 		}
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#EvictingStackSet(int)} (int)} constructor
+	 * functions correctly when provided with a collection which contains zero. The test will only
+	 * pass if the correct exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor2_nullContents() {
 		new EvictingStackSet<>(1, null);
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#setMaxSize(int)} method functions correctly
+	 * when provided with a value which is smaller than the current number of elements. The test
+	 * will only pass if the correct elements are evicted and the correct callbacks are delivered.
+	 */
 	@Test
 	public void testSetMaxSize_newMaxSmallerThanCurrentSize() {
 		final int initialLimit = 10;
@@ -139,6 +194,11 @@ public class TestEvictingStackSet {
 		}
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#setMaxSize(int)} method functions correctly
+	 * when provided with a value which is equal to the current number of elements. The test will
+	 * only pass if no elements are evicted and no callbacks are delivered.
+	 */
 	@Test
 	public void testSetMaxSize_newMaxEqualToCurrentSize() {
 		final int initialLimit = 10;
@@ -168,6 +228,11 @@ public class TestEvictingStackSet {
 		}
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#setMaxSize(int)} method functions correctly
+	 * when provided with a value which is greater than the current number of elements. The test
+	 * will only pass if no elements are evicted and no callbacks are delivered.
+	 */
 	@Test
 	public void testSetMaxSize_newMaxGreaterThanCurrentSize() {
 		final int initialLimit = 10;
@@ -198,6 +263,11 @@ public class TestEvictingStackSet {
 		}
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#push(Object)} method functions correctly when
+	 * pushing a new element does not cause the capacity to be reached or exceeded. The test will
+	 * only pass if no elements are evicted and no callbacks are delivered.
+	 */
 	@Test
 	public void testPush_capacityNotReached() {
 		final int limit = 10;
@@ -222,6 +292,11 @@ public class TestEvictingStackSet {
 		verify(listener2, never()).onEviction(eq(evictingStackSet), anyInt());
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#push(Object)} method functions correctly when
+	 * pushing a new element causes the capacity to be reached but not exceeded. The test will only
+	 * pass if no elements are evicted and no callbacks are delivered.
+	 */
 	@Test
 	public void testPush_capacityReachedButNotExceeded() {
 		final int limit = 10;
@@ -246,6 +321,11 @@ public class TestEvictingStackSet {
 		verify(listener2, never()).onEviction(eq(evictingStackSet), anyInt());
 	}
 
+	/**
+	 * Test to ensure that the {@link EvictingStackSet#push(Object)} method functions correctly when
+	 * pushing a new element causes the capacity to be exceeded. The test will only pass if the
+	 * correct elements are evicted and the correct callbacks are delivered.
+	 */
 	@Test
 	public void testPush_capacityExceeded() {
 		final int limit = 10;
@@ -280,9 +360,15 @@ public class TestEvictingStackSet {
 		}
 	}
 
+	/**
+	 * Registers the mock listeners as well as a null listener to the supplied EvictingStackSet.
+	 *
+	 * @param evictingStackSet
+	 * 		the stack set to register the listeners to, not null
+	 */
 	private void registerListeners(final EvictingStackSet<Integer> evictingStackSet) {
 		evictingStackSet.registerListener(listener1);
 		evictingStackSet.registerListener(listener2);
-		evictingStackSet.registerListener(null);
+		evictingStackSet.registerListener(null); // To check null safety
 	}
 }
