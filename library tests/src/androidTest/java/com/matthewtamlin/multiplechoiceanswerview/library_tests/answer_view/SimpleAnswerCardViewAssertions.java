@@ -35,7 +35,7 @@ public class SimpleAnswerCardViewAssertions {
 	 * matches some condition.
 	 *
 	 * @param animationDurationMs
-	 * 		the condition to match, not null
+	 * 		the condition to match
 	 * @return the view assertion
 	 */
 	public static ViewAssertion animationDuration(final Matcher<Integer> animationDurationMs) {
@@ -59,9 +59,9 @@ public class SimpleAnswerCardViewAssertions {
 	 * condition.
 	 *
 	 * @param marked
-	 * 		the condition to match on the marked property of the card, not null
+	 * 		the condition to match on the marked property of the card
 	 * @param selected
-	 * 		the condition to match on the selected property of the card, not null
+	 * 		the condition to match on the selected property of the card
 	 * @return the view assertion
 	 */
 	public static ViewAssertion status(final Matcher<Boolean> marked,
@@ -90,7 +90,7 @@ public class SimpleAnswerCardViewAssertions {
 	 * queried when examining the background.
 	 *
 	 * @param color
-	 * 		the condition to match, not null
+	 * 		the condition to match
 	 * @return the view assertion
 	 */
 	public static ViewAssertion cardBackgroundColor(final Matcher<Integer> color) {
@@ -115,7 +115,7 @@ public class SimpleAnswerCardViewAssertions {
 	 * condition.
 	 *
 	 * @param alpha
-	 * 		the condition to match, not null
+	 * 		the condition to match
 	 * @return the view assertion
 	 */
 	public static ViewAssertion alpha(final Matcher<Float> alpha) {
