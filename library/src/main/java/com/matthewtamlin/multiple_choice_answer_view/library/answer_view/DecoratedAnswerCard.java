@@ -158,7 +158,7 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	/**
 	 * Applies decoration to a single {@link DecoratedAnswerCard} via the {@link
 	 * DecoratedAnswerCard#addDecorator(Decorator, boolean)} method. In general, it is not safe to
-	 * apply the same decorator to multiple views simultaneously.
+	 * apply a single instance to multiple views.
 	 */
 	public interface Decorator {
 		/**
@@ -166,13 +166,13 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 		 * #decorate(DecoratedAnswerCard, boolean)} is called.
 		 *
 		 * @param animationDurationMs
-		 * 		the duration to use, measured in milliseconds
+		 * 		the duration to use, measured in milliseconds, greater than zero
 		 */
 		public void setAnimationDurationMs(int animationDurationMs);
 
 		/**
-		 * Returns the duration currently used for any animations this decorator performs when
-		 * {@link #decorate(DecoratedAnswerCard, boolean)} is called.
+		 * Returns the duration used for any animations this decorator performs when {@link
+		 * #decorate(DecoratedAnswerCard, boolean)} is called.
 		 *
 		 * @return the current animation duration, measured in milliseconds
 		 */
