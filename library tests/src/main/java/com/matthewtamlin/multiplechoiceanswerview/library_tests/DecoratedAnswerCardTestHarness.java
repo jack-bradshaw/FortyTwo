@@ -29,7 +29,7 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.ColorFa
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard;
 
 /**
- * A test harness for the {@link DecoratedAnswerCard} class.
+ * A test harness for displaying and interacting with the {@link DecoratedAnswerCard} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class DecoratedAnswerCardTestHarness extends SimpleAnswerCardTestHarness {
@@ -96,7 +96,7 @@ public class DecoratedAnswerCardTestHarness extends SimpleAnswerCardTestHarness 
 	/**
 	 * Creates a button which adds the color fade decorator to the test view when clicked.
 	 *
-	 * @return the button, not null
+	 * @return the button
 	 */
 	private Button createUseColorDecoratorButton() {
 		final Button b = new Button(this);
@@ -116,7 +116,7 @@ public class DecoratedAnswerCardTestHarness extends SimpleAnswerCardTestHarness 
 	/**
 	 * Creates a button which removes the color fade decorator from the test view when clicked.
 	 *
-	 * @return the button, not null
+	 * @return the button
 	 */
 	private Button createRemoveColorDecoratorButton() {
 		final Button b = new Button(this);
@@ -136,7 +136,7 @@ public class DecoratedAnswerCardTestHarness extends SimpleAnswerCardTestHarness 
 	/**
 	 * Creates a button which adds the alpha decorator to the test view when clicked.
 	 *
-	 * @return the button, not null
+	 * @return the button
 	 */
 	private Button createUseAlphaDecoratorButton() {
 		final Button b = new Button(this);
@@ -156,7 +156,7 @@ public class DecoratedAnswerCardTestHarness extends SimpleAnswerCardTestHarness 
 	/**
 	 * Creates a button which removes the alpha decorator from the test view when clicked.
 	 *
-	 * @return the button, not null
+	 * @return the button
 	 */
 	private Button createRemoveAlphaDecoratorButton() {
 		final Button b = new Button(this);
@@ -176,7 +176,7 @@ public class DecoratedAnswerCardTestHarness extends SimpleAnswerCardTestHarness 
 	/**
 	 * Creates a button which removes all decorators from the test view when clicked.
 	 *
-	 * @return the button, not null
+	 * @return the button
 	 */
 	private Button createClearDecoratorsButton() {
 		final Button b = new Button(this);
