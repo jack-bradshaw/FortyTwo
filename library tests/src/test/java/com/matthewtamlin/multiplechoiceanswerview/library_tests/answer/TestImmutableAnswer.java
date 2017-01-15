@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 public class TestImmutableAnswer {
 	/**
 	 * Test to ensure the {@link ImmutableAnswer#ImmutableAnswer(CharSequence, boolean)}
-	 * construction functons correctly when provided with null text. The test will only pass if the
+	 * construction functions correctly when provided with null text. The test will only pass if the
 	 * correct exception is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
@@ -26,7 +26,7 @@ public class TestImmutableAnswer {
 
 	/**
 	 * Test to ensure the {@link ImmutableAnswer#ImmutableAnswer(CharSequence, boolean)}
-	 * construction functons correctly when provided with non-null text. The test will only pass if
+	 * construction functions correctly when provided with non-null text. The test will only pass if
 	 * the getters return the values passed the constructor.
 	 */
 	@Test
@@ -36,4 +36,4 @@ public class TestImmutableAnswer {
 		assertThat("getter returned wrong text.", answer.getText(), is((CharSequence) "test"));
 		assertThat("getter returned wrong correctness", answer.isCorrect(), is(true));
 	}
-}	
+}
