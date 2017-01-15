@@ -144,7 +144,7 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	@Override
-	public void setAnimationDurationMs(int animationDurationMs) {
+	public void setAnimationDurationMs(final int animationDurationMs) {
 		IntChecker.checkGreaterThanOrEqualTo(animationDurationMs, 0, "animationDurationMs cannot " +
 				"be less than zero.");
 
