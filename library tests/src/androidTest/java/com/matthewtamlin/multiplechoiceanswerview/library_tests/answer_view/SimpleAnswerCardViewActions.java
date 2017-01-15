@@ -41,7 +41,7 @@ public class SimpleAnswerCardViewActions {
 	 * duration.
 	 *
 	 * @param animationDurationMs
-	 * 		the animation duration to set, measured in milliseconds, at least zero
+	 * 		the animation duration to set
 	 * @return the view action
 	 */
 	public static ViewAction setAnimationDurationMs(final int animationDurationMs) {
@@ -167,7 +167,7 @@ public class SimpleAnswerCardViewActions {
 	 * Creates a ViewAction which can be applied to a SimpleAnswerCard to set the answer.
 	 *
 	 * @param answer
-	 * 		the answer to set, may be null
+	 * 		the answer to set
 	 * @param animate
 	 * 		whether or not any resulting UI changes should be animated
 	 * @return the view action
@@ -199,7 +199,7 @@ public class SimpleAnswerCardViewActions {
 	 * Creates a ViewAction which can be applied to a SimpleAnswerCard to set the identifier.
 	 *
 	 * @param identifier
-	 * 		the identifier to set, may be null
+	 * 		the identifier to set
 	 * @param animate
 	 * 		whether or not any resulting UI changes should be animated
 	 * @return the view action

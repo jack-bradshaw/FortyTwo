@@ -40,7 +40,7 @@ public class DecoratedAnswerCardViewActions {
 	 * Creates a ViewAction which can be applied to a DecoratedAnswerCard to add a decorator.
 	 *
 	 * @param decorator
-	 * 		the decorator to add, not null
+	 * 		the decorator to add
 	 * @param animate
 	 * 		whether or not the initial decoration should be animated
 	 * @return the view action
@@ -72,7 +72,7 @@ public class DecoratedAnswerCardViewActions {
 	 * Creates a ViewAction which can be applied to a DecoratedAnswerCard to remove a decorator.
 	 *
 	 * @param decorator
-	 * 		the decorator to remove, not null
+	 * 		the decorator to remove
 	 * @return the view action
 	 */
 	public static ViewAction removeDecorator(final Decorator decorator) {
