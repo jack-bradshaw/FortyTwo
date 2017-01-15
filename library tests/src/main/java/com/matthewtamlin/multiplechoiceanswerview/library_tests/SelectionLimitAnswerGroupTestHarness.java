@@ -31,11 +31,14 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.Decorat
 
 import java.util.Random;
 
+/**
+ * A test harness for displaying and interacting with an {@link SelectionLimitedAnswerGroup}.
+ */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 		<DecoratedAnswerCard, SelectionLimitedAnswerGroup<DecoratedAnswerCard>> {
 	/**
-	 * Decorates the test view by changing the background and text colors.
+	 * Supplies colors to ColorDecorators.
 	 */
 	private final ColorSupplier colorSupplier = new ColorSupplier() {
 		@Override
@@ -54,7 +57,7 @@ public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 	};
 
 	/**
-	 * Decorates the test view by changing the transparency.
+	 * Supplied alpha values to AlphaDecorators.
 	 */
 	private final AlphaDecorator.AlphaSupplier
 			alphaSupplier = new AlphaDecorator.AlphaSupplier() {
@@ -70,8 +73,7 @@ public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 	};
 
 	/**
-	 * The view being tested. The view should be initialised before use so that {@link
-	 * #getTestView()} never returns null.
+	 * The view under test.
 	 */
 	private SelectionLimitedAnswerGroup<DecoratedAnswerCard> testView;
 
@@ -110,6 +112,11 @@ public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 		return answerCard;
 	}
 
+	/**
+	 * Creates a button which increases the multiple selection limit of the test view when clicked.
+	 *
+	 * @return the button
+	 */
 	private Button createIncreaseMultipleSelectionLimitButton() {
 		final Button b = new Button(this);
 		b.setText("Increase multiple selection limit");
@@ -126,6 +133,11 @@ public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 		return b;
 	}
 
+	/**
+	 * Creates a button which decreases the multiple selection limit of the test view when clicked.
+	 *
+	 * @return the button
+	 */
 	private Button createDecreaseMultipleSelectionLimitButton() {
 		final Button b = new Button(this);
 		b.setText("Decrease multiple selection limit");
@@ -142,10 +154,16 @@ public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 		return b;
 	}
 
+	/**
+	 * @return a new ColorFadeDecorator which uses the {@code colorSupplier}
+	 */
 	private ColorFadeDecorator getNewColorFadeDecorator() {
 		return new ColorFadeDecorator(colorSupplier);
 	}
 
+	/**
+	 * @return a new AlphaDecorator which uses the {@code alphaSupplier}
+	 */
 	private AlphaDecorator getNewAlphaDecorator() {
 		return new AlphaDecorator(alphaSupplier);
 	}
