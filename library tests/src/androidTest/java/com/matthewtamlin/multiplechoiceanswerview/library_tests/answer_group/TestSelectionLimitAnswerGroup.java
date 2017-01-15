@@ -65,7 +65,7 @@ public class TestSelectionLimitAnswerGroup {
 	 * rule allows an actual instance of the view to be tested.
 	 */
 	@Rule
-	public ActivityTestRule<SelectionLimitAnswerGroupTestHarness> rule = new
+	public final ActivityTestRule<SelectionLimitAnswerGroupTestHarness> rule = new
 			ActivityTestRule<>(SelectionLimitAnswerGroupTestHarness.class);
 
 	/**
