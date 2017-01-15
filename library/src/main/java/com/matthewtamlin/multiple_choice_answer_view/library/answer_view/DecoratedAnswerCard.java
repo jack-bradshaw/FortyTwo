@@ -179,8 +179,8 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 		public int getAnimationDurationMs();
 
 		/**
-		 * Applies the decoration to the supplied card. This method may start animations, and it may
-		 * be called again before the animations finish.
+		 * Applies the decoration to the supplied card. If the decoration is animated, the duration
+		 * last passed to {@link #setAnimationDurationMs(int)} is used.
 		 *
 		 * @param cardToDecorate
 		 * 		the card to apply the decoration to, not null
