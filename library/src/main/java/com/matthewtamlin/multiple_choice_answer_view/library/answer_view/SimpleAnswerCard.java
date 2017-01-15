@@ -203,6 +203,14 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 		}
 	}
 
+	/**
+	 * Returns whether or not the current answer is correct. If there is currently no answer, false
+	 * is returned.
+	 */
+	public boolean answerIsCorrect() {
+		return answer == null ? false : answer.isCorrect();
+	}
+
 	@Override
 	public void setStatus(final boolean marked, final boolean selected, final boolean animate) {
 		this.marked = marked;
@@ -242,14 +250,6 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	@Override
 	public Answer getAnswer() {
 		return answer;
-	}
-
-	/**
-	 * Returns whether or not the current answer is correct. If there is currently no answer, false
-	 * is returned.
-	 */
-	public boolean answerIsCorrect() {
-		return answer == null ? false : answer.isCorrect();
 	}
 
 	@Override
