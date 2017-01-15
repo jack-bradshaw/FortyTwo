@@ -16,6 +16,7 @@
 
 package com.matthewtamlin.multiple_choice_answer_view.library.answer_view;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 
 /**
@@ -23,6 +24,7 @@ import com.matthewtamlin.java_utilities.checkers.IntChecker;
  * animation duration. The default duration is 300 milliseconds. The implementation of the {@link
  * #decorate(DecoratedAnswerCard, boolean)} method is deferred to subclasses.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true) // via subclasses
 public abstract class DecoratorAdapter implements DecoratedAnswerCard.Decorator {
 	/**
 	 * The duration to use for decoration animations, measured in milliseconds.

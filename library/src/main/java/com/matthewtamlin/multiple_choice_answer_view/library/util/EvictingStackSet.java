@@ -1,5 +1,7 @@
 package com.matthewtamlin.multiple_choice_answer_view.library.util;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * @param <T>
  * 		the type of the elements contained in the stack
  */
+@Tested(testMethod = "automated", requiresInstrumentation = false)
 public class EvictingStackSet<T> extends Stack<T> implements Listenable<EvictingStackSet
 		.EvictionListener<T>> {
 	/**

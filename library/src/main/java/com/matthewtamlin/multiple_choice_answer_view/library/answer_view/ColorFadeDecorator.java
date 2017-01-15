@@ -21,6 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 
 import com.matthewtamlin.android_utilities.library.helpers.ColorHelper;
+import com.matthewtamlin.android_utilities.library.testing.Tested;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard.Decorator;
 
 import static com.matthewtamlin.android_utilities.library.helpers.ColorHelper.calculateBestTextColor;
@@ -33,6 +34,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * readability against the background. If animations are enabled, the colors are transitioned
  * smoothly.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true)
 public class ColorFadeDecorator extends DecoratorAdapter {
 	/**
 	 * Supplies the background colors to use.

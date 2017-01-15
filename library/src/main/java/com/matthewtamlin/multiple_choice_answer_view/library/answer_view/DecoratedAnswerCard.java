@@ -19,6 +19,7 @@ package com.matthewtamlin.multiple_choice_answer_view.library.answer_view;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
 
@@ -31,6 +32,7 @@ import java.util.Set;
  * decorators. Any decorator supplied to {@link #addDecorator(Decorator, boolean)} will be called
  * upon whenever the status, answer or identifier changes.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true)
 public class DecoratedAnswerCard extends SimpleAnswerCard {
 	/**
 	 * All decorators currently registered with the card.
