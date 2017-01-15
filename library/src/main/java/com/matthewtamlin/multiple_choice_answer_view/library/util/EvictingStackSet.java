@@ -36,7 +36,7 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 	 * Constructs a new empty EvictingStack.
 	 *
 	 * @param maxSize
-	 * 		the size limit after which elements will be evicted, greater than or equal to zero
+	 * 		the size limit of the stack, at least 1
 	 * @throws IllegalArgumentException
 	 */
 	public EvictingStackSet(final int maxSize) {
@@ -47,14 +47,13 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 
 	/**
 	 * Constructs a new EvictingStack from an existing collection. When the new stack is populated,
-	 * elements are added using the total ordering of the supplied collection. This will affect
-	 * which elements end up in the stack if the supplied collection is larger than the stack size
-	 * limit.
+	 * elements are added using the ordering of the supplied collection. This will affect which
+	 * elements end up in the stack if the supplied collection is larger than the stack size limit.
 	 *
 	 * @param maxSize
-	 * 		the size limit after which elements will be evicted, greater than zero
+	 * 		the size limit of the stack, at least 1
 	 * @param contents
-	 * 		the elements to add to the stack
+	 * 		the elements to add to the stack, not null
 	 * @throws IllegalArgumentException
 	 * 		if {@code maxSize} is less than 1
 	 * @throws IllegalArgumentException
@@ -77,11 +76,13 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 	}
 
 	/**
-	 * Sets the size limit of the stack. If the stack contains more that this many elements,
-	 * elements will be evicted from the bottom until the stack reaches the new max size.
+	 * Sets the size limit of the stack. If the stack contains more that this many elements, then
+	 * elements are evicted from the bottom until the stack size matches the new max size.
 	 *
 	 * @param maxSize
-	 * 		the size limit to use, greater than zero
+	 * 		the size limit to use, at least 1
+	 * @throws IllegalArgumentException
+	 * 		if {@code maxSize} is less than 1
 	 */
 	public void setMaxSize(final int maxSize) {
 		this.maxSize = checkGreaterThan(maxSize, 0, "maxSize cannot be less than 1.");
@@ -132,7 +133,7 @@ public class EvictingStackSet<T> extends Stack<T> implements Listenable<Evicting
 	 * Callback listener to be called when elements are evicted from an EvictingStackSet.
 	 *
 	 * @param <V>
-	 * 		the type of elements being evicted
+	 * 		the type of elements in the stack set		
 	 */
 	public interface EvictionListener<V> {
 		/**
