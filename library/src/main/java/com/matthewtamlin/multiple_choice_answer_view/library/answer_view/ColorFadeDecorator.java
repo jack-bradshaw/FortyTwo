@@ -28,8 +28,8 @@ import static com.matthewtamlin.android_utilities.library.helpers.ColorHelper.ca
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A {@link Decorator} which changes the colors of an answer card, specifically the card background
- * color and the text colors. The card background colors are defined by supplying a {@link
+ * A {@link Decorator} which changes the colors of the target answer card, specifically the
+ * background color and the text colors. The background colors are defined by supplying a {@link
  * ColorSupplier} to the constructor, and the text colors are automatically chosen to maximise
  * readability against the background. If animations are enabled, the colors are transitioned
  * smoothly.
@@ -37,7 +37,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
 @Tested(testMethod = "automated", requiresInstrumentation = true)
 public class ColorFadeDecorator extends DecoratorAdapter {
 	/**
-	 * Supplies the background colors to use.
+	 * Supplies the colors to use for the card background.
 	 */
 	private final ColorSupplier colorSupplier;
 
@@ -48,7 +48,7 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 	private boolean updateInProgress = false;
 
 	/**
-	 * Indicates whether or not an update needs to be performed.
+	 * Indicates whether or not an update needs to be performed when possible.
 	 */
 	private boolean updatePending = false;
 
@@ -61,7 +61,7 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 	 * Constructs a new ColorFadeDecorator.
 	 *
 	 * @param colorSupplier
-	 * 		defines the card background colors, not null
+	 * 		supplies the card background colors, not null
 	 * @throws IllegalArgumentException
 	 * 		if {@code colorSupplier} is null
 	 */
@@ -89,9 +89,9 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 	}
 
 	/**
-	 * Applies the decoration to the supplied card. If this method is called again while animations
-	 * from a previous invocation are still running, the current animations will complete before new
-	 * ones are started.
+	 * Applies the decoration to the supplied card, using animations if necessary. If this method is
+	 * called again while animations from a previous invocation are still running, the current
+	 * animations will complete before new ones are started.
 	 *
 	 * @param cardToDecorate
 	 * 		the card to apply the decoration to, not null
@@ -165,7 +165,7 @@ public class ColorFadeDecorator extends DecoratorAdapter {
 		 * 		whether or not the card is currently selected
 		 * @param answerIsCorrect
 		 * 		whether or not the answer displayed in the card is correct
-		 * @return the color to use for the background, as an ARGB hex code
+		 * @return the color to use for the card background, as an ARGB hex code
 		 */
 		public int getColor(boolean marked, boolean selected, boolean answerIsCorrect);
 	}
