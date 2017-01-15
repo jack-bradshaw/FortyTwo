@@ -21,7 +21,7 @@ import android.support.test.rule.ActivityTestRule;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.DecoratedAnswerCard.Decorator;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
-import com.matthewtamlin.multiple_choice_answer_view.library.answer.SimpleAnswer;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer.PojoAnswer;
 import com.matthewtamlin.multiplechoiceanswerview.library_tests.DecoratedAnswerCardTestHarness;
 
 import org.junit.Before;
@@ -170,7 +170,7 @@ public class TestDecoratedAnswerCard extends TestSimpleAnswerCard {
 		getSimpleAnswerCardViewInteraction().perform(addDecorator(decorator2, false));
 		getSimpleAnswerCardViewInteraction().perform(addDecorator(null, false));
 
-		getSimpleAnswerCardViewInteraction().perform(setAnswer(new SimpleAnswer("test", false),
+		getSimpleAnswerCardViewInteraction().perform(setAnswer(new PojoAnswer("test", false),
 				true));
 
 		verify(decorator1, times(1)).decorate(testView, true);

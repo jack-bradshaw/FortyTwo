@@ -19,6 +19,7 @@ package com.matthewtamlin.multiple_choice_answer_view.library.answer_view;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.matthewtamlin.android_utilities.library.testing.Tested;
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
 
@@ -27,18 +28,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * An implementation of the AnswerCard interface which can be customised using decorators. Multiple
- * decorators can be supplied to achieve a mix of multiple effects.
+ * An implementation of the AnswerCard interface which can be customised by supplying one or more
+ * decorators. Any decorator supplied to {@link #addDecorator(Decorator, boolean)} will be called
+ * upon whenever the status, answer or identifier changes.
  */
+@Tested(testMethod = "automated", requiresInstrumentation = true)
 public class DecoratedAnswerCard extends SimpleAnswerCard {
 	/**
-	 * The decorators which are currently applied to the card.
+	 * All decorators currently registered with the card.
 	 */
 	private final Set<Decorator> decorators = new HashSet<>();
 
 	/**
-	 * Constructs a new DecoratedAnswerCard. The marked and selected parameters are both set to
-	 * false by default.
+	 * Constructs a new DecoratedAnswerCard. The marked and selected statuses are both set to false
+	 * by default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -48,8 +51,8 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Constructs a new DecoratedAnswerCard. The marked and selected parameters are both set to
-	 * false by default.
+	 * Constructs a new DecoratedAnswerCard. The marked and selected statuses are both set to false
+	 * by default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -61,8 +64,8 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Constructs a new DecoratedAnswerCard. The marked and selected parameters are both set to
-	 * false by default.
+	 * Constructs a new DecoratedAnswerCard. The marked and selected statuses are both set to false
+	 * by default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -77,9 +80,9 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Adds a decorator to this view if not already added. When the decorator is added, the {@link
-	 * Decorator#decorate (DecoratedAnswerCard, boolean)} method is called. If the decorator is null
-	 * or has already been added, there is no effect and the method returns normally.
+	 * Registers a decorator with this view and calls its {@link Decorator#decorate
+	 * (DecoratedAnswerCard, boolean)} method immediately. If the decorator is null or has already
+	 * been added, then there is no effect and the method returns immediately.
 	 *
 	 * @param decorator
 	 * 		the decorator to add
@@ -89,16 +92,15 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	public void addDecorator(final Decorator decorator, boolean animate) {
 		if (decorator != null) {
 			decorators.add(decorator);
-
 			decorator.setAnimationDurationMs(getAnimationDurationMs());
 			decorator.decorate(this, animate);
 		}
 	}
 
 	/**
-	 * Removes a decorator from this view. If the decorator has modified the view in some way, those
-	 * modifications will not be reversed. If the decorator is null or was never added to the view,
-	 * there is no effect and the method returns normally.
+	 * Removes a decorator from this view. If the decorator is null or has not been added, then
+	 * there is no effect and the method returns immediately. If the decorator has modified the view
+	 * in some way, those modifications are not reversed.
 	 *
 	 * @param decorator
 	 * 		the decorator to remove
@@ -108,7 +110,8 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Removes all decorators from the view.
+	 * Removes all decorators from the view. If the decorators have modified the view in some way,
+	 * those modifications are not reversed.
 	 */
 	public void clearDecorators() {
 		decorators.clear();
@@ -143,7 +146,7 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	@Override
-	public void setAnimationDurationMs(int animationDurationMs) {
+	public void setAnimationDurationMs(final int animationDurationMs) {
 		IntChecker.checkGreaterThanOrEqualTo(animationDurationMs, 0, "animationDurationMs cannot " +
 				"be less than zero.");
 
@@ -155,8 +158,9 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 	}
 
 	/**
-	 * Applies decoration to a {@link DecoratedAnswerCard}. Decorators can be applied to a view by
-	 * calling {@link DecoratedAnswerCard#addDecorator(Decorator, boolean)}.
+	 * Applies decoration to a single {@link DecoratedAnswerCard} via the {@link
+	 * DecoratedAnswerCard#addDecorator(Decorator, boolean)} method. In general, it is not safe to
+	 * apply a single instance to multiple views.
 	 */
 	public interface Decorator {
 		/**
@@ -164,21 +168,21 @@ public class DecoratedAnswerCard extends SimpleAnswerCard {
 		 * #decorate(DecoratedAnswerCard, boolean)} is called.
 		 *
 		 * @param animationDurationMs
-		 * 		the duration to use, measured in milliseconds
+		 * 		the duration to use, measured in milliseconds, greater than zero
 		 */
 		public void setAnimationDurationMs(int animationDurationMs);
 
 		/**
-		 * Returns the duration currently used for any animations this decorator performs when
-		 * {@link #decorate(DecoratedAnswerCard, boolean)} is called.
+		 * Returns the duration used for any animations this decorator performs when {@link
+		 * #decorate(DecoratedAnswerCard, boolean)} is called.
 		 *
-		 * @return the current duration, measured in milliseconds
+		 * @return the current animation duration, measured in milliseconds
 		 */
 		public int getAnimationDurationMs();
 
 		/**
-		 * Applies the decoration to the supplied card. This method may start animations, and it may
-		 * be called again before the animations finish.
+		 * Applies the decoration to the supplied card. If the decoration is animated, the duration
+		 * last passed to {@link #setAnimationDurationMs(int)} is used.
 		 *
 		 * @param cardToDecorate
 		 * 		the card to apply the decoration to, not null
