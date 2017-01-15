@@ -32,19 +32,16 @@ import com.matthewtamlin.multiple_choice_answer_view.library.R;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer.Answer;
 
 /**
- * A basic implementation of the AnswerView interface. Although all interface methods are
- * implemented, the class is declared abstract because the UI is never updated to reflect the status
- * passed to {@link #setStatus(boolean, boolean, boolean)}. Despite this, all getters work as
- * expected.
- * <p>
- * The accessibility content description is automatically set based on the current state of the
- * view, however custom content descriptions can be provided by calling {@link
- * #enableAutomaticContentDescriptions(boolean)} and supplying false.
+ * A implementation of the AnswerView interface which uses a CardView for the UI. Although all
+ * interface methods are implemented, the class is declared abstract because the UI is never updated
+ * to reflect the selected status and the marked status. Despite this, all getters work as expected.
+ * The accessibility content description of the view is automatically set based on the current
+ * status and answer, however custom content descriptions can be set by passing false to {@link
+ * #enableAutomaticContentDescriptions(boolean)} and setting the content description as usual.
  */
 public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView {
 	/**
-	 * The main UI component of the view. This component displays the answer container and the
-	 * identifier container.
+	 * The main UI component, containing the answer container and identifier container.
 	 */
 	private CardView card;
 
@@ -59,13 +56,13 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	private TextView identifierContainer;
 
 	/**
-	 * Indicates whether or not the answer and identifier contains are currently being updated. This
-	 * could be an instantaneous update on the UI thread, or an asynchronous update using animators.
+	 * Indicates whether or not the containers are currently being updated. This could be an
+	 * instantaneous update on the UI thread, or an asynchronous update using animators.
 	 */
 	private boolean textUpdateInProgress = false;
 
 	/**
-	 * Indicates whether or not an update needs to be performed.
+	 * Indicates whether or not an update needs to be performed when possible.
 	 */
 	private boolean textUpdatePending = false;
 
@@ -75,7 +72,7 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	private boolean animateNextTextUpdate = false;
 
 	/**
-	 * The duration to use for animated updates.
+	 * The duration to use for animated updates, measured in milliseconds.
 	 */
 	private int animationDurationMs = 300;
 
@@ -102,14 +99,14 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	private CharSequence identifier = null;
 
 	/**
-	 * Whether or not the content description should automatically be updated to reflect the state
-	 * of the view.
+	 * Whether or not the content description should automatically be updated to reflect the status
+	 * and answer of the view.
 	 */
 	private boolean enableAutomaticContentDescriptions = true;
 
 	/**
-	 * Constructs a new SimpleAnswerCard. The marked and selected parameters are both set to false
-	 * by default.
+	 * Constructs a new SimpleAnswerCard. The marked and selected statuses are both set to false by
+	 * default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -120,8 +117,8 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	/**
-	 * Constructs a new SimpleAnswerCard. The marked and selected parameters are both set to false
-	 * by default.
+	 * Constructs a new SimpleAnswerCard. The marked and selected statuses are both set to false by
+	 * default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -134,8 +131,8 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	/**
-	 * Constructs a new SimpleAnswerCard. The marked and selected parameters are both set to false
-	 * by default.
+	 * Constructs a new SimpleAnswerCard. The marked and selected statuses are both set to false by
+	 * default.
 	 *
 	 * @param context
 	 * 		the context this view is operating in, not null
@@ -151,7 +148,7 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	/**
-	 * @return the card view used for the main body of this view
+	 * @return the CardView used for the main body of this view
 	 */
 	public CardView getCard() {
 		return card;
@@ -175,7 +172,7 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	 * Sets the animation duration to use when updating the UI. The default is 300 milliseconds.
 	 *
 	 * @param animationDurationMs
-	 * 		the duration to use, measured in milliseconds
+	 * 		the duration to use, measured in milliseconds, at least 0
 	 */
 	public void setAnimationDurationMs(final int animationDurationMs) {
 		this.animationDurationMs = IntChecker.checkGreaterThanOrEqualTo(animationDurationMs, 0,
@@ -183,16 +180,16 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	/**
-	 * @return the current animation duration
+	 * @return the current animation duration, measured in milliseconds
 	 */
 	public int getAnimationDurationMs() {
 		return animationDurationMs;
 	}
 
 	/**
-	 * Allows automatic content descriptions to be enabled or disabled. By default, the content
-	 * description of this view is automatically updated to reflect the view's current status and
-	 * answer. If this option is disabled, the content description must be set externally.
+	 * Enables/disables automatic content descriptions. If automatic descriptions are enabled, the
+	 * content description is automatically set to reflect the current status and answer. If this
+	 * option is disabled, the content description can be set externally.
 	 *
 	 * @param enable
 	 * 		true to enable automatic content descriptions, false to disable them
@@ -248,8 +245,8 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	/**
-	 * Returns whether or not the current answer is correct. If there is currently no answer,
-	 * false is returned.
+	 * Returns whether or not the current answer is correct. If there is currently no answer, false
+	 * is returned.
 	 */
 	public boolean answerIsCorrect() {
 		return answer == null ? false : answer.isCorrect();
@@ -287,7 +284,7 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	/**
-	 * Updates the accessibility properties of this view by updating the content description.
+	 * Updates the accessibility properties of this view.
 	 */
 	private void updateAccessibility() {
 		if (enableAutomaticContentDescriptions) {
@@ -320,9 +317,9 @@ public abstract class SimpleAnswerCard extends FrameLayout implements AnswerView
 	}
 
 	/**
-	 * Updates the text displayed in the UI for the answer and identifier. If this method is called
-	 * again while animations from a previous invocation are still running, the current animations
-	 * will complete before new ones are started.
+	 * Updates the UI to display the current answer and identifier. If this method is called again
+	 * while animations from a previous invocation are still running, the current animations will
+	 * complete before new ones are started.
 	 *
 	 * @param animate
 	 * 		whether or not the UI update should be animated
