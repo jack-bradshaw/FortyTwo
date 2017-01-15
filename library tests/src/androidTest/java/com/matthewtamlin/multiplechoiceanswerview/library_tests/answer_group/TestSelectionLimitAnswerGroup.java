@@ -56,7 +56,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
- * Unit tests for the {@link SelectionLimitedAnswerGroup} class.
+ * Instrumentation tests for the {@link SelectionLimitedAnswerGroup} class.
  */
 @RunWith(AndroidJUnit4.class)
 public class TestSelectionLimitAnswerGroup {
