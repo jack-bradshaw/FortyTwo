@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An abstract test harness for displaying and interacting with implementations of the {@link
+ * An abstract test harness for displaying and interacting with an implementation of the {@link
  * AnswerGroup} interface.
  *
  * @param <V>
