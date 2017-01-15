@@ -11,12 +11,13 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A stack which is limited in size, and does not allows duplicate insertions. Pushing an item which
- * is already in the stack will move it to the top. The size limit has been reached and an item is
- * pushed to the stack, the item at the bottom of the stack is evicted to make room.
+ * A stack which is limited in size and does not allows duplicate elements. Since there can be no
+ * duplicates, pushing an item to the stack which is already contained will move it to the top. If
+ * the size limit has been reached when an item is pushed to the stack, the item at the bottom of
+ * the stack is evicted to make room.
  *
  * @param <T>
- * 		the type of the elements contained in the stack
+ * 		the type of elements contained in the stack
  */
 @Tested(testMethod = "automated", requiresInstrumentation = false)
 public class EvictingStackSet<T> extends Stack<T> implements Listenable<EvictingStackSet
