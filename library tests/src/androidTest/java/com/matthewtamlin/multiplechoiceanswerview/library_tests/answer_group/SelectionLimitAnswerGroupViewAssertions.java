@@ -26,7 +26,20 @@ import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerV
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Custom Espresso view assertions which can be applied to SelectionLimitAnswerViews.
+ */
 public class SelectionLimitAnswerGroupViewAssertions {
+	/**
+	 * Creates a ViewAssertion which checks whether or not a SelectionLimitAnswerView contains a
+	 * particular answer view.
+	 *
+	 * @param answerView
+	 * 		the answer view to check if contained or not contained
+	 * @param contained
+	 * 		true to check that the answer view is contained, false to check that it is not
+	 * @return the view assertion
+	 */
 	public static ViewAssertion containsView(final AnswerView answerView, final boolean
 			contained) {
 		return new ViewAssertion() {
@@ -53,6 +66,12 @@ public class SelectionLimitAnswerGroupViewAssertions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAssertion which checks that a SelectionLimitAnswerView contains no answer
+	 * views.
+	 *
+	 * @return the view assertion
+	 */
 	public static ViewAssertion containsNoAnswers() {
 		return new ViewAssertion() {
 			@Override
