@@ -526,7 +526,7 @@ public class TestSelectionLimitAnswerGroup {
 	 * deselected.
 	 */
 	@Test
-	public void testSetSelectionLimit_limitExceedsCurrentSelectionCount() {
+	public void testSetSelectionLimit_limitLessThanCurrentSelectionCount() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
 		answers.add(getNewAnswerCard());
 		answers.add(getNewAnswerCard());
@@ -594,7 +594,7 @@ public class TestSelectionLimitAnswerGroup {
 	 * currently selected. The test will only pass if no views are deselected.
 	 */
 	@Test
-	public void testSetSelectionLimit_limitDoesNotExceedCurrentSelectionCount() {
+	public void testSetSelectionLimit_limitGreaterThanCurrentSelectionCount() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
 		answers.add(getNewAnswerCard());
 		answers.add(getNewAnswerCard());
