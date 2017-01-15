@@ -31,7 +31,7 @@ import java.util.List;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 
 /**
- * Custom ViewActions for use with SelectionLimitAnswerGroups.
+ * Custom Espresso view actions which can be applied to SelectionLimitAnswerViews.
  */
 @SuppressWarnings("unchecked")
 public class SelectionLimitAnswerGroupViewActions {
