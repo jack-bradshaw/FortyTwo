@@ -23,6 +23,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.matthewtamlin.android_testing_tools.library.EspressoHelper;
+import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.AnswerGroup.Listener;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.multiple_choice_answer_view.library.answer_view.AnswerView;
@@ -498,16 +499,32 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(2), 0);
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#setMultipleSelectionLimit(int)} method
+	 * functions correctly when provided with a negative limit. The test will only pass if the
+	 * correct exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetSelectionLimit_limitIsNegative() {
 		testViewEspresso.perform(setMultipleSelectionLimit(-1));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#setMultipleSelectionLimit(int)} method
+	 * functions correctly when provided with a limit of zero. The test will only pass if the
+	 * correct exception is thrown.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetSelectionLimit_limitIsZero() {
 		testViewEspresso.perform(setMultipleSelectionLimit(0));
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#setMultipleSelectionLimit(int)} method
+	 * functions correctly when provided with a limit which is less than the number of views
+	 * currently selected. The test will only pass if the least recently clicked views are
+	 * deselected.
+	 */
 	@Test
 	public void testSetSelectionLimit_limitExceedsCurrentSelectionCount() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -537,6 +554,11 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(2), 0);
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#setMultipleSelectionLimit(int)} method
+	 * functions correctly when provided with a limit which is equal to the number of views
+	 * currently selected. The test will only pass if no views are deselected.
+	 */
 	@Test
 	public void testSetSelectionLimit_limitEqualToCurrentSelectionCount() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -566,6 +588,11 @@ public class TestSelectionLimitAnswerGroup {
 		verifyDeselectedCallbackInvocations(answers.get(2), 0);
 	}
 
+	/**
+	 * Test to ensure the {@link SelectionLimitedAnswerGroup#setMultipleSelectionLimit(int)} method
+	 * functions correctly when provided with a limit which is greater than the number of views
+	 * currently selected. The test will only pass if no views are deselected.
+	 */
 	@Test
 	public void testSetSelectionLimit_limitDoesNotExceedCurrentSelectionCount() {
 		final List<DecoratedAnswerCard> answers = new ArrayList<>();
@@ -603,12 +630,30 @@ public class TestSelectionLimitAnswerGroup {
 		return new DecoratedAnswerCard(context);
 	}
 
+	/**
+	 * Verifies that the {@link Listener#onAnswerSelected(AnswerGroup, AnswerView)} method of both
+	 * listeners has been invoked with the correct arguments, the correct number of times.
+	 *
+	 * @param selectedView
+	 * 		the expected {@code selectedView} argument of the callbacks
+	 * @param times
+	 * 		the expected number of callback invocations
+	 */
 	private void verifySelectedCallbackInvocations(final DecoratedAnswerCard selectedView,
 			final int times) {
 		verify(listener1, times(times)).onAnswerSelected(testViewDirect, selectedView);
 		verify(listener2, times(times)).onAnswerSelected(testViewDirect, selectedView);
 	}
 
+	/**
+	 * Verifies that the {@link Listener#onAnswerDeselected(AnswerGroup, AnswerView)} method of both
+	 * listeners has been invoked with the correct arguments, the correct number of times.
+	 *
+	 * @param deselectedView
+	 * 		the expected {@code deselectedView} argument of the callbacks
+	 * @param times
+	 * 		the expected number of callback invocations
+	 */
 	private void verifyDeselectedCallbackInvocations(final DecoratedAnswerCard deselectedView,
 			final int times) {
 		verify(listener1, times(times)).onAnswerDeselected(testViewDirect, deselectedView);
