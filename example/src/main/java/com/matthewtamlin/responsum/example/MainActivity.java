@@ -43,20 +43,7 @@ public class MainActivity extends AppCompatActivity {
 		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
 
 		populateAnswerMap();
-
-		questionContainer.setText(QUESTION);
-
-		for (final CharSequence identifier : answerMap.keySet()) {
-			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
-			decoratedAnswerCard.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-
-			decoratedAnswerCard.setIdentifier(identifier, false);
-			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
-			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
-			decoratedAnswerCard.addDecorator(createAlphaFadeDecorator(), false);
-
-			answerGroup.addAnswer(decoratedAnswerCard);
-		}
+		addAnswersToView();
 	}
 
 	private void populateAnswerMap() {
@@ -69,6 +56,22 @@ public class MainActivity extends AppCompatActivity {
 		answerMap.put("D", new ImmutableAnswer("No one knows the answer to this question.", true));
 		answerMap.put("E", new ImmutableAnswer("To find the final digit of Pi.", false));
 		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
+	}
+
+	private void addAnswersToView() {
+		questionContainer.setText(QUESTION);
+
+		for (final CharSequence identifier : answerMap.keySet()) {
+			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
+
+			decoratedAnswerCard.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+			decoratedAnswerCard.setIdentifier(identifier, false);
+			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
+			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
+			decoratedAnswerCard.addDecorator(createAlphaFadeDecorator(), false);
+
+			answerGroup.addAnswer(decoratedAnswerCard);
+		}
 	}
 
 	private ColorFadeDecorator createColorFadeDecorator() {
