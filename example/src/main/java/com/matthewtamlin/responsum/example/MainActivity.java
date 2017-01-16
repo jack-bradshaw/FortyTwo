@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator.ColorS
 import com.matthewtamlin.responsum.library.answer_view.DecoratedAnswerCard;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class MainActivity extends AppCompatActivity {
 	private static final String QUESTION = "What is the square root of -1?";
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 		for (final Answer a : ANSWERS) {
 			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
+			decoratedAnswerCard.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 
 			decoratedAnswerCard.setAnswer(a, false);
 			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 		rootViewGroup.addView(questionContainer);
 		rootViewGroup.addView((View) answerGroup);
 
-		setContentView(rootViewGroup, new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));
+		setContentView(rootViewGroup, new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 	}
 
 	private ColorFadeDecorator createColorFadeDecorator() {
