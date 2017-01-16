@@ -3,6 +3,7 @@ package com.matthewtamlin.responsum.example;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
 	private void createUi() {
 		questionContainer = new TextView(this);
+		questionContainer.setTextSize(20);
+		questionContainer.setGravity(Gravity.CENTER);
+
 		answerGroup = new SelectionLimitedAnswerGroup<>(this);
 
 		final LinearLayout rootViewGroup = new LinearLayout(this);
