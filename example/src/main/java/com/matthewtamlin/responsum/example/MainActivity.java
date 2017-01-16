@@ -37,8 +37,12 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_activity);
+
+		questionContainer = (TextView) findViewById(R.id.main_Activity_question_container);
+		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
+
 		populateAnswerMap();
-		createUi();
 
 		questionContainer.setText(QUESTION);
 
@@ -65,21 +69,6 @@ public class MainActivity extends AppCompatActivity {
 		answerMap.put("D", new ImmutableAnswer("No one knows the answer to this question.", true));
 		answerMap.put("E", new ImmutableAnswer("To find the final digit of Pi.", false));
 		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
-	}
-
-	private void createUi() {
-		questionContainer = new TextView(this);
-		questionContainer.setTextSize(20);
-		questionContainer.setGravity(Gravity.CENTER);
-
-		answerGroup = new SelectionLimitedAnswerGroup<>(this);
-
-		final LinearLayout rootViewGroup = new LinearLayout(this);
-		rootViewGroup.setOrientation(LinearLayout.VERTICAL);
-		rootViewGroup.addView(questionContainer);
-		rootViewGroup.addView((View) answerGroup);
-
-		setContentView(rootViewGroup, new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 	}
 
 	private ColorFadeDecorator createColorFadeDecorator() {
