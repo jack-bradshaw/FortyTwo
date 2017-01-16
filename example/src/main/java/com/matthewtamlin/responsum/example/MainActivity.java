@@ -37,22 +37,13 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_activity);
+
+		questionContainer = (TextView) findViewById(R.id.main_Activity_question_container);
+		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
+
 		populateAnswerMap();
-		createUi();
-
-		questionContainer.setText(QUESTION);
-
-		for (final CharSequence identifier : answerMap.keySet()) {
-			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
-			decoratedAnswerCard.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-
-			decoratedAnswerCard.setIdentifier(identifier, false);
-			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
-			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
-			decoratedAnswerCard.addDecorator(createAlphaFadeDecorator(), false);
-
-			answerGroup.addAnswer(decoratedAnswerCard);
-		}
+		addAnswersToView();
 	}
 
 	private void populateAnswerMap() {
@@ -67,19 +58,20 @@ public class MainActivity extends AppCompatActivity {
 		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
 	}
 
-	private void createUi() {
-		questionContainer = new TextView(this);
-		questionContainer.setTextSize(20);
-		questionContainer.setGravity(Gravity.CENTER);
+	private void addAnswersToView() {
+		questionContainer.setText(QUESTION);
 
-		answerGroup = new SelectionLimitedAnswerGroup<>(this);
+		for (final CharSequence identifier : answerMap.keySet()) {
+			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
 
-		final LinearLayout rootViewGroup = new LinearLayout(this);
-		rootViewGroup.setOrientation(LinearLayout.VERTICAL);
-		rootViewGroup.addView(questionContainer);
-		rootViewGroup.addView((View) answerGroup);
+			decoratedAnswerCard.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+			decoratedAnswerCard.setIdentifier(identifier, false);
+			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
+			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
+			decoratedAnswerCard.addDecorator(createAlphaFadeDecorator(), false);
 
-		setContentView(rootViewGroup, new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+			answerGroup.addAnswer(decoratedAnswerCard);
+		}
 	}
 
 	private ColorFadeDecorator createColorFadeDecorator() {
