@@ -18,6 +18,8 @@ import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator;
 import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator.ColorSupplier;
 import com.matthewtamlin.responsum.library.answer_view.DecoratedAnswerCard;
 
+import java.util.LinkedHashMap;
+
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -25,16 +27,7 @@ public class MainActivity extends AppCompatActivity {
 	private static final String QUESTION = "What is the answer to the Ultimate Question of Life, " +
 			"the Universe, and Everything?";
 
-	private static final Answer[] ANSWERS = {
-			new ImmutableAnswer("To live long and prosper.", false),
-			new ImmutableAnswer("To write really long sentences in a way which causes the word " +
-					"count to be raised to an unnecessarily high value without adding any " +
-					"additional/supplemental information or providing any value to the reader.",
-					false),
-			new ImmutableAnswer("To love and be loved.", false),
-			new ImmutableAnswer("No one knows the answer to this question.", true),
-			new ImmutableAnswer("To find the final digit of Pi.", false),
-			new ImmutableAnswer("To propagate one's species.", false)};
+	private final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
 	private TextView questionContainer;
 
@@ -43,20 +36,34 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		populateAnswerMap();
 		createUi();
 
 		questionContainer.setText(QUESTION);
 
-		for (final Answer a : ANSWERS) {
+		for (final CharSequence identifier : answerMap.keySet()) {
 			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
 			decoratedAnswerCard.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 
-			decoratedAnswerCard.setAnswer(a, false);
+			decoratedAnswerCard.setIdentifier(identifier, false);
+			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
 			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
 			decoratedAnswerCard.addDecorator(createAlphaFadeDecorator(), false);
 
 			answerGroup.addAnswer(decoratedAnswerCard);
 		}
+	}
+
+	private void populateAnswerMap() {
+		answerMap.put("A", new ImmutableAnswer("To live long and prosper.", false));
+		answerMap.put("B", new ImmutableAnswer("To write really long sentences in a way which " +
+				"causes the word count to be raised to an unnecessarily high value without " +
+				"adding any additional/supplemental information or providing any value to the " +
+				"reader.", false));
+		answerMap.put("C", new ImmutableAnswer("To love and be loved.", false));
+		answerMap.put("D", new ImmutableAnswer("No one knows the answer to this question.", true));
+		answerMap.put("E", new ImmutableAnswer("To find the final digit of Pi.", false));
+		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
 	}
 
 	private void createUi() {
