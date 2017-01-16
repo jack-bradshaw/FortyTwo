@@ -1,12 +1,10 @@
 package com.matthewtamlin.responsum.example;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,7 +14,6 @@ import com.matthewtamlin.responsum.library.answer_group.AnswerGroup;
 import com.matthewtamlin.responsum.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.responsum.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.responsum.library.answer_view.AlphaDecorator.AlphaSupplier;
-import com.matthewtamlin.responsum.library.answer_view.AnswerView;
 import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator;
 import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator.ColorSupplier;
 import com.matthewtamlin.responsum.library.answer_view.DecoratedAnswerCard;
@@ -25,14 +22,19 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class MainActivity extends AppCompatActivity {
-	private static final String QUESTION = "What is the square root of -1?";
+	private static final String QUESTION = "What is the answer to the Ultimate Question of Life, " +
+			"the Universe, and Everything?";
 
 	private static final Answer[] ANSWERS = {
-			new ImmutableAnswer("The imaginary unit, i", true),
-			new ImmutableAnswer("NaN", false),
-			new ImmutableAnswer("1", false),
-			new ImmutableAnswer("-1", false),
-			new ImmutableAnswer("Pi", false)};
+			new ImmutableAnswer("To live long and prosper.", false),
+			new ImmutableAnswer("To write really long sentences in a way which causes the word " +
+					"count to be raised to an unnecessarily high value without adding any " +
+					"additional/supplemental information or providing any value to the reader.",
+					false),
+			new ImmutableAnswer("To love and be loved.", false),
+			new ImmutableAnswer("No one knows the answer to this question.", true),
+			new ImmutableAnswer("To find the final digit of Pi.", false),
+			new ImmutableAnswer("To propagate one's species.", false)};
 
 	private TextView questionContainer;
 
