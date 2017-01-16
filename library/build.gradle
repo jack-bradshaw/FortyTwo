@@ -18,7 +18,7 @@ apply plugin: 'com.android.library'
 
 ext {
 	PUBLISH_GROUP_ID = 'com.matthew-tamlin'
-	PUBLISH_ARTIFACT_ID = 'answer-view'
+	PUBLISH_ARTIFACT_ID = 'responsum'
 	PUBLISH_VERSION = '1.0.0'
 }
 
