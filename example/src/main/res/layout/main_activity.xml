@@ -15,7 +15,7 @@
 		android:textColor="@android:color/white"
 		android:textSize="20sp"/>
 
-	<com.matthewtamlin.responsum.library.answer_group.SelectionLimitedAnswerGroup
+	<com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup
 		android:id="@+id/main_activity_answer_group"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"/>
