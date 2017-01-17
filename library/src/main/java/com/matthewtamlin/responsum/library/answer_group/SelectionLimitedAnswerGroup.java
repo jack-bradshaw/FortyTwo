@@ -184,7 +184,7 @@ public class SelectionLimitedAnswerGroup extends LinearLayout implements AnswerG
 	}
 
 	@Override
-	public void addAnswers(final Collection<AnswerView> answers) {
+	public void addAnswers(final Collection<? extends AnswerView> answers) {
 		NullChecker.checkEachElementIsNotNull(answers, "answers cannot be null or contain null.");
 
 		allAnswers.addAll(answers);
