@@ -3,10 +3,9 @@ package com.matthewtamlin.responsum.example;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.matthewtamlin.responsum.library.answer.Answer;
@@ -15,6 +14,7 @@ import com.matthewtamlin.responsum.library.answer_group.AnswerGroup;
 import com.matthewtamlin.responsum.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.responsum.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.responsum.library.answer_view.AlphaDecorator.AlphaSupplier;
+import com.matthewtamlin.responsum.library.answer_view.AnswerView;
 import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator;
 import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator.ColorSupplier;
 import com.matthewtamlin.responsum.library.answer_view.DecoratedAnswerCard;
@@ -24,15 +24,40 @@ import java.util.LinkedHashMap;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+/**
+ * An activity which displays a question and a multiple choice answer selector.
+ */
 public class MainActivity extends AppCompatActivity {
+	/**
+	 * The wuestion to display.
+	 */
 	private static final String QUESTION = "What is the answer to the Ultimate Question of Life, " +
 			"the Universe, and Everything?";
 
+	/**
+	 * Toa answers to display, each mapped to the identifier to display with the answer.
+	 */
 	private final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
+	/**
+	 * TextView which contains the question.
+	 */
 	private TextView questionContainer;
 
-	private AnswerGroup<DecoratedAnswerCard> answerGroup;
+	/**
+	 * AnswerGroup which contains the answers.
+	 */
+	private AnswerGroup answerGroup;
+
+	/**
+	 * A button for marking and unmarking the answers.
+	 */
+	private Button actionButton;
+
+	/**
+	 * Whether or not the answers are currently marked.
+	 */
+	private boolean currentlyMarked = false;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -41,11 +66,16 @@ public class MainActivity extends AppCompatActivity {
 
 		questionContainer = (TextView) findViewById(R.id.main_Activity_question_container);
 		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
+		actionButton = (Button) findViewById(R.id.main_activity_action_button);
 
 		populateAnswerMap();
-		addAnswersToView();
+		displayAnswersAndIdentifiers();
+		setupActionButtonBehaviour();
 	}
 
+	/**
+	 * Populates the answer map with identifiers and answers.
+	 */
 	private void populateAnswerMap() {
 		answerMap.put("A", new ImmutableAnswer("To live long and prosper.", false));
 		answerMap.put("B", new ImmutableAnswer("To write really long sentences in a way which " +
@@ -58,7 +88,11 @@ public class MainActivity extends AppCompatActivity {
 		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
 	}
 
-	private void addAnswersToView() {
+	/**
+	 * Adds all answer and identifiers to the view.
+	 */
+	@SuppressWarnings("unchecked")
+	private void displayAnswersAndIdentifiers() {
 		questionContainer.setText(QUESTION);
 
 		for (final CharSequence identifier : answerMap.keySet()) {
@@ -68,12 +102,31 @@ public class MainActivity extends AppCompatActivity {
 			decoratedAnswerCard.setIdentifier(identifier, false);
 			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
 			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
-			decoratedAnswerCard.addDecorator(createAlphaFadeDecorator(), false);
+			decoratedAnswerCard.addDecorator(createAlphaDecorator(), false);
 
 			answerGroup.addAnswer(decoratedAnswerCard);
 		}
 	}
 
+	/**
+	 * Toggles the marked status of all answer views.
+	 */
+	private void setupActionButtonBehaviour() {
+		actionButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				for (final AnswerView answerView : answerGroup.getAnswers()) {
+					answerView.setMarkedStatus(!currentlyMarked, true);
+				}
+
+				currentlyMarked = !currentlyMarked;
+			}
+		});
+	}
+
+	/**
+	 * @return a new ColorFadeDecorator
+	 */
 	private ColorFadeDecorator createColorFadeDecorator() {
 		final ColorSupplier colorSupplier = new ColorSupplier() {
 			@Override
@@ -94,7 +147,10 @@ public class MainActivity extends AppCompatActivity {
 		return new ColorFadeDecorator(colorSupplier);
 	}
 
-	private AlphaDecorator createAlphaFadeDecorator() {
+	/**
+	 * @return a new AlphaDecorator
+	 */
+	private AlphaDecorator createAlphaDecorator() {
 		final AlphaSupplier alphaSupplier = new AlphaSupplier() {
 			@Override
 			public float getAlpha(final boolean marked, final boolean selected,
