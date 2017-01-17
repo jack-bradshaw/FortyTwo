@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 			public float getAlpha(final boolean marked, final boolean selected,
 					final boolean answerIsCorrect) {
 				if (marked && !selected && !answerIsCorrect) {
-					return 0.5f;
+					return 0.3f;
 				} else {
 					return 1f;
 				}
