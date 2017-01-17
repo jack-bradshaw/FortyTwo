@@ -43,7 +43,7 @@ public class SelectionLimitAnswerGroupViewActions {
 	 * 		the answers to add
 	 * @return the view action
 	 */
-	public static ViewAction addAnswers(final List<AnswerView> answers) {
+	public static ViewAction addAnswers(final List<? extends AnswerView> answers) {
 		return new ViewAction() {
 			@Override
 			public Matcher<View> getConstraints() {
