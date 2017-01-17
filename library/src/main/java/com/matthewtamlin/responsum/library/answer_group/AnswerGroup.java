@@ -23,6 +23,8 @@ import com.matthewtamlin.responsum.library.util.Listenable;
 import java.util.Collection;
 import java.util.List;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 /**
  * Contains and coordinates a collection of AnswerViews. The group listens for clicks on the
  * contained views and responds by selecting and deselecting views as necessary. The group provides
@@ -34,11 +36,8 @@ import java.util.List;
  * must not be modified externally.</li>
  * <p>
  * Failure to satisfy both conditions at any time may result in malfunction.
- *
- * @param <V>
- * 		the type of AnswerViews contained
  */
-public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V>> {
+public interface AnswerGroup extends Listenable<Listener> {
 	/**
 	 * Adds a collection of answer views to this group. The order of the collection determines the
 	 * order in which the views are added. The supplied collection must not be null and must not
@@ -47,7 +46,7 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 	 * @param answers
 	 * 		the answer views to add, not null, not containing null
 	 */
-	public void addAnswers(Collection<V> answers);
+	public void addAnswers(Collection<AnswerView> answers);
 
 	/**
 	 * Adds the supplied answer view to this group. The supplied view must not be null.
@@ -55,7 +54,7 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 	 * @param answer
 	 * 		the answer to add, not null
 	 */
-	public void addAnswer(V answer);
+	public void addAnswer(AnswerView answer);
 
 	/**
 	 * Removes the supplied answer view from this group. If the supplied answer is not contained in
@@ -64,7 +63,7 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 	 * @param answer
 	 * 		the answer to remove, not null
 	 */
-	public void removeAnswer(V answer);
+	public void removeAnswer(AnswerView answer);
 
 	/**
 	 * Removes all answers views currently in this group.
@@ -77,7 +76,7 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 	 *
 	 * @return the collection of views
 	 */
-	public List<V> getAnswers();
+	public List<AnswerView> getAnswers();
 
 	/**
 	 * Enables/disables selection changes on all answer views which are marked. Clicks on marked
@@ -105,11 +104,8 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 	/**
 	 * Callback listener to be called when an AnswerView in an AnswerGroup is selected or
 	 * deselected.
-	 *
-	 * @param <V>
-	 * 		the type of answer views in the AnswerGroup
 	 */
-	public interface Listener<V extends AnswerView> {
+	public interface Listener {
 		/**
 		 * Invoked when an AnswerView is selected in the AnswerGroup this listener is registered
 		 * to.
@@ -119,7 +115,7 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 		 * @param selectedView
 		 * 		the view which was selected, not null
 		 */
-		public void onAnswerSelected(final AnswerGroup<V> answerGroup, final V selectedView);
+		public void onAnswerSelected(AnswerGroup answerGroup, AnswerView selectedView);
 
 		/**
 		 * Invoked when an AnswerView is deselected in the AnswerGroup this listener is registered
@@ -130,6 +126,6 @@ public interface AnswerGroup<V extends AnswerView> extends Listenable<Listener<V
 		 * @param deselectedView
 		 * 		the view which was deselected, not null
 		 */
-		public void onAnswerDeselected(final AnswerGroup<V> answerGroup, final V deselectedView);
+		public void onAnswerDeselected(AnswerGroup answerGroup, AnswerView deselectedView);
 	}
 }
