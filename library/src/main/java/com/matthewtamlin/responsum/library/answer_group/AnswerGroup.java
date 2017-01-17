@@ -46,7 +46,7 @@ public interface AnswerGroup extends Listenable<Listener> {
 	 * @param answers
 	 * 		the answer views to add, not null, not containing null
 	 */
-	public void addAnswers(Collection<AnswerView> answers);
+	public void addAnswers(Collection<? extends AnswerView> answers);
 
 	/**
 	 * Adds the supplied answer view to this group. The supplied view must not be null.
