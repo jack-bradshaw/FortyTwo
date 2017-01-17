@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * AnswerGroup which contains the answers.
 	 */
-	private AnswerGroup<DecoratedAnswerCard> answerGroup;
+	private AnswerGroup answerGroup;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
