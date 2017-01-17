@@ -83,8 +83,9 @@ public class MainActivity extends AppCompatActivity {
 				"adding any additional/supplemental information or providing any value to the " +
 				"reader.", false));
 		answerMap.put("C", new ImmutableAnswer("To love and be loved.", false));
-		answerMap.put("D", new ImmutableAnswer("No one knows the answer to this question.", true));
-		answerMap.put("E", new ImmutableAnswer("To find the final digit of Pi.", false));
+		answerMap.put("D", new ImmutableAnswer("42.", true));
+		answerMap.put("E", new ImmutableAnswer("To value working software over documentation.",
+				false));
 		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
 	}
 
