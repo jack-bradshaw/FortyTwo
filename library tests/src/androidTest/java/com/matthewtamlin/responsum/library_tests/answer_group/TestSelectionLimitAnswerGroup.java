@@ -23,6 +23,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.matthewtamlin.android_testing_tools.library.EspressoHelper;
+import com.matthewtamlin.responsum.library.answer.Answer;
 import com.matthewtamlin.responsum.library.answer_group.AnswerGroup;
 import com.matthewtamlin.responsum.library.answer_group.AnswerGroup.Listener;
 import com.matthewtamlin.responsum.library.answer_group.SelectionLimitedAnswerGroup;
@@ -71,7 +72,7 @@ public class TestSelectionLimitAnswerGroup {
 	/**
 	 * A direct reference to the view under test.
 	 */
-	private SelectionLimitedAnswerGroup<DecoratedAnswerCard> testViewDirect;
+	private SelectionLimitedAnswerGroup testViewDirect;
 
 	/**
 	 * The view under test, as an Espresso ViewInteraction.
@@ -81,12 +82,12 @@ public class TestSelectionLimitAnswerGroup {
 	/**
 	 * A mock listener.
 	 */
-	private Listener<DecoratedAnswerCard> listener1;
+	private Listener listener1;
 
 	/**
 	 * Another mock listener.
 	 */
-	private Listener<DecoratedAnswerCard> listener2;
+	private Listener listener2;
 
 	/**
 	 * Performs initialisation before the tests run. The direct and espresso view references are
@@ -154,13 +155,13 @@ public class TestSelectionLimitAnswerGroup {
 	 */
 	@Test
 	public void testAddAnswers_validArgument() {
-		final List<DecoratedAnswerCard> answers = new ArrayList<>();
+		final List<AnswerView> answers = new ArrayList<>();
 		answers.add(getNewAnswerCard());
 		answers.add(getNewAnswerCard());
 
 		testViewEspresso.perform(addAnswers(answers));
 
-		for (final DecoratedAnswerCard card : answers) {
+		for (final AnswerView card : answers) {
 			testViewEspresso.check(containsView(card, true));
 		}
 
@@ -185,7 +186,7 @@ public class TestSelectionLimitAnswerGroup {
 	 */
 	@Test
 	public void testAddAnswer_validArgument() {
-		final DecoratedAnswerCard view = getNewAnswerCard();
+		final AnswerView view = getNewAnswerCard();
 
 		testViewEspresso.perform(addAnswer(view));
 
