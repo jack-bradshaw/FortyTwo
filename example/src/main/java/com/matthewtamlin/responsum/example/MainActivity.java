@@ -3,10 +3,7 @@ package com.matthewtamlin.responsum.example;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.matthewtamlin.responsum.library.answer.Answer;
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
 
 		populateAnswerMap();
-		addAnswersToView();
+		displayAnswersAndIdentifiers();
 	}
 
 	/**
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 	 * Adds all answer and identifiers to the view.
 	 */
 	@SuppressWarnings("unchecked")
-	private void addAnswersToView() {
+	private void displayAnswersAndIdentifiers() {
 		questionContainer.setText(QUESTION);
 
 		for (final CharSequence identifier : answerMap.keySet()) {
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 			decoratedAnswerCard.setIdentifier(identifier, false);
 			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
 			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
-			decoratedAnswerCard.addDecorator(createAlphaFadeDecorator(), false);
+			decoratedAnswerCard.addDecorator(createAlphaDecorator(), false);
 
 			answerGroup.addAnswer(decoratedAnswerCard);
 		}
@@ -122,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 	/**
 	 * @return a new AlphaDecorator
 	 */
-	private AlphaDecorator createAlphaFadeDecorator() {
+	private AlphaDecorator createAlphaDecorator() {
 		final AlphaSupplier alphaSupplier = new AlphaSupplier() {
 			@Override
 			public float getAlpha(final boolean marked, final boolean selected,
