@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 			"the Universe, and Everything?";
 
 	/**
-	 * Toa answers to display, each mapped to the identifier to display with the answer.
+	 * The answers to display, each mapped to the identifier to display with the answer.
 	 */
 	private final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
