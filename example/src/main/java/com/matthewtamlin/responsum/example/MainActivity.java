@@ -24,14 +24,29 @@ import java.util.LinkedHashMap;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+/**
+ * An activity which displays a question and a multiple choice answer selector.
+ */
 public class MainActivity extends AppCompatActivity {
+	/**
+	 * The wuestion to display.
+	 */
 	private static final String QUESTION = "What is the answer to the Ultimate Question of Life, " +
 			"the Universe, and Everything?";
 
+	/**
+	 * Toa answers to display, each mapped to the identifier to display with the answer.
+	 */
 	private final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
+	/**
+	 * TextView which contains the question.
+	 */
 	private TextView questionContainer;
 
+	/**
+	 * AnswerGroup which contains the answers.
+	 */
 	private AnswerGroup<DecoratedAnswerCard> answerGroup;
 
 	@Override
