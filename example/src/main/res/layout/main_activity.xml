@@ -3,6 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="#FF212121"
 	android:orientation="vertical">
 
 	<TextView
@@ -10,7 +11,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center"
-		android:paddingBottom="16dp"
+		android:padding="8dp"
+		android:textColor="@android:color/white"
 		android:textSize="20sp"/>
 
 	<com.matthewtamlin.responsum.library.answer_group.SelectionLimitedAnswerGroup
@@ -20,7 +22,10 @@
 
 	<Button
 		android:id="@+id/main_activity_action_button"
-		style="@style/Base.Widget.AppCompat.ActionButton"
+		style="@style/Widget.AppCompat.Button.Borderless"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"/>
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:text="Toggle Submission"
+		android:textSize="16sp"/>
 </LinearLayout>
