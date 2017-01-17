@@ -121,6 +121,12 @@ public class MainActivity extends AppCompatActivity {
 				}
 
 				currentlyMarked = !currentlyMarked;
+
+				if (currentlyMarked) {
+					actionButton.setText("Reset");
+				} else {
+					actionButton.setText("Submit answers");
+				}
 			}
 		});
 	}
