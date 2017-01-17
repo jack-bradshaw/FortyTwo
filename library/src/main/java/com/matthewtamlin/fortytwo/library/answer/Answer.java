@@ -14,28 +14,20 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+package com.matthewtamlin.fortytwo.library.answer;
 
-ext {
-	PUBLISH_GROUP_ID = 'com.matthew-tamlin'
-	PUBLISH_ARTIFACT_ID = 'fortytwo'
-	PUBLISH_VERSION = '1.0.0'
+/**
+ * An answer to a question, composed of two parts: <ul><li>The actual text of
+ * the answer.</li><li>Whether or not the answer is correct.</li></ul>
+ */
+public interface Answer {
+	/**
+	 * @return the actual text of the answer, not null
+	 */
+	public CharSequence getText();
+
+	/**
+	 * @return whether or not this answer is correct
+	 */
+	public boolean isCorrect();
 }
-
-android {
-	compileSdkVersion 25
-	buildToolsVersion "25.0.2"
-
-	defaultConfig {
-		minSdkVersion 12
-		targetSdkVersion 25
-	}
-}
-
-dependencies {
-	compile 'com.matthew-tamlin:android-utilities:3.0.0'
-	compile 'com.android.support:cardview-v7:25.1.0'
-	compile 'org.apache.commons:commons-collections4:4.1'
-}
-
-apply from: 'buildRelease.gradle'
