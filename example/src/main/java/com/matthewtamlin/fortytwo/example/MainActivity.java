@@ -44,7 +44,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  */
 public class MainActivity extends AppCompatActivity {
 	/**
-	 * The wuestion to display.
+	 * The question to display.
 	 */
 	private static final String QUESTION = "What is the answer to the Ultimate Question of Life, " +
 			"the Universe, and Everything?";
