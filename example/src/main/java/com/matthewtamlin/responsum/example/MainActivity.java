@@ -134,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
 					final boolean answerIsCorrect) {
 				if (marked) {
 					if (selected) {
-						return answerIsCorrect ? Color.GREEN : Color.RED;
+						return answerIsCorrect ? 0xFF4CAF50 : 0xFFF44336; // Green, red
 					} else {
-						return answerIsCorrect ? Color.RED : Color.GREEN;
+						return answerIsCorrect ? 0xFFFF5722 : 0xFFFFFFFF; // Orange, white
 					}
 				} else {
-					return selected ? Color.BLUE : Color.WHITE;
+					return selected ? 0xFF03A9F4 : 0xFFFFFFFF; // Cyan, white
 				}
 			}
 		};
