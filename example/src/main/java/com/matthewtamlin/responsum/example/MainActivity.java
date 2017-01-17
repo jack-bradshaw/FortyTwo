@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
 		addAnswersToView();
 	}
 
+	/**
+	 * Populates the answer map with identifiers and answers.
+	 */
 	private void populateAnswerMap() {
 		answerMap.put("A", new ImmutableAnswer("To live long and prosper.", false));
 		answerMap.put("B", new ImmutableAnswer("To write really long sentences in a way which " +
@@ -73,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
 		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
 	}
 
+	/**
+	 * Adds all answer and identifiers to the view.
+	 */
+	@SuppressWarnings("unchecked")
 	private void addAnswersToView() {
 		questionContainer.setText(QUESTION);
 
@@ -89,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * @return a new ColorFadeDecorator
+	 */
 	private ColorFadeDecorator createColorFadeDecorator() {
 		final ColorSupplier colorSupplier = new ColorSupplier() {
 			@Override
@@ -109,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
 		return new ColorFadeDecorator(colorSupplier);
 	}
 
+	/**
+	 * @return a new AlphaDecorator
+	 */
 	private AlphaDecorator createAlphaFadeDecorator() {
 		final AlphaSupplier alphaSupplier = new AlphaSupplier() {
 			@Override
