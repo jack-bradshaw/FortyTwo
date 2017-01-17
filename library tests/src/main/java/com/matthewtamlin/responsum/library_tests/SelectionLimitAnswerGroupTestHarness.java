@@ -35,8 +35,7 @@ import java.util.Random;
  * A test harness for displaying and interacting with an {@link SelectionLimitedAnswerGroup}.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
-		<DecoratedAnswerCard, SelectionLimitedAnswerGroup<DecoratedAnswerCard>> {
+public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness {
 	/**
 	 * Supplies colors to ColorDecorators.
 	 */
@@ -75,7 +74,7 @@ public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 	/**
 	 * The view under test.
 	 */
-	private SelectionLimitedAnswerGroup<DecoratedAnswerCard> testView;
+	private SelectionLimitedAnswerGroup testView;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -86,9 +85,9 @@ public class SelectionLimitAnswerGroupTestHarness extends AnswerGroupTestHarness
 	}
 
 	@Override
-	public SelectionLimitedAnswerGroup<DecoratedAnswerCard> getTestView() {
+	public SelectionLimitedAnswerGroup getTestView() {
 		if (testView == null) {
-			testView = new SelectionLimitedAnswerGroup<>(this);
+			testView = new SelectionLimitedAnswerGroup(this);
 		}
 
 		return testView;

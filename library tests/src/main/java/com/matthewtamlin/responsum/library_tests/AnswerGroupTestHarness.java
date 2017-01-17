@@ -29,22 +29,19 @@ import com.matthewtamlin.responsum.library.answer_view.AnswerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 /**
  * An abstract test harness for displaying and interacting with an implementation of the {@link
  * AnswerGroup} interface.
- *
- * @param <V>
- * 		the type of AnswerViews displayed in the AnswerGroup
- * @param <T>
- * 		the type of AnswerGroup under test
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends AnswerGroup<V>> extends
-		ControlsOverViewTestHarness<T> {
+public abstract class AnswerGroupTestHarness extends ControlsOverViewTestHarness<AnswerGroup> {
 	/**
 	 * @return a new AnswerView which can be displayed in the test answer group, not null
 	 */
-	public abstract V getAnswerView();
+	public abstract AnswerView getAnswerView();
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -74,7 +71,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				final List<V> answers = new ArrayList<>();
+				final List<AnswerView> answers = new ArrayList<>();
 
 				answers.add(getAnswerView());
 				answers.add(getAnswerView());
@@ -121,7 +118,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 			@Override
 			public void onClick(final View v) {
 				if (!getTestView().getAnswers().isEmpty()) {
-					final V firstAnswer = getTestView().getAnswers().get(0);
+					final AnswerView firstAnswer = getTestView().getAnswers().get(0);
 					getTestView().removeAnswer(firstAnswer);
 				}
 			}
@@ -204,7 +201,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				for (final V answerView : getTestView().getAnswers()) {
+				for (final AnswerView answerView : getTestView().getAnswers()) {
 					answerView.setMarkedStatus(true, true);
 				}
 			}
@@ -226,7 +223,7 @@ public abstract class AnswerGroupTestHarness<V extends AnswerView, T extends Ans
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				for (final V answerView : getTestView().getAnswers()) {
+				for (final AnswerView answerView : getTestView().getAnswers()) {
 					answerView.setMarkedStatus(false, true);
 				}
 			}
