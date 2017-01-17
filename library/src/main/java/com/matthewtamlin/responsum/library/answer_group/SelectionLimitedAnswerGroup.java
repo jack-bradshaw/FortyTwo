@@ -41,38 +41,36 @@ import java.util.Set;
  * can be set at any time, and is automatically enforced when views are clicked. If the limit has
  * been reached and a view is clicked, the view which was least recently selected will be deselected
  * to allow for the newly selected view.
- *
- * @param <V>
- * 		the type of AnswerViews contained
  */
 @Tested(testMethod = "automated", requiresInstrumentation = true)
-public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLayout implements
-		AnswerGroup<V> {
+public class SelectionLimitedAnswerGroup extends LinearLayout implements AnswerGroup {
 	/**
 	 * The listeners which have registered for callbacks.
 	 */
-	private final Set<AnswerGroup.Listener<V>> listeners = new HashSet<>();
+	private final Set<Listener> listeners = new HashSet<>();
 
 	/**
 	 * All answers which are currently displayed in this group.
 	 */
-	private final List<V> allAnswers = new ArrayList<>();
+	private final List<AnswerView> allAnswers = new ArrayList<>();
 
 	/**
 	 * All answers which are currently displayed and selected. The size of the stack enforces the
 	 * selection limit.
 	 */
-	private final EvictingStackSet<V> selectedViews = new EvictingStackSet<>(1);
+	private final EvictingStackSet<AnswerView> selectedViews = new EvictingStackSet<>(1);
 
 	/**
 	 * Listens to eviction callbacks from the {@code selectedViews} and selects the evicted view.
 	 */
-	private final EvictionListener<V> evictionListener = new EvictionListener<V>() {
-		@Override
-		public void onEviction(final EvictingStackSet<V> evictingStackSet, final V evicted) {
-			deselectView(evicted);
-		}
-	};
+	private final EvictionListener<AnswerView> evictionListener =
+			new EvictionListener<AnswerView>() {
+				@Override
+				public void onEviction(final EvictingStackSet<AnswerView> evictingStackSet,
+						final AnswerView evicted) {
+					deselectView(evicted);
+				}
+			};
 
 	/**
 	 * Whether or not the selection status of marked views can be changed.
@@ -186,12 +184,12 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	}
 
 	@Override
-	public void addAnswers(final Collection<V> answers) {
+	public void addAnswers(final Collection<AnswerView> answers) {
 		NullChecker.checkEachElementIsNotNull(answers, "answers cannot be null or contain null.");
 
 		allAnswers.addAll(answers);
 
-		for (final V answer : answers) {
+		for (final AnswerView answer : answers) {
 			addView((View) answer);
 
 			((View) answer).setOnClickListener(new View.OnClickListener() {
@@ -208,17 +206,17 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	}
 
 	@Override
-	public void addAnswer(final V answer) {
+	public void addAnswer(final AnswerView answer) {
 		NullChecker.checkNotNull(answer, "answer cannot be null.");
 
-		final List<V> answers = new ArrayList<>();
+		final List<AnswerView> answers = new ArrayList<>();
 		answers.add(answer);
 
 		addAnswers(answers);
 	}
 
 	@Override
-	public void removeAnswer(final V answer) {
+	public void removeAnswer(final AnswerView answer) {
 		NullChecker.checkNotNull(answer, "answer cannot be null.");
 
 		allAnswers.remove(answer);
@@ -231,15 +229,15 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	@Override
 	public void clearAnswers() {
 		// Use a copy to avoid concurrent modification exceptions when removeAnswer is called
-		final List<V> allAnswersCopy = new ArrayList<>(allAnswers);
+		final List<AnswerView> allAnswersCopy = new ArrayList<>(allAnswers);
 
-		for (final V answer : allAnswersCopy) {
+		for (final AnswerView answer : allAnswersCopy) {
 			removeAnswer(answer);
 		}
 	}
 
 	@Override
-	public List<V> getAnswers() {
+	public List<AnswerView> getAnswers() {
 		return new ArrayList<>(allAnswers);
 	}
 
@@ -257,7 +255,7 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	public void declareExternalViewSelectionChanges() {
 		selectedViews.clear();
 
-		for (final V answer : allAnswers) {
+		for (final AnswerView answer : allAnswers) {
 			if (answer.isSelected()) {
 				selectedViews.add(answer);
 			}
@@ -265,14 +263,14 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	}
 
 	@Override
-	public void registerListener(final Listener<V> listener) {
+	public void registerListener(final Listener listener) {
 		if (listener != null) {
 			listeners.add(listener);
 		}
 	}
 
 	@Override
-	public void unregisterListener(final Listener<V> listener) {
+	public void unregisterListener(final Listener listener) {
 		listeners.remove(listener);
 	}
 
@@ -292,7 +290,7 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	 * @param clickedView
 	 * 		the answer view which was clicked, not null
 	 */
-	private void handleClick(final V clickedView) {
+	private void handleClick(final AnswerView clickedView) {
 		boolean allowSelectionChange = !(clickedView.isMarked()
 				&& !allowSelectionChangesWhenMarked);
 
@@ -312,13 +310,13 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	 * @param answerView
 	 * 		the view to deselect, not null
 	 */
-	private void deselectView(final V answerView) {
+	private void deselectView(final AnswerView answerView) {
 		if (answerView.isSelected()) {
 			answerView.setSelectedStatus(false, selectionAnimationsEnabled);
 
 			selectedViews.remove(answerView);
 
-			for (final AnswerGroup.Listener<V> listener : listeners) {
+			for (final Listener listener : listeners) {
 				listener.onAnswerDeselected(this, answerView);
 			}
 		}
@@ -331,13 +329,13 @@ public class SelectionLimitedAnswerGroup<V extends AnswerView> extends LinearLay
 	 * @param answerView
 	 * 		the view to select, not null
 	 */
-	private void selectView(final V answerView) {
+	private void selectView(final AnswerView answerView) {
 		if (!answerView.isSelected()) {
 			answerView.setSelectedStatus(true, selectionAnimationsEnabled);
 
 			selectedViews.push(answerView);
 
-			for (final AnswerGroup.Listener<V> listener : listeners) {
+			for (final Listener listener : listeners) {
 				listener.onAnswerSelected(this, answerView);
 			}
 		}
