@@ -3,7 +3,9 @@ package com.matthewtamlin.responsum.example;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.matthewtamlin.responsum.library.answer.Answer;
@@ -12,6 +14,7 @@ import com.matthewtamlin.responsum.library.answer_group.AnswerGroup;
 import com.matthewtamlin.responsum.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.responsum.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.responsum.library.answer_view.AlphaDecorator.AlphaSupplier;
+import com.matthewtamlin.responsum.library.answer_view.AnswerView;
 import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator;
 import com.matthewtamlin.responsum.library.answer_view.ColorFadeDecorator.ColorSupplier;
 import com.matthewtamlin.responsum.library.answer_view.DecoratedAnswerCard;
@@ -46,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	private AnswerGroup answerGroup;
 
+	/**
+	 * A button for marking and unmarking the answers.
+	 */
+	private Button actionButton;
+
+	/**
+	 * Whether or not the answers are currently marked.
+	 */
+	private boolean currentlyMarked = false;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,9 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
 		questionContainer = (TextView) findViewById(R.id.main_Activity_question_container);
 		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
+		actionButton = (Button) findViewById(R.id.main_activity_action_button);
 
 		populateAnswerMap();
 		displayAnswersAndIdentifiers();
+		setupActionButtonBehaviour();
 	}
 
 	/**
@@ -91,6 +106,22 @@ public class MainActivity extends AppCompatActivity {
 
 			answerGroup.addAnswer(decoratedAnswerCard);
 		}
+	}
+
+	/**
+	 * Toggles the marked status of all answer views.
+	 */
+	private void setupActionButtonBehaviour() {
+		actionButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				for (final AnswerView answerView : answerGroup.getAnswers()) {
+					answerView.setMarkedStatus(!currentlyMarked, true);
+				}
+
+				currentlyMarked = !currentlyMarked;
+			}
+		});
 	}
 
 	/**
