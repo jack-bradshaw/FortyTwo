@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 					final boolean answerIsCorrect) {
 				if (marked) {
 					if (selected) {
-						return answerIsCorrect ? 0xFF8BC34A : 0xFFb71c1c; // Green, red
+						return answerIsCorrect ? 0xFF2E7D32 : 0xFFb71c1c; // Green, red
 					} else {
 						return answerIsCorrect ? 0xFF673AB7 : 0xFFFFFFFF; // Purple, white
 					}
