@@ -25,7 +25,7 @@ public class AbstractQuestionActivity extends AppCompatActivity {
 	/**
 	 * Contains the answers.
 	 */
-	private AnswerGroup answerGroup;
+	private SelectionLimitedAnswerGroup answerGroup;
 
 	/**
 	 * Button for submitting and resetting the answers.
@@ -68,7 +68,7 @@ public class AbstractQuestionActivity extends AppCompatActivity {
 		return questionContainer;
 	}
 
-	public AnswerGroup getAnswerGroup() {
+	public SelectionLimitedAnswerGroup getAnswerGroup() {
 		return answerGroup;
 	}
 }
