@@ -32,7 +32,8 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
- * An activity which displays a question and a multiple choice answer selector.
+ * An activity designed to find the answer to the Ultimate Question of Life, the Universe and
+ * Everything.
  */
 public class SingleSelectionActivity extends AbstractQuestionActivity {
 	/**
