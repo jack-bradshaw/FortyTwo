@@ -16,6 +16,7 @@
 
 package com.matthewtamlin.fortytwo.example;
 
+import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
@@ -60,8 +61,8 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		displayQuestionAndAnswers();
 		getAnswerGroup().setMultipleSelectionLimit(MULTIPLE_SELECTION_LIMIT);
 	}
