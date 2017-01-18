@@ -55,9 +55,9 @@ public class AbstractQuestionActivity extends AppCompatActivity {
 				currentlyMarked = !currentlyMarked;
 
 				if (currentlyMarked) {
-					actionButton.setText("Reset");
+					actionButton.setText("Deselect");
 				} else {
-					actionButton.setText("Submit answers");
+					actionButton.setText("Submit");
 				}
 			}
 		});
