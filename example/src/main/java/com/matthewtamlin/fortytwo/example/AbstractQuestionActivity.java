@@ -58,4 +58,12 @@ public class AbstractQuestionActivity extends AppCompatActivity {
 			}
 		});
 	}
+
+	public TextView getQuestionContainer() {
+		return questionContainer;
+	}
+
+	public AnswerGroup getAnswerGroup() {
+		return answerGroup;
+	}
 }
