@@ -16,20 +16,12 @@
 
 package com.matthewtamlin.fortytwo.example;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.matthewtamlin.fortytwo.library.answer.Answer;
 import com.matthewtamlin.fortytwo.library.answer.ImmutableAnswer;
-import com.matthewtamlin.fortytwo.library.answer_group.AnswerGroup;
-import com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.fortytwo.library.answer_view.AlphaDecorator;
 import com.matthewtamlin.fortytwo.library.answer_view.AlphaDecorator.AlphaSupplier;
-import com.matthewtamlin.fortytwo.library.answer_view.AnswerView;
 import com.matthewtamlin.fortytwo.library.answer_view.ColorFadeDecorator;
 import com.matthewtamlin.fortytwo.library.answer_view.ColorFadeDecorator.ColorSupplier;
 import com.matthewtamlin.fortytwo.library.answer_view.DecoratedAnswerCard;
@@ -42,7 +34,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 /**
  * An activity which displays a question and a multiple choice answer selector.
  */
-public class SingleSelectionActivity extends AppCompatActivity {
+public class SingleSelectionActivity extends AbstractQuestionActivity {
 	/**
 	 * The question to display.
 	 */
@@ -50,42 +42,15 @@ public class SingleSelectionActivity extends AppCompatActivity {
 			"the Universe, and Everything?";
 
 	/**
-	 * The answers to display, each mapped to the identifier to display with the answer.
+	 * The answers and the associated identifiers to display.
 	 */
 	private final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
-	/**
-	 * TextView which contains the question.
-	 */
-	private TextView questionContainer;
-
-	/**
-	 * AnswerGroup which contains the answers.
-	 */
-	private AnswerGroup answerGroup;
-
-	/**
-	 * A button for marking and unmarking the answers.
-	 */
-	private Button actionButton;
-
-	/**
-	 * Whether or not the answers are currently marked.
-	 */
-	private boolean currentlyMarked = false;
-
 	@Override
-	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.question_activity);
-
-		questionContainer = (TextView) findViewById(R.id.main_Activity_question_container);
-		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
-		actionButton = (Button) findViewById(R.id.main_activity_action_button);
-
+	protected void onStart() {
+		super.onStart();
 		populateAnswerMap();
-		displayAnswersAndIdentifiers();
-		setupActionButtonBehaviour();
+		displayQuestionAndAnswers();
 	}
 
 	/**
@@ -108,8 +73,8 @@ public class SingleSelectionActivity extends AppCompatActivity {
 	 * Adds all answer and identifiers to the view.
 	 */
 	@SuppressWarnings("unchecked")
-	private void displayAnswersAndIdentifiers() {
-		questionContainer.setText(QUESTION);
+	private void displayQuestionAndAnswers() {
+		getQuestionContainer().setText(QUESTION);
 
 		for (final CharSequence identifier : answerMap.keySet()) {
 			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
@@ -120,30 +85,8 @@ public class SingleSelectionActivity extends AppCompatActivity {
 			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
 			decoratedAnswerCard.addDecorator(createAlphaDecorator(), false);
 
-			answerGroup.addAnswer(decoratedAnswerCard);
+			getAnswerGroup().addAnswer(decoratedAnswerCard);
 		}
-	}
-
-	/**
-	 * Toggles the marked status of all answer views.
-	 */
-	private void setupActionButtonBehaviour() {
-		actionButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				for (final AnswerView answerView : answerGroup.getAnswers()) {
-					answerView.setMarkedStatus(!currentlyMarked, true);
-				}
-
-				currentlyMarked = !currentlyMarked;
-
-				if (currentlyMarked) {
-					actionButton.setText("Reset");
-				} else {
-					actionButton.setText("Submit answers");
-				}
-			}
-		});
 	}
 
 	/**
