@@ -10,4 +10,10 @@
 		android:layout_width="wrap_content"
 		android:onClick="showSingleSelectionActivity"
 		android:layout_height="wrap_content"/>
+
+	<Button
+		android:text="Show Multiple Selection Activity"
+		android:layout_width="wrap_content"
+		android:onClick="showMultipleSelectionActivity"
+		android:layout_height="wrap_content"/>
 </LinearLayout>
