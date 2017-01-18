@@ -42,7 +42,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 /**
  * An activity which displays a question and a multiple choice answer selector.
  */
-public class MainActivity extends AppCompatActivity {
+public class SingleSelectionActivity extends AppCompatActivity {
 	/**
 	 * The question to display.
 	 */
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_activity);
+		setContentView(R.layout.single_selection_activity);
 
 		questionContainer = (TextView) findViewById(R.id.main_Activity_question_container);
 		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
