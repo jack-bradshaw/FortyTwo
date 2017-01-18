@@ -77,7 +77,7 @@ public class SingleSelectionActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.single_selection_activity);
+		setContentView(R.layout.question_activity);
 
 		questionContainer = (TextView) findViewById(R.id.main_Activity_question_container);
 		answerGroup = (SelectionLimitedAnswerGroup) findViewById(R.id.main_activity_answer_group);
