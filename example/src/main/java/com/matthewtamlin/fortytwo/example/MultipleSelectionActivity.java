@@ -95,12 +95,12 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity{
 					final boolean answerIsCorrect) {
 				if (marked) {
 					if (selected) {
-						return answerIsCorrect ? 0xFF1565C0 : 0xFFC62828; // Blue, red
+						return answerIsCorrect ? 0xFF2E7D32 : 0xFFb71c1c; // Green, red
 					} else {
-						return answerIsCorrect ? 0xFFEF6C00 : 0xFFFFFFFF; // Orange, white
+						return answerIsCorrect ? 0xFF673AB7 : 0xFFFFFFFF; // Purple, white
 					}
 				} else {
-					return selected ? 0xFFE91E63 : 0xFFFFFFFF; // Pink, white
+					return selected ? 0xFFFF9800 : 0xFFFFFFFF; // Orange, white
 				}
 			}
 		};
