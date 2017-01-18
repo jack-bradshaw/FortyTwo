@@ -43,7 +43,7 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity {
 	 * The question to display.
 	 */
 	private static final String QUESTION = "Which of the following are moons of Jupiter? " +
-			"Select up to four answers.";
+			"You may select up to four answers.";
 
 	/**
 	 * The answers and the associated identifiers to display.
