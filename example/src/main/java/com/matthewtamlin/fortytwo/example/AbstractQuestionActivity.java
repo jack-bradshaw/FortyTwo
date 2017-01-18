@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.matthewtamlin.fortytwo.library.answer_group.AnswerGroup;
 import com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.fortytwo.library.answer_view.AnswerView;
 
