@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * On click listener method for the action button.
+	 * On click listener method for launching the single selection activity.
 	 *
 	 * @param v
 	 * 		the view which was clicked, not null
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * On click listener method for launching the multiple choice selection activity.
+	 * On click listener method for launching the multiple selection activity.
 	 *
 	 * @param v
 	 */
