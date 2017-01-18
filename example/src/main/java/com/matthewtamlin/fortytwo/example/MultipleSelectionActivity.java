@@ -35,6 +35,8 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * An activity which tests the user's knowledge of our solar system.
  */
 public class MultipleSelectionActivity extends AbstractQuestionActivity{
+	private static final int MULTIPLE_SELECTION_LIMIT = 4;
+
 	/**
 	 * The question to display.
 	 */
@@ -60,6 +62,7 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity{
 	protected void onStart() {
 		super.onStart();
 		displayQuestionAndAnswers();
+		getAnswerGroup().setMultipleSelectionLimit(MULTIPLE_SELECTION_LIMIT);
 	}
 
 	/**
