@@ -17,6 +17,7 @@
 package com.matthewtamlin.fortytwo.example;
 
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 
 import com.matthewtamlin.fortytwo.library.answer.Answer;
 import com.matthewtamlin.fortytwo.library.answer.ImmutableAnswer;
@@ -34,7 +35,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 /**
  * An activity which tests the user's knowledge of our solar system.
  */
-public class MultipleSelectionActivity extends AbstractQuestionActivity{
+public class MultipleSelectionActivity extends AbstractQuestionActivity {
 	private static final int MULTIPLE_SELECTION_LIMIT = 4;
 
 	/**
@@ -75,7 +76,7 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity{
 		for (final CharSequence identifier : answerMap.keySet()) {
 			final DecoratedAnswerCard decoratedAnswerCard = new DecoratedAnswerCard(this);
 
-			decoratedAnswerCard.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+			decoratedAnswerCard.setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
 			decoratedAnswerCard.setIdentifier(identifier, false);
 			decoratedAnswerCard.setAnswer(answerMap.get(identifier), false);
 			decoratedAnswerCard.addDecorator(createColorFadeDecorator(), false);
