@@ -24,4 +24,13 @@ public class MainActivity extends AppCompatActivity {
 	public void showSingleSelectionActivity(final View v) {
 		startActivity(new Intent(this, SingleSelectionActivity.class));
 	}
+
+	/**
+	 * On click listener method for launching the multiple choice selection activity.
+	 *
+	 * @param v
+	 */
+	public void showMultipleSelectionActivity(final View v) {
+		startActivity(new Intent(this, MultipleSelectionActivity.class));
+	}
 }
