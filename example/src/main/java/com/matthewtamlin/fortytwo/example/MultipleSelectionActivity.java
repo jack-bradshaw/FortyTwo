@@ -81,7 +81,7 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity{
 						return answerIsCorrect ? 0xFFEF6C00 : 0xFFFFFFFF; // Orange, white
 					}
 				} else {
-					return selected ? 0xFFAD1457 : 0xFFFFFFFF; // Pink, white
+					return selected ? 0xFFE91E63 : 0xFFFFFFFF; // Pink, white
 				}
 			}
 		};
