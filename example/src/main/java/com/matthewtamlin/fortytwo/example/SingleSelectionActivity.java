@@ -45,19 +45,9 @@ public class SingleSelectionActivity extends AbstractQuestionActivity {
 	/**
 	 * The answers and the associated identifiers to display.
 	 */
-	private final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
+	private static final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		populateAnswerMap();
-		displayQuestionAndAnswers();
-	}
-
-	/**
-	 * Populates the answer map with identifiers and answers.
-	 */
-	private void populateAnswerMap() {
+	static {
 		answerMap.put("A", new ImmutableAnswer("To live long and prosper.", false));
 		answerMap.put("B", new ImmutableAnswer("To write really long sentences in a way which " +
 				"causes the word count to be raised to an unnecessarily high value without " +
@@ -68,6 +58,12 @@ public class SingleSelectionActivity extends AbstractQuestionActivity {
 		answerMap.put("E", new ImmutableAnswer("To value working software over documentation.",
 				false));
 		answerMap.put("F", new ImmutableAnswer("To propagate one's species.", false));
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		displayQuestionAndAnswers();
 	}
 
 	/**
