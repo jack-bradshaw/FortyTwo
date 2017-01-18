@@ -5,7 +5,9 @@ import android.view.ViewGroup;
 import com.matthewtamlin.fortytwo.library.answer.Answer;
 import com.matthewtamlin.fortytwo.library.answer.ImmutableAnswer;
 import com.matthewtamlin.fortytwo.library.answer_view.AlphaDecorator;
+import com.matthewtamlin.fortytwo.library.answer_view.AlphaDecorator.AlphaSupplier;
 import com.matthewtamlin.fortytwo.library.answer_view.ColorFadeDecorator;
+import com.matthewtamlin.fortytwo.library.answer_view.ColorFadeDecorator.ColorSupplier;
 import com.matthewtamlin.fortytwo.library.answer_view.DecoratedAnswerCard;
 
 import java.util.LinkedHashMap;
@@ -65,7 +67,7 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity{
 	 * @return a new ColorFadeDecorator
 	 */
 	private ColorFadeDecorator createColorFadeDecorator() {
-		final ColorFadeDecorator.ColorSupplier colorSupplier = new ColorFadeDecorator.ColorSupplier() {
+		final ColorSupplier colorSupplier = new ColorSupplier() {
 			@Override
 			public int getColor(final boolean marked, final boolean selected,
 					final boolean answerIsCorrect) {
@@ -88,7 +90,7 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity{
 	 * @return a new AlphaDecorator
 	 */
 	private AlphaDecorator createAlphaDecorator() {
-		final AlphaDecorator.AlphaSupplier alphaSupplier = new AlphaDecorator.AlphaSupplier() {
+		final AlphaSupplier alphaSupplier = new AlphaSupplier() {
 			@Override
 			public float getAlpha(final boolean marked, final boolean selected,
 					final boolean answerIsCorrect) {
