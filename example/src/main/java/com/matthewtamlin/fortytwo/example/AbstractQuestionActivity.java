@@ -12,25 +12,28 @@ import com.matthewtamlin.fortytwo.library.answer_group.AnswerGroup;
 import com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.fortytwo.library.answer_view.AnswerView;
 
+/**
+ * Displays a question, an selection or answers, and a submit/reset button.
+ */
 @SuppressLint("SetTextI18n") // Just an example, not a real app
 public class AbstractQuestionActivity extends AppCompatActivity {
 	/**
-	 * TextView which contains the question.
+	 * Contains the question.
 	 */
 	private TextView questionContainer;
 
 	/**
-	 * AnswerGroup which contains the answers.
+	 * Contains the answers.
 	 */
 	private AnswerGroup answerGroup;
 
 	/**
-	 * A button for marking and unmarking the answers.
+	 * Button for submitting and resetting the answers.
 	 */
 	private Button actionButton;
 
 	/**
-	 * Whether or not the answers are currently marked.
+	 * Whether or not the answers are currently submitted.
 	 */
 	private boolean currentlyMarked = false;
 
