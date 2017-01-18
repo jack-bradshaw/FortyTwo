@@ -5,7 +5,7 @@ import com.matthewtamlin.fortytwo.library.answer.ImmutableAnswer;
 
 import java.util.LinkedHashMap;
 
-public class MultipleSelectionActivity {
+public class MultipleSelectionActivity extends AbstractQuestionActivity{
 	/**
 	 * The question to display.
 	 */
@@ -27,5 +27,5 @@ public class MultipleSelectionActivity {
 		answerMap.put("", new ImmutableAnswer("Titan", false));
 	}
 
-	
+
 }
