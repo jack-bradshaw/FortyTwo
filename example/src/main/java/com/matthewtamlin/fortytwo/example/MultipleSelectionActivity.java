@@ -31,13 +31,13 @@ public class MultipleSelectionActivity extends AbstractQuestionActivity{
 	private static final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
 	static {
-		answerMap.put("1.", new ImmutableAnswer("Pheobe", false));
-		answerMap.put("2.", new ImmutableAnswer("Ganymede", true));
-		answerMap.put("3.", new ImmutableAnswer("Triton", false));
-		answerMap.put("4.", new ImmutableAnswer("Lunar", false));
-		answerMap.put("5.", new ImmutableAnswer("Kore", true));
-		answerMap.put("6.", new ImmutableAnswer("Callisto", true));
-		answerMap.put("7.", new ImmutableAnswer("Titan", false));
+		answerMap.put("Φοίβη", new ImmutableAnswer("Pheobe", false));
+		answerMap.put("Γανυμήδης", new ImmutableAnswer("Ganymede", true));
+		answerMap.put("Τρίτων", new ImmutableAnswer("Triton", false));
+		answerMap.put("Σελήνη", new ImmutableAnswer("Lunar", false));
+		answerMap.put("Περσεφόνη", new ImmutableAnswer("Kore", true));
+		answerMap.put("Καλλιστώ", new ImmutableAnswer("Callisto", true));
+		answerMap.put("Τιτάν", new ImmutableAnswer("Titan", false));
 	}
 
 	@Override
