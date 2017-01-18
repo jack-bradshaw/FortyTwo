@@ -15,6 +15,9 @@ import java.util.LinkedHashMap;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+/**
+ * An activity which tests the user's knowledge of our solar system.
+ */
 public class MultipleSelectionActivity extends AbstractQuestionActivity{
 	/**
 	 * The question to display.
