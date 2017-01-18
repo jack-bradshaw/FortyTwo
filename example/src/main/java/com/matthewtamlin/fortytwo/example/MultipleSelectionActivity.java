@@ -18,6 +18,14 @@ public class MultipleSelectionActivity {
 	private static final LinkedHashMap<CharSequence, Answer> answerMap = new LinkedHashMap<>();
 
 	static {
-
+		answerMap.put("1.", new ImmutableAnswer("Pheobe", false));
+		answerMap.put("2.", new ImmutableAnswer("Ganymede", true));
+		answerMap.put("3.", new ImmutableAnswer("Triton", false));
+		answerMap.put("4..", new ImmutableAnswer("Lunar", false));
+		answerMap.put("5.", new ImmutableAnswer("Kore", true));
+		answerMap.put("6.", new ImmutableAnswer("Callisto", true));
+		answerMap.put("", new ImmutableAnswer("Titan", false));
 	}
+
+	
 }
