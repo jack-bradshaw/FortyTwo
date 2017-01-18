@@ -23,7 +23,7 @@ limitations under the License.
 	<application
 		android:allowBackup="false"
 		android:icon="@mipmap/ic_launcher"
-		android:label="Example"
+		android:label="FortyTwo Example"
 		android:supportsRtl="true"
 		android:theme="@style/Theme.AppCompat.NoActionBar">
 
