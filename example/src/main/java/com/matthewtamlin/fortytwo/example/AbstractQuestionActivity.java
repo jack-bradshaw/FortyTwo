@@ -1,5 +1,6 @@
 package com.matthewtamlin.fortytwo.example;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import com.matthewtamlin.fortytwo.library.answer_group.AnswerGroup;
 import com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup;
 import com.matthewtamlin.fortytwo.library.answer_view.AnswerView;
 
+@SuppressLint("SetTextI18n") // Just an example, not a real app
 public class AbstractQuestionActivity extends AppCompatActivity {
 	/**
 	 * TextView which contains the question.
