@@ -23,7 +23,7 @@ limitations under the License.
 	<application
 		android:allowBackup="false"
 		android:icon="@mipmap/ic_launcher"
-		android:label="MultipleChoiceAnswerView tests"
+		android:label="FortyTwo Tests"
 		android:supportsRtl="true"
 		android:theme="@style/Theme.AppCompat.Light">
 
