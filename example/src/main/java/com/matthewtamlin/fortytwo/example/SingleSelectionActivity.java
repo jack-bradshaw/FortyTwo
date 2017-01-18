@@ -16,6 +16,7 @@
 
 package com.matthewtamlin.fortytwo.example;
 
+import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 
 import com.matthewtamlin.fortytwo.library.answer.Answer;
@@ -61,8 +62,8 @@ public class SingleSelectionActivity extends AbstractQuestionActivity {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		displayQuestionAndAnswers();
 	}
 
