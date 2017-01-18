@@ -55,7 +55,7 @@ public class AbstractQuestionActivity extends AppCompatActivity {
 				currentlyMarked = !currentlyMarked;
 
 				if (currentlyMarked) {
-					actionButton.setText("Deselect");
+					actionButton.setText("Unsubmit");
 				} else {
 					actionButton.setText("Submit");
 				}
