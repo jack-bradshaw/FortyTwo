@@ -20,7 +20,7 @@ The following implementations are provided for the AnswerView interface:
 - SimpleAnswerCard: An abstract class which can be extended to make CardView based AnswerViews.
 - DecoratedAnswerCard: A subclass of SimpleAnswerCard which can be customised by supplying one or more Decorator objects. Two implementations of the Decorator interface have been provided: ColorFadeDecorator and AlphaDecorator (both shown in the above gifs).
 
-The SelectionLimitAnswerGroup is the only provided implementation of the AnswerGroup interface, however it is flexible enough to suit most needs. The view allows the user to select up to a configurable maximum number of views, and it can be set to disallow selection changes when the answers have been submitted. The user’s selections are managed using a size-limited stack, so if the user attempts to select 3 answers when only 2 are allowed to be selected simultaneously, then the answer which was selected least recently is automatically deselected.
+The SelectionLimitAnswerGroup is the only provided implementation of the AnswerGroup interface, however it is flexible enough to suit most needs. The view can be configured to limit the number of selected answers, and it can be set to disallow selection changes when the answers have been submitted.
 
 For further details, read the Javadoc and have a look at [the source](example/src/main/java/com/matthewtamlin/fortytwo/example) of the above gifs.
 
