@@ -1,4 +1,4 @@
-# AnswerView
+# FortyTwo
 FortyTwo is the answer to the Ultimate Question of Life, the Universe, and Everything. It's also a UI library designed for displaying multiple choice answers in Android apps, for example:
 
 <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/dev/add-artwork/artwork/single_selection.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/dev/add-artwork/artwork/multiple_selection.gif" width="425"/> 
