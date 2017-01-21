@@ -22,7 +22,7 @@ The following implementations are provided for the AnswerView interface:
 
 The SelectionLimitAnswerGroup is the only provided implementation of the AnswerGroup interface, however it is flexible enough to suit most needs. The view can be configured to limit the number of selected answers, and it can be set to disallow selection changes when the answers have been submitted.
 
-For further details, read the Javadoc and have a look at [the source](example/src/main/java/com/matthewtamlin/fortytwo/example) of the above gifs.
+For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
 ## License
 This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
