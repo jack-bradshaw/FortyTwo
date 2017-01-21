@@ -13,12 +13,12 @@ There are three key interfaces in this library:
 - `AnswerGroup` displays multiple AnswerViews and coordinates the user’s interaction with them.
 
 The following implementations are provided for the Answer interface:
-- ImmutableAnswer: An answer where the values are set and fixed at instantiation.
-- PojoAnswer: An answer which provides getters and setters for accessing and changing the data.
+- `ImmutableAnswer`: An answer where the values are set and fixed at instantiation.
+- `PojoAnswer`: An answer which provides getters and setters for accessing and changing the data.
 
 The following implementations are provided for the AnswerView interface:
-- SimpleAnswerCard: An abstract class which can be extended to make CardView based AnswerViews.
-- DecoratedAnswerCard: A subclass of SimpleAnswerCard which can be customised by supplying one or more Decorator objects. Two implementations of the Decorator interface have been provided: ColorFadeDecorator and AlphaDecorator (both shown in the above gifs).
+- `SimpleAnswerCard`: An abstract class which can be extended to make CardView based AnswerViews.
+- `DecoratedAnswerCard`: A subclass of SimpleAnswerCard which can be customised by supplying one or more Decorator objects. Two implementations of the Decorator interface have been provided: ColorFadeDecorator and AlphaDecorator (both shown in the above gifs).
 
 The SelectionLimitAnswerGroup is the only provided implementation of the AnswerGroup interface, however it is flexible enough to suit most needs. The view can be configured to limit the number of selected answers, and it can be set to disallow selection changes when the answers have been submitted.
 
