@@ -87,6 +87,47 @@ Create an AnswerView for each Answer and add them to the AnswerGroup. The Decora
 		}
 ```
 
+Two decorator classes are provieded: ColorFadeDecorator and AlphaDecorator.
+```java
+
+public ColorFadeDecorator createColorFadeDecorator() {
+	// Defines the colors to use in the color decorator for different answer properties
+	final ColorSupplier colorSupplier = new ColorSupplier() {
+		@Override
+		public int getColor(boolean marked, boolean selected, boolean answerIsCorrect) {
+			if (marked) {
+				if (selected) {
+					return answerIsCorrect ? Color.GREEN : Color.RED;
+				} else {
+					return answerIsCorrect ? Color.PURPLE : Color.WHITE;
+				}
+			} else {
+				return selected ? Color.ORANGE : Color.WHITE;
+			}
+		}
+	};
+
+	return new ColorFadeDecorator(colorSupplier);
+}
+
+private AlphaDecorator createAlphaDecorator() {
+	// Defines the alpha values to use in the alpha decorator for different answer properties
+	final AlphaSupplier alphaSupplier = new AlphaSupplier() {
+		@Override
+		public float getAlpha(boolean marked, boolean selected, boolean answerIsCorrect) {
+			if (marked && !selected && !answerIsCorrect) {
+				return 0.3f; // 30% opacity
+			} else {
+				return 1f; // Full opacity
+			}
+		}
+	};
+
+	return new AlphaDecorator(alphaSupplier);
+}
+```
+
+
 For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
 ## License
