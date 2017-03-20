@@ -36,7 +36,7 @@ Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true
 ```
 
 ### AnswerGroup
-Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided implementation of this interface, but the class is flexible enough to meet most needs.
+Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided implementation of this interface and should be flexible enough to meet most needs.
 ```xml
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
