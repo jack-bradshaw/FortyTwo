@@ -12,6 +12,26 @@ There are three key interfaces in this library:
 - `AnswerView` displays an Answer in the UI. The user can interact with an AnswerView to select it, and an AnswerView can be marked to show whether or not the user’s selection is correct.
 - `AnswerGroup` displays multiple AnswerViews and coordinates the user’s interaction with them.
 
+Define your answers by implementing the Answer interface or instantating one of the provided implementations.
+```java
+// Directly implement the interface
+Answer answer1 = new Answer() {
+    public CharSequence getText() {
+        return "incorrect answer";
+    }
+    
+    public boolean isCorrect() {
+        return false;
+    };
+    
+// Use the PojoAnswer class
+Answer answer2 = new PojoAnswer("this is the right answer", true);
+answer2.setText("actually I changed my mind");
+answer.setCorrectness(false);
+
+// Use the ImmutableAnswer class
+Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
+```
 The following implementations are provided for the Answer interface:
 - `ImmutableAnswer`: An answer where the values are set and fixed at instantiation.
 - `PojoAnswer`: An answer which provides getters and setters for accessing and changing the data.
