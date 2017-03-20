@@ -8,9 +8,9 @@ Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:fo
 
 ## Usage
 There are three key interfaces in this library:
-- `Answer` contains the actual data to display. An Answer consists of text describing the actual answer, and a boolean denoting whether or not the answer is correct. 
-- `AnswerView` displays an Answer in the UI. The user can interact with an AnswerView to select it, and an AnswerView can be marked to show whether or not the user’s selection is correct.
-- `AnswerGroup` displays multiple AnswerViews and coordinates the user’s interaction with them.
+- Answer: Contains the actual data to display.
+- AnswerView: Displays a single answer in the UI.
+- AnswerGroup: Displays multiple AnswerViews and coordinates the user’s interaction with them.
 
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
 ```java
