@@ -9,7 +9,7 @@ Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:fo
 ## Usage
 There are three key interfaces in this library:
 - Answer: Contains the actual data to display.
-- AnswerView: Displays a single answer in the UI.
+- AnswerView: Displays a single answer in the UI along with an identifier (e.g A, B, C, 1, 2, 3 etc.)
 - AnswerGroup: Displays multiple AnswerViews and coordinates the user’s interaction with them.
 
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
