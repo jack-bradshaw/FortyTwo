@@ -79,7 +79,7 @@ Programatically:
 AnswerGroup group = new SelectionLimitAnswerGroup(context);
 
 // Ignore user input when the answers are showing as marked
-group.allowSelectionChangesWithMarked(false);
+group.allowSelectionChangesWhenMarked(false);
 
 // Allow at most two answers to be selected at a time
 group.setMultipleSelectionLimit(2);
