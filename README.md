@@ -112,7 +112,7 @@ for (int i = 0; i < answers.size(); i++) {
 }
 ```
 
-Two decorator classes are provided for use with the DecoratedAnswerCard class: ColorFadeDecorator and AlphaDecorator.
+Two concrete decorator classes are provided: ColorFadeDecorator and AlphaDecorator.
 ```java
 public ColorFadeDecorator createColorFadeDecorator() {
 	// Defines the colors to use in the color decorator for different answer properties
