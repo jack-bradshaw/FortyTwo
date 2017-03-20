@@ -69,7 +69,7 @@ Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only pro
 </LinearLayout>
 ```
 
-Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerView is the recommended class due to its versatility and customisability.
+Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerCard is the recommended class due to its versatility and customisability.
 ```java
 	List<Answers> answers = getAnswers();
 	
@@ -77,7 +77,7 @@ Create an AnswerView for each Answer and add them to the AnswerGroup. The Decora
 			DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
 
 			aanswerCard.setAnswer(answers.get(i), false);
-			nswerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a number such as 1. 2. 3. 4. etc.
+			nswerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a sequential number
 			
 			// Customise the answer card using decorators
 			answerCard.addDecorator(createColorFadeDecorator(), false);
@@ -87,9 +87,8 @@ Create an AnswerView for each Answer and add them to the AnswerGroup. The Decora
 		}
 ```
 
-Two decorator classes are provieded: ColorFadeDecorator and AlphaDecorator.
+Two decorator classes are provieded for use with the DecoratedAnswerCard class: ColorFadeDecorator and AlphaDecorator.
 ```java
-
 public ColorFadeDecorator createColorFadeDecorator() {
 	// Defines the colors to use in the color decorator for different answer properties
 	final ColorSupplier colorSupplier = new ColorSupplier() {
@@ -126,7 +125,6 @@ private AlphaDecorator createAlphaDecorator() {
 	return new AlphaDecorator(alphaSupplier);
 }
 ```
-
 
 For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
