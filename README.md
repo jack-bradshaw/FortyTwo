@@ -26,8 +26,8 @@ Answer answer1 = new Answer() {
     
 // Use the PojoAnswer class
 Answer answer2 = new PojoAnswer("this is the right answer", true);
-answer2.setText("actually I changed my mind");
-answer.setCorrectness(false);
+answer2.setText("actually I changed my mind, this answer is wrong too");
+answer2.setCorrectness(false);
 
 // Use the ImmutableAnswer class
 Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
