@@ -36,7 +36,7 @@ Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true
 ```
 
 ### AnswerGroup
-Display and coordinates multiple answer by adding an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided answer group and it should be flexible enough to meet most needs.
+Display and coordinate multiple answers by adding an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided answer group and it should be flexible enough to meet most needs.
 ```xml
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
