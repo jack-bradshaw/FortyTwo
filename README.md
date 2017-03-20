@@ -12,6 +12,7 @@ There are three key interfaces in this library:
 - AnswerView: Displays a single answer in the UI along with an identifier (e.g A, B, C, 1, 2, 3 etc.)
 - AnswerGroup: Displays multiple AnswerViews and coordinates the user’s interaction with them.
 
+### Answer
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
 ```java
 // Directly implement the interface
@@ -34,6 +35,7 @@ answer2.setCorrectness(false);
 Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
 ```
 
+### AnswerGroup
 Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided implementation of this interface, but the class is flexible enough to meet most needs.
 ```xml
 <LinearLayout
@@ -69,6 +71,7 @@ Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only pro
 </LinearLayout>
 ```
 
+### AnswerView
 Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerCard is the recommended class due to its versatility and customisability.
 ```java
 List<Answers> answers = getAnswers();
