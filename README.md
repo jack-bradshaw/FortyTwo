@@ -69,9 +69,23 @@ Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only pro
 </LinearLayout>
 ```
 
-The following implementations are provided for the AnswerView interface:
-- `SimpleAnswerCard`: An abstract class which can be extended to make CardView based AnswerViews.
-- `DecoratedAnswerCard`: A subclass of SimpleAnswerCard which can be customised by supplying one or more Decorator objects. Two implementations of the Decorator interface have been provided: ColorFadeDecorator and AlphaDecorator (both shown in the above gifs).
+Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerView is the recommended class due to its versatility and customisability.
+```java
+	List<Answers> answers = getAnswers();
+	
+	for (int i = 0; i < answers.size(); i++) {
+			DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
+
+			aanswerCard.setAnswer(answers.get(i), false);
+			nswerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a number such as 1. 2. 3. 4. etc.
+			
+			// Customise the answer card using decorators
+			answerCard.addDecorator(createColorFadeDecorator(), false);
+			answerCard.addDecorator(createAlphaDecorator(), false);
+
+			getAnswerGroup().addAnswer(decoratedAnswerCard);
+		}
+```
 
 For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
