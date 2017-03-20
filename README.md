@@ -37,6 +37,8 @@ Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true
 
 ### AnswerGroup
 Display and coordinate multiple answers by adding an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided answer group and it should be flexible enough to meet most needs.
+
+Using XML:
 ```xml
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
@@ -69,6 +71,21 @@ Display and coordinate multiple answers by adding an AnswerGroup to your layout.
 		android:text="Submit"
 		android:textSize="16sp"/>
 </LinearLayout>
+```
+
+Programatically:
+```java
+// Like all views, a Context is needed to instantiate
+AnswerGroup group = new SelectionLimitAnswerGroup(context);
+
+// Ignore user input when the answers are showing as marked
+group.allowSelectionChangesWithMarked(false);
+
+// Allow at most two answers to be selected at a time
+group.setMultipleSelectionLimit(2);
+
+// Enable animations when the user interacts with the view
+group.enableSelectionAnimations(true);
 ```
 
 ### AnswerView
