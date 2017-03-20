@@ -126,6 +126,11 @@ private AlphaDecorator createAlphaDecorator() {
 }
 ```
 
+To create your own decorator, you can:
+- Extend one of the existing decorators
+- Extend the DecoratorAdapter (eliminates boilerplate code)
+- Implement the Decorator interface directly
+
 For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
 ## License
