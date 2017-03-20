@@ -114,8 +114,9 @@ for (int i = 0; i < answers.size(); i++) {
 
 Two concrete decorator classes are provided: ColorFadeDecorator and AlphaDecorator.
 ```java
+// Changes the background color of the card, using a blended color transition
 public ColorFadeDecorator createColorFadeDecorator() {
-	// Defines the colors to use in the color decorator for different answer properties
+	// Defines the colors to use for different answer properties
 	final ColorSupplier colorSupplier = new ColorSupplier() {
 		@Override
 		public int getColor(boolean marked, boolean selected, boolean answerIsCorrect) {
@@ -134,8 +135,9 @@ public ColorFadeDecorator createColorFadeDecorator() {
 	return new ColorFadeDecorator(colorSupplier);
 }
 
+// Changes the alpha of the card
 public AlphaDecorator createAlphaDecorator() {
-	// Defines the alpha values to use in the alpha decorator for different answer properties
+	// Defines the alpha values to use for different answer properties
 	final AlphaSupplier alphaSupplier = new AlphaSupplier() {
 		@Override
 		public float getAlpha(boolean marked, boolean selected, boolean answerIsCorrect) {
