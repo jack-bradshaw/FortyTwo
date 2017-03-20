@@ -14,24 +14,33 @@ There are three key interfaces in this library:
 
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
 ```java
-// Directly implement the interface
-Answer answer1 = new Answer() {
-    public CharSequence getText() {
-        return "incorrect answer";
-    }
+public List<Answer> getAnswers() {
+	// Directly implement the interface
+	Answer answer1 = new Answer() {
+	    public CharSequence getText() {
+        	return "incorrect answer";
+    	}
     
-    public boolean isCorrect() {
-        return false;
-    };
-}
-    
-// Use the PojoAnswer class
-Answer answer2 = new PojoAnswer("this is the right answer", true);
-answer2.setText("actually I changed my mind, this answer is wrong too");
-answer2.setCorrectness(false);
+   		public boolean isCorrect() {
+        	return false;
+    	}
+	};
+	
+	// Use the PojoAnswer class
+	Answer answer2 = new PojoAnswer("this is the right answer", true);
+	answer2.setText("actually I changed my mind, this answer is wrong too");
+	answer2.setCorrectness(false);
 
-// Use the ImmutableAnswer class
-Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
+	// Use the ImmutableAnswer class
+	Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
+	
+	List<Answer> answers = new ArrayList<>();
+	answers.add(answer1);
+	answers.add(answer2);
+	answers.add(answer3);
+	
+	return answers;
+}
 ```
 
 Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided implementation of this interface, but the class is flexible enough to meet most needs.
