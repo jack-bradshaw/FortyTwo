@@ -80,7 +80,9 @@ for (int i = 0; i < answers.size(); i++) {
 	DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
 
 	answerCard.setAnswer(answers.get(i), false);
-	answerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a sequential number
+	
+	// Identify each answer with a sequential number (e.g. 1. Some answer, 2. Another answer)
+	answerCard.setIdentifier((i + 1) + ".", false); 
 		
 	// Customise the answer card using decorators
 	answerCard.addDecorator(createColorFadeDecorator(), false);
@@ -112,7 +114,7 @@ public ColorFadeDecorator createColorFadeDecorator() {
 	return new ColorFadeDecorator(colorSupplier);
 }
 
-private AlphaDecorator createAlphaDecorator() {
+public AlphaDecorator createAlphaDecorator() {
 	// Defines the alpha values to use in the alpha decorator for different answer properties
 	final AlphaSupplier alphaSupplier = new AlphaSupplier() {
 		@Override
