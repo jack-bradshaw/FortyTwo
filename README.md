@@ -43,8 +43,8 @@ Display and coordinate multiple answer by adding an AnswerGroup to your layout. 
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
-
-    <!-- Displays the question -->
+	
+	<!-- Displays the question -->
 	<TextView
 		android:id="@+id/question"
 		android:layout_width="match_parent"
@@ -53,13 +53,13 @@ Display and coordinate multiple answer by adding an AnswerGroup to your layout. 
 		android:padding="8dp"
 		android:textSize="20sp"/>
 
-    <!-- Displays the answers -->
+	<!-- Displays the answers -->
 	<com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup
 		android:id="@+id/answers"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"/>
 
-    <!-- Button for submitting -->
+	<!-- Button for submitting -->
 	<Button
 		android:id="@+id/submit_button"
 		style="@style/Widget.AppCompat.Button.Borderless"
