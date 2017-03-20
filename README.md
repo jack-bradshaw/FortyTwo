@@ -17,13 +17,13 @@ Define your answers by implementing the Answer interface or instantating one of 
 public List<Answer> getAnswers() {
 	// Directly implement the interface
 	Answer answer1 = new Answer() {
-	    public CharSequence getText() {
-        	return "incorrect answer";
-    	}
+	    	public CharSequence getText() {
+        		return "incorrect answer";
+    		}
     
    		public boolean isCorrect() {
-        	return false;
-    	}
+        		return false;
+    		}
 	};
 	
 	// Use the PojoAnswer class
