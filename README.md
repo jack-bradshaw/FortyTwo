@@ -71,20 +71,20 @@ Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only pro
 
 Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerCard is the recommended class due to its versatility and customisability.
 ```java
-	List<Answers> answers = getAnswers();
-	
-	for (int i = 0; i < answers.size(); i++) {
-			DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
+List<Answers> answers = getAnswers();
 
-			aanswerCard.setAnswer(answers.get(i), false);
-			nswerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a sequential number
-			
-			// Customise the answer card using decorators
-			answerCard.addDecorator(createColorFadeDecorator(), false);
-			answerCard.addDecorator(createAlphaDecorator(), false);
+for (int i = 0; i < answers.size(); i++) {
+	DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
 
-			getAnswerGroup().addAnswer(decoratedAnswerCard);
-		}
+	answerCard.setAnswer(answers.get(i), false);
+	answerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a sequential number
+		
+	// Customise the answer card using decorators
+	answerCard.addDecorator(createColorFadeDecorator(), false);
+	answerCard.addDecorator(createAlphaDecorator(), false);
+		
+	getAnswerGroup().addAnswer(decoratedAnswerCard);
+}
 ```
 
 Two decorator classes are provieded for use with the DecoratedAnswerCard class: ColorFadeDecorator and AlphaDecorator.
