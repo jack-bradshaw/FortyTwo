@@ -94,7 +94,7 @@ Create an AnswerView for each Answer and add them to the AnswerGroup. The Decora
 List<Answers> answers = getAnswers();
 
 for (int i = 0; i < answers.size(); i++) {
-	// Like all views, a Context is needed to instantiate a new answer card
+	// Like all views, a Context is needed to instantiate
 	DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
 
 	// False = don't show animations
@@ -103,7 +103,7 @@ for (int i = 0; i < answers.size(); i++) {
 	// Identify each answer with a sequential number (e.g. 1. Some answer, 2. Another answer)
 	answerCard.setIdentifier((i + 1) + ".", false); 
 		
-	// Customise the answer card using decorators
+	// Customise the answer card using decorators (see below for details)
 	answerCard.addDecorator(createColorFadeDecorator(), false);
 	answerCard.addDecorator(createAlphaDecorator(), false);
 	
