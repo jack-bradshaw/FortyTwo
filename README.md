@@ -23,6 +23,7 @@ Answer answer1 = new Answer() {
     public boolean isCorrect() {
         return false;
     };
+}
     
 // Use the PojoAnswer class
 Answer answer2 = new PojoAnswer("this is the right answer", true);
