@@ -12,6 +12,9 @@ There are three key interfaces in this library:
 - AnswerGroup: Displays multiple AnswerViews and coordinates the user’s interaction with them.
 - AnswerView: Displays a single answer in the UI along with an identifier (e.g A, B, C, 1, 2, 3 etc.)
 
+This section provides a quick overview of the components. For more in depth information, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
+
+
 ### Answer
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
 ```java
@@ -157,8 +160,6 @@ To create your own decorator, you can:
 - Extend one of the existing decorators
 - Extend the DecoratorAdapter class (eliminates boilerplate code)
 - Implement the Decorator interface directly
-
-For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
 ## License
 This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
