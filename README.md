@@ -33,15 +33,45 @@ answer2.setCorrectness(false);
 // Use the ImmutableAnswer class
 Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
 ```
-The following implementations are provided for the Answer interface:
-- `ImmutableAnswer`: An answer where the values are set and fixed at instantiation.
-- `PojoAnswer`: An answer which provides getters and setters for accessing and changing the data.
+
+Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided implementation of this interface, but it is flexible enough to meet most needs.
+```xml
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+    <!-- Displays the question -->
+	<TextView
+		android:id="@+id/question"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:padding="8dp"
+		android:textSize="20sp"/>
+
+    <!-- Displays the answers -->
+	<com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup
+		android:id="@+id/answers"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+
+    <!-- Button for submitting -->
+	<Button
+		android:id="@+id/submit_button"
+		style="@style/Widget.AppCompat.Button.Borderless"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:text="Submit"
+		android:textSize="16sp"/>
+</LinearLayout>
+```
 
 The following implementations are provided for the AnswerView interface:
 - `SimpleAnswerCard`: An abstract class which can be extended to make CardView based AnswerViews.
 - `DecoratedAnswerCard`: A subclass of SimpleAnswerCard which can be customised by supplying one or more Decorator objects. Two implementations of the Decorator interface have been provided: ColorFadeDecorator and AlphaDecorator (both shown in the above gifs).
-
-The SelectionLimitAnswerGroup is the only provided implementation of the AnswerGroup interface, however it is flexible enough to suit most needs. The view can be configured to limit the number of selected answers, and it can be set to disallow selection changes when the answers have been submitted.
 
 For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
