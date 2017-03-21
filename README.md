@@ -8,19 +8,123 @@ Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:fo
 
 ## Usage
 There are three key interfaces in this library:
-- `Answer` contains the actual data to display. An Answer consists of text describing the actual answer, and a boolean denoting whether or not the answer is correct. 
-- `AnswerView` displays an Answer in the UI. The user can interact with an AnswerView to select it, and an AnswerView can be marked to show whether or not the user’s selection is correct.
-- `AnswerGroup` displays multiple AnswerViews and coordinates the user’s interaction with them.
+- Answer: Contains the actual data to display.
+- AnswerView: Displays a single answer in the UI along with an identifier (e.g A, B, C, 1, 2, 3 etc.)
+- AnswerGroup: Displays multiple AnswerViews and coordinates the user’s interaction with them.
 
-The following implementations are provided for the Answer interface:
-- `ImmutableAnswer`: An answer where the values are set and fixed at instantiation.
-- `PojoAnswer`: An answer which provides getters and setters for accessing and changing the data.
+Define your answers by implementing the Answer interface or instantating one of the provided implementations.
+```java
+// Directly implement the interface
+Answer answer1 = new Answer() {
+    public CharSequence getText() {
+        return "incorrect answer";
+    }
+    
+    public boolean isCorrect() {
+        return false;
+    };
+}
+    
+// Use the PojoAnswer class
+Answer answer2 = new PojoAnswer("this is the right answer", true);
+answer2.setText("actually I changed my mind, this answer is wrong too");
+answer2.setCorrectness(false);
 
-The following implementations are provided for the AnswerView interface:
-- `SimpleAnswerCard`: An abstract class which can be extended to make CardView based AnswerViews.
-- `DecoratedAnswerCard`: A subclass of SimpleAnswerCard which can be customised by supplying one or more Decorator objects. Two implementations of the Decorator interface have been provided: ColorFadeDecorator and AlphaDecorator (both shown in the above gifs).
+// Use the ImmutableAnswer class
+Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
+```
 
-The SelectionLimitAnswerGroup is the only provided implementation of the AnswerGroup interface, however it is flexible enough to suit most needs. The view can be configured to limit the number of selected answers, and it can be set to disallow selection changes when the answers have been submitted.
+Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided implementation of this interface, but the class is flexible enough to meet most needs.
+```xml
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+    <!-- Displays the question -->
+	<TextView
+		android:id="@+id/question"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:padding="8dp"
+		android:textSize="20sp"/>
+
+    <!-- Displays the answers -->
+	<com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup
+		android:id="@+id/answers"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
+
+    <!-- Button for submitting -->
+	<Button
+		android:id="@+id/submit_button"
+		style="@style/Widget.AppCompat.Button.Borderless"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:text="Submit"
+		android:textSize="16sp"/>
+</LinearLayout>
+```
+
+Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerCard is the recommended class due to its versatility and customisability.
+```java
+	List<Answers> answers = getAnswers();
+	
+	for (int i = 0; i < answers.size(); i++) {
+			DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
+
+			aanswerCard.setAnswer(answers.get(i), false);
+			nswerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a sequential number
+			
+			// Customise the answer card using decorators
+			answerCard.addDecorator(createColorFadeDecorator(), false);
+			answerCard.addDecorator(createAlphaDecorator(), false);
+
+			getAnswerGroup().addAnswer(decoratedAnswerCard);
+		}
+```
+
+Two decorator classes are provieded for use with the DecoratedAnswerCard class: ColorFadeDecorator and AlphaDecorator.
+```java
+public ColorFadeDecorator createColorFadeDecorator() {
+	// Defines the colors to use in the color decorator for different answer properties
+	final ColorSupplier colorSupplier = new ColorSupplier() {
+		@Override
+		public int getColor(boolean marked, boolean selected, boolean answerIsCorrect) {
+			if (marked) {
+				if (selected) {
+					return answerIsCorrect ? Color.GREEN : Color.RED;
+				} else {
+					return answerIsCorrect ? Color.PURPLE : Color.WHITE;
+				}
+			} else {
+				return selected ? Color.ORANGE : Color.WHITE;
+			}
+		}
+	};
+
+	return new ColorFadeDecorator(colorSupplier);
+}
+
+private AlphaDecorator createAlphaDecorator() {
+	// Defines the alpha values to use in the alpha decorator for different answer properties
+	final AlphaSupplier alphaSupplier = new AlphaSupplier() {
+		@Override
+		public float getAlpha(boolean marked, boolean selected, boolean answerIsCorrect) {
+			if (marked && !selected && !answerIsCorrect) {
+				return 0.3f; // 30% opacity
+			} else {
+				return 1f; // Full opacity
+			}
+		}
+	};
+
+	return new AlphaDecorator(alphaSupplier);
+}
+```
 
 For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
