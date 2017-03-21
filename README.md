@@ -4,14 +4,18 @@ FortyTwo is the answer to the Ultimate Question of Life, the Universe, and Every
 <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/single_selection.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/multiple_selection.gif" width="425"/> 
 
 ## Download
-Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:forty-two:1.0.0’` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/FortyTwo).
+Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:forty-two:1.0.0’` to your gradle build file to use the latest version.
 
 ## Usage
 There are three key interfaces in this library:
 - Answer: Contains the actual data to display.
-- AnswerView: Displays a single answer in the UI along with an identifier (e.g A, B, C, 1, 2, 3 etc.)
 - AnswerGroup: Displays multiple AnswerViews and coordinates the user’s interaction with them.
+- AnswerView: Displays a single answer in the UI along with an identifier (e.g A, B, C, 1, 2, 3 etc.)
 
+This section provides a quick overview of the components. For more in depth information, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
+
+
+### Answer
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
 ```java
 // Directly implement the interface
@@ -34,15 +38,18 @@ answer2.setCorrectness(false);
 Answer answer3 = new ImmutableAnswer("this is definitely the right answer", true);
 ```
 
-Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided implementation of this interface, but the class is flexible enough to meet most needs.
+### AnswerGroup
+Display and coordinate multiple answers by adding an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only provided answer group and it should be flexible enough to meet most needs.
+
+Using XML:
 ```xml
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
-
-    <!-- Displays the question -->
+	
+	<!-- Displays the question -->
 	<TextView
 		android:id="@+id/question"
 		android:layout_width="match_parent"
@@ -51,13 +58,13 @@ Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only pro
 		android:padding="8dp"
 		android:textSize="20sp"/>
 
-    <!-- Displays the answers -->
+	<!-- Displays the answers -->
 	<com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup
 		android:id="@+id/answers"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"/>
 
-    <!-- Button for submitting -->
+	<!-- Button for submitting -->
 	<Button
 		android:id="@+id/submit_button"
 		style="@style/Widget.AppCompat.Button.Borderless"
@@ -69,28 +76,50 @@ Add an AnswerGroup to your layout. The SelectionLimitAnswerGroup is the only pro
 </LinearLayout>
 ```
 
-Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerCard is the recommended class due to its versatility and customisability.
+Programatically:
 ```java
-	List<Answers> answers = getAnswers();
-	
-	for (int i = 0; i < answers.size(); i++) {
-			DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
+// Like all views, a Context is needed to instantiate
+AnswerGroup group = new SelectionLimitAnswerGroup(context);
 
-			aanswerCard.setAnswer(answers.get(i), false);
-			nswerCard.setIdentifier((i + 1) + ".", false); // Identify each answer with a sequential number
-			
-			// Customise the answer card using decorators
-			answerCard.addDecorator(createColorFadeDecorator(), false);
-			answerCard.addDecorator(createAlphaDecorator(), false);
+// Ignore user input when the answers are showing as marked
+group.allowSelectionChangesWhenMarked(false);
 
-			getAnswerGroup().addAnswer(decoratedAnswerCard);
-		}
+// Allow at most two answers to be selected at a time
+group.setMultipleSelectionLimit(2);
+
+// Enable animations when the user interacts with the view
+group.enableSelectionAnimations(true);
 ```
 
-Two decorator classes are provieded for use with the DecoratedAnswerCard class: ColorFadeDecorator and AlphaDecorator.
+### AnswerView
+Create an AnswerView for each Answer and add them to the AnswerGroup. The DecoratedAnswerCard is the recommended class due to its versatility and customisability.
 ```java
+List<Answers> answers = getAnswers();
+
+for (int i = 0; i < answers.size(); i++) {
+	// Like all views, a Context is needed to instantiate
+	DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
+
+	// False = don't show animations
+	answerCard.setAnswer(answers.get(i), false);
+	
+	// Identify each answer with a sequential number (e.g. 1. Some answer, 2. Another answer)
+	answerCard.setIdentifier((i + 1) + ".", false); 
+		
+	// Customise the answer card using decorators (see below for details)
+	answerCard.addDecorator(createColorFadeDecorator(), false);
+	answerCard.addDecorator(createAlphaDecorator(), false);
+	
+	// Show the card in the UI
+	getAnswerGroup().addAnswer(decoratedAnswerCard);
+}
+```
+
+Two concrete decorator classes are provided: ColorFadeDecorator and AlphaDecorator.
+```java
+// Changes the background color of the card, using a blended color transition
 public ColorFadeDecorator createColorFadeDecorator() {
-	// Defines the colors to use in the color decorator for different answer properties
+	// Defines the colors to use for different answer properties
 	final ColorSupplier colorSupplier = new ColorSupplier() {
 		@Override
 		public int getColor(boolean marked, boolean selected, boolean answerIsCorrect) {
@@ -109,8 +138,9 @@ public ColorFadeDecorator createColorFadeDecorator() {
 	return new ColorFadeDecorator(colorSupplier);
 }
 
-private AlphaDecorator createAlphaDecorator() {
-	// Defines the alpha values to use in the alpha decorator for different answer properties
+// Changes the alpha of the card
+public AlphaDecorator createAlphaDecorator() {
+	// Defines the alpha values to use for different answer properties
 	final AlphaSupplier alphaSupplier = new AlphaSupplier() {
 		@Override
 		public float getAlpha(boolean marked, boolean selected, boolean answerIsCorrect) {
@@ -126,7 +156,10 @@ private AlphaDecorator createAlphaDecorator() {
 }
 ```
 
-For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
+To create your own decorator, you can:
+- Extend one of the existing decorators
+- Extend the DecoratorAdapter class (eliminates boilerplate code)
+- Implement the Decorator interface directly
 
 ## License
 This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
