@@ -3,8 +3,23 @@ FortyTwo is the answer to the Ultimate Question of Life, the Universe, and Every
 
 <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/single_selection.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/multiple_selection.gif" width="425"/> 
 
-## Download
-Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:forty-two:1.0.0’` to your gradle build file to use the latest version.
+## Dependency
+To use the framework, add the following to your gradle build file:
+```groovy
+repositories {
+	jcenter()
+}
+
+dependencies {
+	// For Android Gradle plugin 3.0.0+ projects:
+	implementation 'com.matthew-tamlin:forty-two:1.0.0'
+
+	// For older projects:
+	compile 'com.matthew-tamlin:forty-two:1.0.0'
+}
+```
+
+Older versions are available in [the Maven repo](https://bintray.com/matthewtamlin/maven/FortyTwo).
 
 ## Usage
 There are three key interfaces in this library:
@@ -13,7 +28,6 @@ There are three key interfaces in this library:
 - AnswerView: Displays a single answer in the UI along with an identifier (e.g A, B, C, 1, 2, 3 etc.)
 
 This section provides a quick overview of the components. For more in depth information, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
-
 
 ### Answer
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
@@ -163,12 +177,6 @@ To create your own decorator, you can:
 
 ## License
 This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
-
-## Dependencies and Attribution
-This library uses the following open source libraries as level 1 dependencies:
-- [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html), licensed under the Apache 2.0 license.
-- [Android Utilities](https://github.com/MatthewTamlin/AndroidUtilities), licensed under the Apache 2.0 license.
-- [Apache Commons Collections](https://commons.apache.org/proper/commons-collections/), licensed under the Apache 2.0 license. 
 
 ## Compatibility
 This library is compatible with Android 12 and up.
