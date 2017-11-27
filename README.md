@@ -29,7 +29,6 @@ There are three key interfaces in this library:
 
 This section provides a quick overview of the components. For more in depth information, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/fortytwo/example).
 
-
 ### Answer
 Define your answers by implementing the Answer interface or instantating one of the provided implementations.
 ```java
@@ -178,12 +177,6 @@ To create your own decorator, you can:
 
 ## License
 This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
-
-## Dependencies and Attribution
-This library uses the following open source libraries as level 1 dependencies:
-- [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html), licensed under the Apache 2.0 license.
-- [Android Utilities](https://github.com/MatthewTamlin/AndroidUtilities), licensed under the Apache 2.0 license.
-- [Apache Commons Collections](https://commons.apache.org/proper/commons-collections/), licensed under the Apache 2.0 license. 
 
 ## Compatibility
 This library is compatible with Android 12 and up.
