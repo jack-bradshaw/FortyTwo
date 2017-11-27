@@ -3,8 +3,23 @@ FortyTwo is the answer to the Ultimate Question of Life, the Universe, and Every
 
 <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/single_selection.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/multiple_selection.gif" width="425"/> 
 
-## Download
-Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:forty-two:1.0.0’` to your gradle build file to use the latest version.
+## Dependency
+To use the framework, add the following to your gradle build file:
+```groovy
+repositories {
+	jcenter()
+}
+
+dependencies {
+	// For Android Gradle plugin 3.0.0+ projects:
+	implementation 'com.matthew-tamlin:forty-two:1.0.0'
+
+	// For older projects:
+	compile 'com.matthew-tamlin:forty-two:1.0.0'
+}
+```
+
+Older versions are available in [the Maven repo](https://bintray.com/matthewtamlin/maven/FortyTwo).
 
 ## Usage
 There are three key interfaces in this library:
