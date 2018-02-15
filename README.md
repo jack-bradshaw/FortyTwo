@@ -11,11 +11,7 @@ repositories {
 }
 
 dependencies {
-	// For Android Gradle plugin 3.0.0+ projects:
 	implementation 'com.matthew-tamlin:forty-two:1.0.0'
-
-	// For older projects:
-	compile 'com.matthew-tamlin:forty-two:1.0.0'
 }
 ```
 
