@@ -171,8 +171,5 @@ To create your own decorator, you can:
 - Extend the DecoratorAdapter class (eliminates boilerplate code)
 - Implement the Decorator interface directly
 
-## License
-This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
-
 ## Compatibility
 This library is compatible with Android 12 and up.
