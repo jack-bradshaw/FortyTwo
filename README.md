@@ -7,11 +7,11 @@ FortyTwo is the answer to the Ultimate Question of Life, the Universe, and Every
 To use the library, add the following to your gradle build file:
 ```groovy
 repositories {
-	jcenter()
+  jcenter()
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:forty-two:1.0.0'
+  implementation 'com.matthew-tamlin:forty-two:1.0.0'
 }
 ```
 
@@ -30,13 +30,13 @@ Define your answers by implementing the Answer interface or instantating one of 
 ```java
 // Directly implement the interface
 Answer answer1 = new Answer() {
-    public CharSequence getText() {
-        return "incorrect answer";
-    }
+  public CharSequence getText() {
+    return "incorrect answer";
+  }
     
-    public boolean isCorrect() {
-        return false;
-    };
+  public boolean isCorrect() {
+    return false;
+  };
 }
     
 // Use the PojoAnswer class
@@ -54,35 +54,35 @@ Display and coordinate multiple answers by adding an AnswerGroup to your layout.
 Using XML:
 ```xml
 <LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical">
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 	
-	<!-- Displays the question -->
-	<TextView
-		android:id="@+id/question"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center"
-		android:padding="8dp"
-		android:textSize="20sp"/>
+  <!-- Displays the question -->
+  <TextView
+    android:id="@+id/question"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="8dp"
+  	android:textSize="20sp"/>
 
-	<!-- Displays the answers -->
-	<com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup
-		android:id="@+id/answers"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"/>
+  <!-- Displays the answers -->
+  <com.matthewtamlin.fortytwo.library.answer_group.SelectionLimitedAnswerGroup
+    android:id="@+id/answers"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
 
-	<!-- Button for submitting -->
-	<Button
-		android:id="@+id/submit_button"
-		style="@style/Widget.AppCompat.Button.Borderless"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:text="Submit"
-		android:textSize="16sp"/>
+  <!-- Button for submitting -->
+  <Button
+    android:id="@+id/submit_button"
+    style="@style/Widget.AppCompat.Button.Borderless"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:text="Submit"
+    android:textSize="16sp"/>
 </LinearLayout>
 ```
 
@@ -107,21 +107,21 @@ Create an AnswerView for each Answer and add them to the AnswerGroup. The Decora
 List<Answers> answers = getAnswers();
 
 for (int i = 0; i < answers.size(); i++) {
-	// Like all views, a Context is needed to instantiate
-	DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
+  // Like all views, a Context is needed to instantiate
+  DecoratedAnswerCard answerCard = new DecoratedAnswerCard(context);
 
-	// False = don't show animations
-	answerCard.setAnswer(answers.get(i), false);
+  // False = don't show animations
+  answerCard.setAnswer(answers.get(i), false);
 	
-	// Identify each answer with a sequential number (e.g. 1. Some answer, 2. Another answer)
-	answerCard.setIdentifier((i + 1) + ".", false); 
+  // Identify each answer with a sequential number (e.g. 1. Some answer, 2. Another answer)
+  answerCard.setIdentifier((i + 1) + ".", false); 
 		
-	// Customise the answer card using decorators (see below for details)
-	answerCard.addDecorator(createColorFadeDecorator(), false);
-	answerCard.addDecorator(createAlphaDecorator(), false);
+  // Customise the answer card using decorators (see below for details)
+  answerCard.addDecorator(createColorFadeDecorator(), false);
+  answerCard.addDecorator(createAlphaDecorator(), false);
 	
-	// Show the card in the UI
-	getAnswerGroup().addAnswer(decoratedAnswerCard);
+  // Show the card in the UI
+  getAnswerGroup().addAnswer(decoratedAnswerCard);
 }
 ```
 
@@ -129,40 +129,40 @@ Two concrete decorator classes are provided: ColorFadeDecorator and AlphaDecorat
 ```java
 // Changes the background color of the card, using a blended color transition
 public ColorFadeDecorator createColorFadeDecorator() {
-	// Defines the colors to use for different answer properties
-	final ColorSupplier colorSupplier = new ColorSupplier() {
-		@Override
-		public int getColor(boolean marked, boolean selected, boolean answerIsCorrect) {
-			if (marked) {
-				if (selected) {
-					return answerIsCorrect ? Color.GREEN : Color.RED;
-				} else {
-					return answerIsCorrect ? Color.PURPLE : Color.WHITE;
-				}
-			} else {
-				return selected ? Color.ORANGE : Color.WHITE;
-			}
-		}
-	};
+  // Defines the colors to use for different answer properties
+  final ColorSupplier colorSupplier = new ColorSupplier() {
+    @Override
+    public int getColor(boolean marked, boolean selected, boolean answerIsCorrect) {
+      if (marked) {
+        if (selected) {
+          return answerIsCorrect ? Color.GREEN : Color.RED;
+        } else {
+          return answerIsCorrect ? Color.PURPLE : Color.WHITE;
+        }
+      } else {
+        return selected ? Color.ORANGE : Color.WHITE;
+      }
+    }
+  };
 
-	return new ColorFadeDecorator(colorSupplier);
+  return new ColorFadeDecorator(colorSupplier);
 }
 
 // Changes the alpha of the card
 public AlphaDecorator createAlphaDecorator() {
-	// Defines the alpha values to use for different answer properties
-	final AlphaSupplier alphaSupplier = new AlphaSupplier() {
-		@Override
-		public float getAlpha(boolean marked, boolean selected, boolean answerIsCorrect) {
-			if (marked && !selected && !answerIsCorrect) {
-				return 0.3f; // 30% opacity
-			} else {
-				return 1f; // Full opacity
-			}
-		}
-	};
+  // Defines the alpha values to use for different answer properties
+  final AlphaSupplier alphaSupplier = new AlphaSupplier() {
+    @Override
+    public float getAlpha(boolean marked, boolean selected, boolean answerIsCorrect) {
+      if (marked && !selected && !answerIsCorrect) {
+        return 0.3f; // 30% opacity
+      } else {
+        return 1f; // Full opacity
+      }
+    }
+  };
 
-	return new AlphaDecorator(alphaSupplier);
+  return new AlphaDecorator(alphaSupplier);
 }
 ```
 
