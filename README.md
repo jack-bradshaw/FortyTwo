@@ -3,6 +3,8 @@ FortyTwo is the answer to the Ultimate Question of Life, the Universe, and Every
 
 <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/single_selection.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/FortyTwo/master/artwork/multiple_selection.gif" width="425"/> 
 
+**SUPPORT NOTICE: This library is now STABLE. It is no longer under active development, however pull requests from others are still being accepted.**
+
 ## Dependency
 To use the library, add the following to your gradle build file:
 ```groovy
